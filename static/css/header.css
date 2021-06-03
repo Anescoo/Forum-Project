@@ -21,7 +21,7 @@
     flex-direction: column;
 }
 
-p {
+.Title {
     font: 900;
     font-size: 10vh;
 }
@@ -50,6 +50,7 @@ p {
 #UserInfos {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     height: 15vh;
 }
 
@@ -58,7 +59,8 @@ p {
     width: 10vh;
 }
 
-button {
+.button1,
+.button2 {
     height: 7vh;
     width: 20vh;
     margin-top: 5vh;

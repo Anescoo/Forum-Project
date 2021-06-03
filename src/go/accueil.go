@@ -8,7 +8,7 @@ import (
 
 func Accueil(w http.ResponseWriter, req *http.Request){
 
-	t,_ := template.ParseFiles("./template/Accueil.html")
+	t,_ := template.ParseFiles("./template/Accueil.html", "./template/Header.html")
 	fmt.Print("Page d'accueil ✔️ \n")
 
 
