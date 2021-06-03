@@ -2,6 +2,7 @@ package main
 
 import (
 	"crypto/md5"
+	"crypto/rand"
 	"fmt"
 	"regexp"
 )
@@ -55,7 +56,18 @@ func main() {
 	} else {
 		fmt.Println(username, "  ", password, "  ", email)
 		passwordHash := md5.Sum([]byte(password))
-		fmt.Println(username, "  ", passwordHash, "  ", email)
+		key := make([]byte, 16)
+		_, err := rand.Read(key)
+		if err != nil {
+			// return a error
+		}
+		fmt.Println(username, "  ", email)
+		fmt.Print("password : ")
+		fmt.Printf("%x", passwordHash)
+		fmt.Println()
+		fmt.Print("clef id unique : ")
+		fmt.Printf("%x", key)
+		fmt.Println()
 	}
 
 }
