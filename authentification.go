@@ -7,7 +7,7 @@ import (
 	"regexp"
 )
 
-func main() {
+func register() {
 	var username string
 	var password string
 	var email string
@@ -54,19 +54,43 @@ func main() {
 		fmt.Println(retryLog)
 		//retourné une érreur ici
 	} else {
-		fmt.Println(username, "  ", password, "  ", email)
+
 		passwordHash := md5.Sum([]byte(password))
-		key := make([]byte, 16)
-		_, err := rand.Read(key)
-		if err != nil {
-			// return a error
-		}
+		fmt.Println(username, "  ", password, "  ", email)
 		fmt.Println(username, "  ", email)
 		fmt.Print("password : ")
 		fmt.Printf("%x", passwordHash)
 		fmt.Println()
-		fmt.Print("clef id unique : ")
-		fmt.Printf("%x", key)
+	}
+
+}
+
+func main() {
+	//recevoir les info
+	var loginPass string
+	var userLogin string
+	var userList = []string{}
+
+	for i := 0; i < len(userList); i++ {
+		fmt.Print(i)
+		if userLogin == userList[i] {
+			fmt.Print(" User is valid")
+			loginPassHash := md5.Sum([]byte(loginPass))
+			if loginPassHash == userList[i].passwordHash {
+				key := make([]byte, 16)
+				_, err := rand.Read(key)
+				if err != nil {
+					// return a error
+				}
+				fmt.Print(",  password is right")
+				fmt.Println()
+				fmt.Print("clef id unique : ")
+				fmt.Printf("%x", key)
+
+			} else {
+				fmt.Print(",  password is wrong")
+			}
+		}
 		fmt.Println()
 	}
 
