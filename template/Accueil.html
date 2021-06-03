@@ -4,28 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="../css/Accueil.css" rel="stylesheet">
+    <link href="../static/css/Accueil.css" rel="stylesheet">
     <title>Merdit</title>
 </head>
 
 <body>
-    <div id="entete">
-        <div id="entete-left-side">
-            <img src="./Images/logo.PNG" alt="Le logo" class="Head-Logo">
-        </div>
-        <div id="entete-middle">
-            <h1>NOM PAGE</h1>
-            <input type="text" placeholder="Fonction de recherche maybe" class="Search">
-        </div>
-        <div id="entete-right-side">
-            <button>Inscription</button>
-            <button>Connexion</button>
-            <img src="Images/pp.PNG" alt="Photo de Profil">
-            <label>UserName</label>
-        </div>
-    </div>
-
-
+    {{ template "header" }}
     <div id="Posts">
         <div class="post1">
             <h3>UserName</h3>
