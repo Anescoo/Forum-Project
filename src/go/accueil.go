@@ -3,10 +3,12 @@ package handlers
 import (
 	"fmt"
 	"net/http"
+	"text/template"
 )
 
 func Accueil(w http.ResponseWriter, req *http.Request){
 
+	t,_ := template.ParseFiles("./template/Accueil.html")
 	fmt.Print("Page d'accueil ✔️ \n")
 
 
@@ -15,4 +17,5 @@ func Accueil(w http.ResponseWriter, req *http.Request){
 		http.Error(w, "404 not found", http.StatusNotFound)
 		return
 	}
+	t.Execute(w, nil)
 }
