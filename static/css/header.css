@@ -1,0 +1,71 @@
+#Contener {
+    background-color: cornflowerblue;
+    height: 15vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#left-header {
+    height: 15vh;
+}
+
+.logo {
+    height: 15vh;
+    width: 15vh;
+}
+
+#Title {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Title {
+    font: 900;
+    font-size: 10vh;
+}
+
+#search {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 25%;
+}
+
+.SearchBox {
+    height: 4vh;
+    width: 100%;
+    border-radius: 45px;
+}
+
+#Right-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 15vh;
+    width: 33%;
+}
+
+#UserInfos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 15vh;
+}
+
+.PP {
+    height: 10vh;
+    width: 10vh;
+}
+
+.button1,
+.button2 {
+    height: 7vh;
+    width: 20vh;
+    margin-top: 5vh;
+    border-radius: 45px;
+    background-color: #47ac9e;
+    color: white;
+    font-size: x-large;
+}

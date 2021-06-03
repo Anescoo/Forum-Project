@@ -1,14 +1,6 @@
 # Forum-Project
 
->Propostion d'environnement de développement
 
-**src** pour les fichiers **scripts**.
+>Projet de développement WEB.
 
-**static** pour les **images** et le **front**.
-
-**templates** pour la structure des pages en **HTML**.
-
----
-![image](static/img/rat.JPEG) 
-
----
+![image](static/img/1618562406336.jpg)
