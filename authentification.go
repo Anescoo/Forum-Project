@@ -4,7 +4,9 @@ import (
 	"crypto/md5"
 	"crypto/rand"
 	"fmt"
+	"net/http"
 	"regexp"
+	"time"
 )
 
 func register() {
@@ -13,6 +15,7 @@ func register() {
 	var email string
 	var retry bool = false
 	var retryLog string
+	var passwordHash string
 	verifemail, _ := regexp.Compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}")
 	majLetter, _ := regexp.Compile("[A-Z]")
 	minLetter, _ := regexp.Compile("[a-z]")
@@ -55,7 +58,8 @@ func register() {
 		//retourné une érreur ici
 	} else {
 
-		passwordHash := md5.Sum([]byte(password))
+		passwordHashBytes := md5.Sum([]byte(password))
+		passwordHash = BitConverter.ToString(passwordHashBytes.ToArray())
 		fmt.Println(username, "  ", password, "  ", email)
 		fmt.Println(username, "  ", email)
 		fmt.Print("password : ")
@@ -70,22 +74,27 @@ func main() {
 	var loginPass string
 	var userLogin string
 	var userList = []string{}
+	var key string
 
 	for i := 0; i < len(userList); i++ {
 		fmt.Print(i)
-		if userLogin == userList[i] {
+		if userLogin == userList[i].username {
 			fmt.Print(" User is valid")
 			loginPassHash := md5.Sum([]byte(loginPass))
 			if loginPassHash == userList[i].passwordHash {
-				key := make([]byte, 16)
-				_, err := rand.Read(key)
+				keyBytes := make([]byte, 16)
+				_, err := rand.Read(keyBytes)
 				if err != nil {
 					// return a error
 				}
 				fmt.Print(",  password is right")
 				fmt.Println()
-				fmt.Print("clef id unique : ")
-				fmt.Printf("%x", key)
+
+				key = BitConverter.ToString(keyBytes.ToArray())
+				fmt.Print("clef id unique : ", key)
+				expiration := time.Now().Add(12 * time.Hour)
+				cookie := http.Cookie{Name: "sessionKey", Value: key, Expires: expiration}
+				http.SetCookie(w, &cookie)
 
 			} else {
 				fmt.Print(",  password is wrong")
