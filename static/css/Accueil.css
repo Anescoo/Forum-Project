@@ -11,3 +11,7 @@
     align-items: center;
     flex-direction: column;
 }
+
+BODY {
+    background-color: #0D748B;
+}

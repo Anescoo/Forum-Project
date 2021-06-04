@@ -1,5 +1,5 @@
 #Contener {
-    background-color: cornflowerblue;
+    background-color: #2A2885;
     height: 15vh;
     display: flex;
     flex-direction: row;
@@ -52,7 +52,7 @@
     width: 20vh;
     margin-top: 5vh;
     border-radius: 45px;
-    background-color: #47ac9e;
+    background-color: #5BC7D6;
     color: white;
     font-size: x-large;
 }
