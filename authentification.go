@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/md5"
 	"crypto/rand"
+	"encoding/hex"
 	"fmt"
 	"net/http"
 	"regexp"
@@ -59,7 +60,7 @@ func register() {
 	} else {
 
 		passwordHashBytes := md5.Sum([]byte(password))
-		passwordHash = BitConverter.ToString(passwordHashBytes.ToArray())
+		passwordHash = hex.EncodeToString(passwordHashBytes[:])
 		fmt.Println(username, "  ", password, "  ", email)
 		fmt.Println(username, "  ", email)
 		fmt.Print("password : ")
@@ -90,7 +91,7 @@ func main() {
 				fmt.Print(",  password is right")
 				fmt.Println()
 
-				key = BitConverter.ToString(keyBytes.ToArray())
+				key = hex.EncodeToString(keyBytes)
 				fmt.Print("clef id unique : ", key)
 				expiration := time.Now().Add(12 * time.Hour)
 				cookie := http.Cookie{Name: "sessionKey", Value: key, Expires: expiration}
