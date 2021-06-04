@@ -93,7 +93,7 @@ func main() {
 
 				key = hex.EncodeToString(keyBytes)
 				fmt.Print("clef id unique : ", key)
-				expiration := time.Now().Add(12 * time.Hour)
+				expiration := time.Now().Add(6 * time.Hour)
 				cookie := http.Cookie{Name: "sessionKey", Value: key, Expires: expiration}
 				http.SetCookie(w, &cookie)
 
