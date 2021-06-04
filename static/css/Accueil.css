@@ -1,0 +1,17 @@
+#entete {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+
+#Posts {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+BODY {
+    background-color: #0D748B;
+}
