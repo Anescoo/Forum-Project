@@ -1,19 +1,19 @@
-package handlers 
+package handlers
 
 import (
 	"fmt"
 	"net/http"
 	"text/template"
+	main "../src/bdd"
 )
 
-func Connexion(w http.ResponseWriter, req *http.Request){
+func Connexion(w http.ResponseWriter, req *http.Request) {
 
-	t,_ := template.ParseFiles("./template/connexion.html", "./template/Header.html")
+	t, _ := template.ParseFiles("./template/connexion.html", "./template/Header.html")
 	fmt.Print("Page de connexion ✔️ \n")
 
-	req.ParseForm()
+	// req.ParseForm()
 
-	
 	getPseudo := req.FormValue("pseudo")
 	getMdp := req.FormValue("mdp")
 
@@ -21,5 +21,7 @@ func Connexion(w http.ResponseWriter, req *http.Request){
 	fmt.Println("Mot de Passe :", getMdp)
 
 	t.Execute(w, nil)
-}
 
+	GetUser(getPseudo)
+	GetUserHash(getMdp)
+}
