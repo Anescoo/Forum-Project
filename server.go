@@ -17,7 +17,6 @@ func main() {
 	http.HandleFunc("/connexion", handlers.Connexion)
 	http.HandleFunc("/timeline", handlers.Timeline)
 	http.HandleFunc("/inscription", handlers.Inscription)
-
 	http.HandleFunc("/profil", handlers.Profil)
 
 	http.ListenAndServe(":8000", nil)
