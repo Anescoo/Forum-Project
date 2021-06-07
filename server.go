@@ -1,13 +1,13 @@
-package main 
-
+package main
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
+
 	handlers "./src/go"
 )
 
-func main(){
+func main() {
 
 	fmt.Print("Démarrage du serveur... 💬\n")
 
@@ -16,7 +16,7 @@ func main(){
 	http.HandleFunc("/", handlers.Accueil)
 	http.HandleFunc("/connexion", handlers.Connexion)
 	http.HandleFunc("/timeline", handlers.Timeline)
-
+	http.HandleFunc("/profil", handlers.Profil)
 
 	http.ListenAndServe(":8000", nil)
 }
