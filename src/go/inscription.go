@@ -1,4 +1,4 @@
-package handlers 
+package handlers
 
 import (
 	"fmt"
@@ -6,12 +6,12 @@ import (
 	"text/template"
 )
 
-func Inscription(w http.ResponseWriter, req *http.Request){
-	
+func Inscription(w http.ResponseWriter, req *http.Request) {
+
 	fmt.Print("Page d'inscription ✔️ \n")
 
-	t,_ := template.ParseFiles("./template/inscription.html", "./template/Header.html")
+	t, _ := template.ParseFiles("./template/inscription.html", "./template/header.html")
 
-	t.Execute(w,nil)
+	t.Execute(w, nil)
 
 }

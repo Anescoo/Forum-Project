@@ -8,7 +8,7 @@ import (
 
 func Profil(w http.ResponseWriter, req *http.Request) {
 
-	t, _ := template.ParseFiles("./template/profil.html", "./template/Header.html")
+	t, _ := template.ParseFiles("./template/profil.html", "./template/header.html")
 	fmt.Print("Page du compte utilisateur ✔️ \n")
 	t.Execute(w, nil)
 }
