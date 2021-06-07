@@ -24,7 +24,7 @@ func Inscription(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("Mot de passe : ", getMdpInscription)
 	
 	bdd.MakeUser(getPseudoInscription, getEmailInscription, getMdpInscription)
-	
+
 
 	t.Execute(w, nil)
 
