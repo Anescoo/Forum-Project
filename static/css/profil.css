@@ -2,3 +2,25 @@ body {
     background-color: #0D748B;
 }
 
+#MyAccount {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Titre {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font: 700;
+    font-size: 7vh;
+    color : white;
+}
+
+#UserInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
