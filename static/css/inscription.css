@@ -58,3 +58,9 @@ body {
     width: 200px;
     font-size: xx-large;
 }
+
+.form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
