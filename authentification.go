@@ -70,10 +70,8 @@ func register() {
 
 }
 
-func main() {
-	//recevoir les infos
-	var loginPass string
-	var userLogin string
+func login(w http.ResponseWriter, userLogin string, loginPass string) {
+	//recevoir les info
 	var userList = []string{}
 	var key string
 
