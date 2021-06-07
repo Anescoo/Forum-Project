@@ -12,6 +12,21 @@
     flex-direction: column;
 }
 
-BODY {
+body {
     background-color: #0D748B;
 }
+.Titre {
+position: absolute;
+width: 389px;
+height: 71px;
+left: 280px;
+top: 7px;
+font-family: Rock Salt;
+font-style: normal;
+font-weight: normal;
+font-size: 40px;
+line-height: 95px;
+color: #010101;
+}
+/* Projet Forum */
+
