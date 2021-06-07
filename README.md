@@ -13,3 +13,7 @@
 
 [Miro](https://miro.com/welcomeonboard/etZgF6OuEeGWBk7fbvOViFWdDMl9rTU5tBCBydfEG19BL5MpuDGSctqfzjiOF0Mz)
 
+
+>Projet de développement WEB.
+
+![image](static/img/1618562406336.jpg)
