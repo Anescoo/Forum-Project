@@ -1,10 +1,10 @@
-package main
+package bdd
 
 import (
 	"database/sql"
 	"fmt"
 	"strconv"
-	
+
 	_ "github.com/mattn/go-sqlite3"
 )
 

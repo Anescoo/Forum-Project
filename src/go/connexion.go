@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"text/template"
-	main "../src/bdd"
+	bdd "../bdd"
 )
 
 func Connexion(w http.ResponseWriter, req *http.Request) {
@@ -22,6 +22,6 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 
 	t.Execute(w, nil)
 
-	GetUser(getPseudo)
-	GetUserHash(getMdp)
+	bdd.GetUser(getPseudo)
+	bdd.GetUserHash(getPseudo)
 }
