@@ -26,6 +26,7 @@ func Inscription(w http.ResponseWriter, req *http.Request) {
 
 	if err != 0 {
 		if err == 1 {
+			
 			//mauvaise longueur pseudo
 		}
 		if err == 2 {
@@ -40,5 +41,4 @@ func Inscription(w http.ResponseWriter, req *http.Request) {
 	}
 
 	t.Execute(w, nil)
-
 }
