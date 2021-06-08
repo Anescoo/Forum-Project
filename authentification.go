@@ -21,7 +21,7 @@ func register() {
 	majLetter, _ := regexp.Compile("[A-Z]")
 	minLetter, _ := regexp.Compile("[a-z]")
 	number, _ := regexp.Compile("[0-9]")
-	for i := 0; i < 1; i++ { //retiré les for
+	for i := 0; i < 1; i++ { //retirer les for
 		fmt.Println("entrez un username")
 		fmt.Scanln(&username)
 		if len(username) < 3 || len(username) > 15 {
@@ -31,7 +31,7 @@ func register() {
 		}
 
 	}
-	for e := 0; e < 1; e++ { //retiré les for
+	for e := 0; e < 1; e++ { //retirer les for
 		fmt.Println("entrez un mot de passe")
 		fmt.Scanln(&password)
 		if len(password) < 8 {
@@ -45,7 +45,7 @@ func register() {
 			//retryLog = retryLog + "mot de passe trop faible,  "
 		}
 	}
-	for u := 0; u < 1; u++ { //retiré les for
+	for u := 0; u < 1; u++ { //retirer les for
 		fmt.Println("entrez une email")
 		fmt.Scanln(&email)
 		if !verifemail.MatchString(email) {
@@ -56,7 +56,7 @@ func register() {
 	}
 	if retry {
 		fmt.Println(retryLog)
-		//retourné une érreur ici
+		//retourner une érreur ici
 	} else {
 
 		passwordHashBytes := md5.Sum([]byte(password))

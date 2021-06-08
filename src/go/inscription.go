@@ -7,9 +7,11 @@ import (
 )
 
 func Inscription(w http.ResponseWriter, req *http.Request){
+	
 	fmt.Print("Page d'inscription ✔️ \n")
 
 	t,_ := template.ParseFiles("./template/inscription.html", "./template/Header.html")
 
 	t.Execute(w,nil)
+
 }
