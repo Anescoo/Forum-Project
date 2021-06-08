@@ -4,7 +4,6 @@ import (
 	"crypto/md5"
 	"crypto/rand"
 	"encoding/hex"
-	"fmt"
 	"net/http"
 	"regexp"
 	"time"
@@ -36,7 +35,11 @@ func Register(username string, email string, password string) int {
 	return 0
 }
 
+<<<<<<< HEAD
 func Login(w http.ResponseWriter, getPseudo string, getMdp string) {
+=======
+func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
+>>>>>>> 209af0bdbf7c27bbe1c51105fd3fd7a7387c6aac
 	err, _ := bdd.GetUser(getPseudo)
 	_, bddMdp := bdd.GetUserHash(getPseudo)
 	var key string
@@ -49,17 +52,15 @@ func Login(w http.ResponseWriter, getPseudo string, getMdp string) {
 		keyBytes := make([]byte, 16)
 		_, err := rand.Read(keyBytes)
 		if err != nil {
-			// return a error
+			return 1
 		}
-		fmt.Print(",  password is right")
-		fmt.Println()
 		key = hex.EncodeToString(keyBytes)
-		fmt.Print("clef id unique : ", key)
 		expiration := time.Now().Add(6 * time.Hour)
-		cookie := http.Cookie{Name: "sessionKey", Value: key, Expires: expiration}
-		http.SetCookie(w, &cookie)
-	} else {
-		fmt.Print(",  password is wrong")
+		cookieForKey := http.Cookie{Name: "sessionKey", Value: key, Expires: expiration}
+		cookieForName := http.Cookie{Name: "sessionOwner", Value: getPseudo, Expires: expiration}
+		http.SetCookie(w, &cookieForKey)
+		http.SetCookie(w, &cookieForName)
+		return 0
 	}
-
+	return 2
 }
