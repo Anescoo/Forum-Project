@@ -1,4 +1,4 @@
-package authentification
+package authent
 
 import (
 	"crypto/md5"
