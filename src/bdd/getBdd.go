@@ -9,12 +9,12 @@ import (
 )
 
 func OpenDataBase() (int, *sql.DB) {
-	db, err := sql.Open("sqlite3", "../bdd/DataBase.db") //ouverture de la bdd
-	if err != nil {                                      //cas d'erreur
+	db, err := sql.Open("sqlite3", "../src/bdd/DataBase.db") //ouverture de la bdd
+	if err != nil {                                      	//cas d'erreur
 		fmt.Println("Error database")
 		return 500, nil //renvoie du code d'erreur
 	}
-	return 0, db //renvoie la base de donner
+	return 0, db //renvoie la base de donnée
 }
 
 func MakeUser(pseudo string, email string, hash string) int {

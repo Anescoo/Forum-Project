@@ -2,13 +2,16 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	"text/template"
 	bdd "./src/bdd"
+	"database/sql"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func main(){
 
-	MakeUser()
+	
+	bdd.MakeUser("Louis", "louis.teilliais@gmail.com", "ATYyuiop1234")
+	fmt.Println(bdd.GetUser("Louis"))
 
 }

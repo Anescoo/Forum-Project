@@ -16,7 +16,7 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 	getPseudo := req.FormValue("pseudoConnexion")
 	getMdp := req.FormValue("mdpConnexion")
 
-	fmt.Println("Pseudo : " , getPseudo)
+	fmt.Println("Pseudo : ", getPseudo)
 	fmt.Println("Mot de Passe :", getMdp)
 
 	bdd.GetUser(getPseudo)
