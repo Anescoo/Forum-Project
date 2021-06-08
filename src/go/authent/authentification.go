@@ -9,7 +9,7 @@ import (
 	"regexp"
 	"time"
 
-	bdd "../bdd"
+	bdd "../../bdd"
 )
 
 func register() {
@@ -72,7 +72,7 @@ func register() {
 
 }
 
-func login(w http.ResponseWriter, getPseudo string, getMdp string) {
+func Login(w http.ResponseWriter, getPseudo string, getMdp string) {
 	err, _ := bdd.GetUser(getPseudo)
 	_, bddMdp := bdd.GetUserHash(getPseudo)
 	var key string

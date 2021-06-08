@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"text/template"
-	//authent "authent"
+	authent "./authent"
 )
 
 func Connexion(w http.ResponseWriter, req *http.Request) {
@@ -17,6 +17,6 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 
 	fmt.Println("Pseudo : ", getPseudo)
 	fmt.Println("Mot de Passe :", getMdp)
-	authent.login(getPseudo, getMdp)
+	authent.Login(nil ,getPseudo, getMdp)
 	t.Execute(w, nil)
 }
