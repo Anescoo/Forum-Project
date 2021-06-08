@@ -1,4 +1,4 @@
-package main
+package authentification
 
 import (
 	"crypto/md5"
@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"regexp"
 	"time"
+
+	bdd "../bdd"
 )
 
 func register() {
@@ -70,36 +72,30 @@ func register() {
 
 }
 
-func login(w http.ResponseWriter, userLogin string, loginPass string) {
-	//recevoir les info
-	var userList = []string{}
+func login(w http.ResponseWriter, getPseudo string, getMdp string) {
+	err, _ := bdd.GetUser(getPseudo)
+	_, bddMdp := bdd.GetUserHash(getPseudo)
 	var key string
+	loginPassHashBytes := md5.Sum([]byte(getMdp))
+	loginPassHash := hex.EncodeToString(loginPassHashBytes[:])
+	if err != 0 {
 
-	for i := 0; i < len(userList); i++ {
-		fmt.Print(i)
-		if userLogin == userList[i].username {
-			fmt.Print(" User is valid")
-			loginPassHash := md5.Sum([]byte(loginPass))
-			if loginPassHash == userList[i].passwordHash {
-				keyBytes := make([]byte, 16)
-				_, err := rand.Read(keyBytes)
-				if err != nil {
-					// return a error
-				}
-				fmt.Print(",  password is right")
-				fmt.Println()
-
-				key = hex.EncodeToString(keyBytes)
-				fmt.Print("clef id unique : ", key)
-				expiration := time.Now().Add(6 * time.Hour)
-				cookie := http.Cookie{Name: "sessionKey", Value: key, Expires: expiration}
-				http.SetCookie(w, &cookie)
-
-			} else {
-				fmt.Print(",  password is wrong")
-			}
+	}
+	if bddMdp == loginPassHash {
+		keyBytes := make([]byte, 16)
+		_, err := rand.Read(keyBytes)
+		if err != nil {
+			// return a error
 		}
+		fmt.Print(",  password is right")
 		fmt.Println()
+		key = hex.EncodeToString(keyBytes)
+		fmt.Print("clef id unique : ", key)
+		expiration := time.Now().Add(6 * time.Hour)
+		cookie := http.Cookie{Name: "sessionKey", Value: key, Expires: expiration}
+		http.SetCookie(w, &cookie)
+	} else {
+		fmt.Print(",  password is wrong")
 	}
 
 }
