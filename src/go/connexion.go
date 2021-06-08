@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"text/template"
-	//authent "authent"
+
+	authent "./authent"
 )
 
 func Connexion(w http.ResponseWriter, req *http.Request) {
@@ -17,6 +18,14 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 
 	fmt.Println("Pseudo : ", getPseudo)
 	fmt.Println("Mot de Passe :", getMdp)
-	authent.login(getPseudo, getMdp)
+	err := authent.Login(nil, getPseudo, getMdp)
+	if err != 0 {
+		if err == 1 {
+			//erreur de génération de token
+		}
+		if err == 2 {
+			//mdp incorect
+		}
+	}
 	t.Execute(w, nil)
 }
