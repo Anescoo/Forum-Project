@@ -9,7 +9,7 @@ import (
 )
 
 func OpenDataBase() (int, *sql.DB) {
-	db, err := sql.Open("sqlite3", "../src/bdd/DataBase.db") //ouverture de la bdd
+	db, err := sql.Open("sqlite3", "src/bdd/DataBase.db") //ouverture de la bdd
 	if err != nil {                                      	//cas d'erreur
 		fmt.Println("Error database")
 		return 500, nil //renvoie du code d'erreur
