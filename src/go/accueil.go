@@ -7,20 +7,17 @@ import (
 	bdd "../bdd"
 )
 
-type text struct {
-	post string
-}
-
-htmlData := text {
-	post : "",
-}
-
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	t, _ := template.ParseFiles("./template/Accueil.html", "./template/header.html")
 	fmt.Print("Page d'accueil ✔️ \n")
 
-	text.post = GetPosteByID(1)
+	htmlData := text {
+	post : "",
+	}
+
+	htmlData.post = bdd.GetPosteByID(1)
+
 
 	if req.URL.Path == "/" { //verification de l'URL
 	} else if req.URL.Path != "/" {
@@ -28,6 +25,5 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	t.Execute(w, nil)
-
 
 }
