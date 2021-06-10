@@ -10,14 +10,10 @@ import (
 func main(){
 
 	
-	bdd.MakeUser("Louis1", "louis.teilliais@gmail.com", "Karim69lattrik")
-	fmt.Println(bdd.GetUser("Louis1"))
-	fmt.Println(bdd.GetUserHash("Louis1"))
+	fmt.Println(bdd.GetAllUser())
 
 
-	bdd.MakePoste("Louis1", "Je suis un post test", "test")
+	fmt.Println(bdd.GetPosteByID(2))
 	
-	fmt.Println(bdd.GetPosteByID(0))
-
 
 }
