@@ -11,11 +11,12 @@
 <body>
     
     <div id="Posts">
-        <div class="post1">
-            <h3>UserName</h3>
-            <p>J'ai posté ça en test c'est faux c'est du HTML</p>
-            <p class="Titre"></p>
-        </div>
+        <form method="POST" class="form">
+            <input type="text" placeholder="Que voulez vous postez ?" name="PostValue" class="WritePost">         
+        </form>
+
+
+        <div class="post1"><p>L'utilisateur nommé {{ .UserName }} a dit : {{ .Post }}</p></div>
         <div class="post2"></div>
         <div class="post3"></div>
     </div>

@@ -65,3 +65,9 @@ color : white;
     color: white;
     font-size: 1.7vmax;
 }
+
+img {
+    border-radius: 50%;
+    border-color: white;
+    border: 5px;
+}
