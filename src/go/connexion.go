@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"net/http"
 	"text/template"
-	bdd "../bdd"
+
+	authent "./authent"
 )
 
 func Connexion(w http.ResponseWriter, req *http.Request) {
-	
 
 	t, _ := template.ParseFiles("./template/connexion.html", "./template/header.html")
 	fmt.Print("Page de connexion ✔️ \n")
@@ -16,11 +16,16 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 	getPseudo := req.FormValue("pseudoConnexion")
 	getMdp := req.FormValue("mdpConnexion")
 
-	fmt.Println("Pseudo : " , getPseudo)
+	fmt.Println("Pseudo : ", getPseudo)
 	fmt.Println("Mot de Passe :", getMdp)
-
-	bdd.GetUser(getPseudo)
-	bdd.GetUserHash(getPseudo)
-	
+	err := authent.Login(nil, getPseudo, getMdp)
+	if err != 0 {
+		if err == 1 {
+			//erreur de génération de token
+		}
+		if err == 2 {
+			//mdp incorect
+		}
+	}
 	t.Execute(w, nil)
 }
