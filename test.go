@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	bdd "./src/bdd"
-	"database/sql"
+	// "database/sql"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -15,6 +15,9 @@ func main(){
 	fmt.Println(bdd.GetUserHash("Louis1"))
 
 
-	// db, _ := sql.Open("sqlite3", "src/bdd/DataBase.db")
-	// fmt.Println(db.Query("SELECT * FROM User"))
+	bdd.MakePoste("Louis1", "Je suis un post test", "test")
+	
+	fmt.Println(bdd.GetPosteByID(0))
+
+
 }

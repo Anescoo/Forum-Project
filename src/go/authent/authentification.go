@@ -35,11 +35,7 @@ func Register(username string, email string, password string) int {
 	return 0
 }
 
-<<<<<<< HEAD
-func Login(w http.ResponseWriter, getPseudo string, getMdp string) {
-=======
 func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
->>>>>>> 209af0bdbf7c27bbe1c51105fd3fd7a7387c6aac
 	err, _ := bdd.GetUser(getPseudo)
 	_, bddMdp := bdd.GetUserHash(getPseudo)
 	var key string
