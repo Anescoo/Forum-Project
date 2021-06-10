@@ -18,8 +18,8 @@ func main(){
     db.Exec("SELECT * FROM Poste ORDER BY DatePoste DESCENDING")
     fmt.Println(bdd.GetAllPoste())
     // fmt.Println(bdd.GetPosteByID(5))
-    // _, NbrPosts := bdd.GetAllPoste()
-    // fmt.Println(len(NbrPosts))
+    _, NbrPosts := bdd.GetAllPoste()
+    fmt.Println(len(NbrPosts))
 
     // db, _ := sql.Open("sqlite3", "src/bdd/DataBase.db")
     // fmt.Println(db.Query("SELECT * FROM User"))
