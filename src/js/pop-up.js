@@ -1,6 +1,6 @@
 
 
-var btnPopup = document.getElementById('btnPopup');
+var btnPopUP = document.getElementById('btnPopUP');
 var overlay = document.getElementById('overlay');
 var btnclose = document.getElementByID('btnclose');
 
@@ -16,6 +16,6 @@ function closePopUP(){
     overlay.style.display = 'none';
 }
 
-function test(){
-    alert("Bonjour")
-}
+// function test(){
+//     alert("Bonjour")
+// }
