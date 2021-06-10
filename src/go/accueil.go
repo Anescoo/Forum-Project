@@ -32,6 +32,9 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	// NbrPosts := bdd.GetAllPoste()
 
+
+
+
 	// for i := 0; i <  ; i++ {
 	// 	if getPostValue == bdd.GetPosteByID(i)[2] {
 
