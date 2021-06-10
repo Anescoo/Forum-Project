@@ -1,6 +1,0 @@
-#!/bin/bash
-
-sudo apt update
-sudo apt install gcc
-go get github.com/mattn/go-sqlite3
-export CGO_ENABLED=1 
