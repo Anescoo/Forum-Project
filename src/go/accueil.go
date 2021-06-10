@@ -24,18 +24,19 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	bdd.MakePoste("Tao",getPostValue,"test")
 	var arr []string
 	_, arr = bdd.GetPosteByID(2)
+	
 	p := test {
 		UserName: arr[1],
 		Post: arr[2],
 	}
 
-	NbrPosts := bdd.GetAllPoste()
+	// NbrPosts := bdd.GetAllPoste()
 
-	for i := 0; i <  ; i++ {
-		if getPostValue == bdd.GetPosteByID(i)[2] {
+	// for i := 0; i <  ; i++ {
+	// 	if getPostValue == bdd.GetPosteByID(i)[2] {
 
-		}
-	}
+	// 	}
+	// }
 
 
 	if req.URL.Path == "/" { //verification de l'URL
