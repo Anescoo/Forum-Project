@@ -10,9 +10,9 @@ import (
 func main(){
 
     
-    bdd.MakeUser("Louis1", "louis.teilliais@gmail.com", "Karim69lattrik")
-    fmt.Println(bdd.GetUser("Louis1"))
-    fmt.Println(bdd.GetUserHash("Louis1"))
+    bdd.MakeUser("Tao", "louis.teilliais@gmail.com", "Karim69lattrik")
+	bdd.MakePoste("Tao", "Ce post s'affiche dans la console", "test")
+	fmt.Println(bdd.GetPosteByID(2)[1])
 
 
     // db, _ := sql.Open("sqlite3", "src/bdd/DataBase.db")

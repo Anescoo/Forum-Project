@@ -13,7 +13,7 @@ func main() {
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
-	http.HandleFunc("/", handlers.Accueil)
+	http.HandleFunc("/home", handlers.Accueil)
 	http.HandleFunc("/connexion", handlers.Connexion)
 	http.HandleFunc("/timeline", handlers.Timeline)
 	http.HandleFunc("/profil", handlers.Profil)
