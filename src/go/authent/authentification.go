@@ -8,7 +8,7 @@ import (
 	"regexp"
 	"time"
 
-	bdd "../bdd"
+	bdd "../../bdd"
 )
 
 func Register(username string, email string, password string) int {
