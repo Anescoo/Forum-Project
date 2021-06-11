@@ -21,9 +21,9 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	getPostValue := req.FormValue("PostValue")
 	fmt.Println(getPostValue)
 	bdd.MakeUser("Tao", "louis.teilliais@gmail.com", "Karim69lattrik")
-	bdd.MakePoste("Tao",getPostValue,"test")
+	bdd.MakePoste("Tao", string(getPostValue),"test")
 	var arr []string
-	_, arr = bdd.GetPosteByID(2)
+	_, arr = bdd.GetPosteByID(1)
 	
 	p := test {
 		UserName: arr[1],

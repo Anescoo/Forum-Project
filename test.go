@@ -16,7 +16,7 @@ func main(){
 
     // db.Exec("DELETE FROM Poste WHERE ID = 23")
     // bdd.MakeUser("Tao", "louis.teilliais@gmail.com", "Karim69lattrik")
-	bdd.MakePoste("Tao", "Ce post s'affiche dans la console", "test")
+	// bdd.MakePoste("Tao", "Ce post s'affiche dans la console", "test")
 	// fmt.Println(bdd.GetPosteByID(2)[1])
     fmt.Println(bdd.GetAllPoste())
     // fmt.Println(bdd.GetPosteByID(23))
