@@ -1,0 +1,32 @@
+#entete {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+
+#Posts {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+body {
+    background-color: #0D748B;
+}
+.Titre {
+position: absolute;
+width: 389px;
+height: 71px;
+left: 280px;
+top: 7px;
+font-family: Rock Salt;
+font-style: normal;
+font-weight: normal;
+font-size: 40px;
+line-height: 95px;
+color: #010101;
+}
+/* Projet Forum */
+
