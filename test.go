@@ -1,14 +1,12 @@
-package main 
+package main
 
 import (
 	"fmt"
-	"net/http"
-	"text/template"
+
 	bdd "./src/bdd"
 )
 
-func main(){
-
-	MakeUser()
-
+func main() {
+	fmt.Println(bdd.GetAllPoste())
+	fmt.Println(bdd.GetPosteByID(1))
 }
