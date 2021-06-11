@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="../static/css/Accueil.css" rel="stylesheet" type="text/css">
+    <title>Projet Forum</title>
+</head>
+{{ template "header" }}
+<body>
+    
+    <div id="Posts">
+        
+        <form method="POST" class="form">
+            <input type="text" placeholder="Que voulez vous postez ?" name="PostValue" class="WritePost">         
+        </form>
+
+        <div class="post1"><p>L'utilisateur nommé {{ .UserName }} a dit : {{ .Post }}</p></div>
+        <div class="post2"></div>
+        <div class="post3"></div>
+
+    </div>
+        <div id="Filter-Bloc">
+    </div>    
+    
+</body>
+</html>
