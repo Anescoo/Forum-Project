@@ -120,7 +120,7 @@ func MakePoste(user string, contenue string, categorie string) int {
 func GetPosteByID(id int) (int, []string) {
 	_, db := OpenDataBase()
 	var resultFunc []string
-	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, PosteTime FROM Poste WHERE id = ?", id)
+	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE id = ?", id)
 	if err != nil {
 		fmt.Println("Error GetPosteById")
 		return 500, resultFunc
@@ -131,7 +131,7 @@ func GetPosteByID(id int) (int, []string) {
 		var PseudoUser string
 		var Contenue string
 		var Categorie string
-		var PosteTime int
+		var PosteTime string
 		var nbLike int
 
 		result.Next()
@@ -142,7 +142,7 @@ func GetPosteByID(id int) (int, []string) {
 		resultFunc = append(resultFunc, Contenue)
 		resultFunc = append(resultFunc, Categorie)
 		resultFunc = append(resultFunc, strconv.Itoa(nbLike))
-		resultFunc = append(resultFunc, strconv.Itoa(PosteTime))
+		resultFunc = append(resultFunc, PosteTime)
 
 		db.Close()
 		return 0, resultFunc
