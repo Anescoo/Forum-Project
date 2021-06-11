@@ -10,6 +10,7 @@ import (
 type test struct {
 	UserName string
 	Post string
+	DatePoste string
 }
 
 
@@ -24,15 +25,17 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	bdd.MakePoste("Tao",getPostValue,"test")
 	var arr []string
 	_, arr = bdd.GetPosteByID(2)
+	fmt.Println(arr)
 	
 	p := test {
 		UserName: arr[1],
 		Post: arr[2],
+		DatePoste : arr[3],
 	}
 
 	// NbrPosts := bdd.GetAllPoste()
 
-
+	
 
 
 	// for i := 0; i <  ; i++ {
