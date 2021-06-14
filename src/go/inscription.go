@@ -37,6 +37,12 @@ func Inscription(w http.ResponseWriter, req *http.Request) {
 		if err == 4 {
 			//adresse email invalide
 		}
+		if err == 5 {
+			//username déja utilisé
+		}
+		if err == 6 {
+			//email déja utilisé
+		}
 	}
 
 	t.Execute(w, nil)

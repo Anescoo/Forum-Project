@@ -26,6 +26,9 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 		if err == 2 {
 			//mdp incorect
 		}
+		if err == 3 {
+			//username invalide
+		}
 	}
 	t.Execute(w, nil)
 }
