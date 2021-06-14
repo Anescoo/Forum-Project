@@ -12,11 +12,11 @@
     
     <div id="Posts">
         <form method="POST" class="form">
-            <input type="text" placeholder="Que voulez vous postez ?" name="PostValue" class="WritePost">         
+            <input type="text" placeholder="Que voulez vous postez ?" name="PostValue" class="WritePost" required>
         </form>
 
         {{ range . }}
-        <div class="post1"><p>L'utilisateur nommé {{ .UserName }} a dit : {{ .Post }} a {{ .Date }}</p></div>
+        <div class="post1"><p>{{ .UserName }} a dit : <br>{{ .Post }} <br> a {{ .Date }}</p></div>
         {{ end }}
     </div>
 

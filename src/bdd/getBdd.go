@@ -158,7 +158,7 @@ func GetAllPoste() (int, [][]string) {
 		fmt.Println("Error GetAllPoste")
 		fmt.Println(err.Error())
 		return 500, resultFunc
-	}
+	} 
 
 	var ID int
 	var PseudoUser string
