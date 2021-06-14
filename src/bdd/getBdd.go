@@ -123,6 +123,7 @@ func GetPosteByID(id int) (int, []string) {
 	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE id = ?", id)
 	if err != nil {
 		fmt.Println("Error GetPosteById")
+		fmt.Println(err.Error())
 		return 500, resultFunc
 	} else {
 		fmt.Println("Starting GetPosteById")

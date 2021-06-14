@@ -11,18 +11,20 @@
 <body>
     
     <div id="Posts">
-        
         <form method="POST" class="form">
             <input type="text" placeholder="Que voulez vous postez ?" name="PostValue" class="WritePost">         
         </form>
 
-        <div class="post1"><p>L'utilisateur nommé {{ .UserName }} a dit : {{ .Post }} à {{ .DatePoste}}</p></div>
-        <div class="post2"></div>
-        <div class="post3"></div>
-
+        {{ range . }}
+        <div class="post1"><p>L'utilisateur nommé {{ .UserName }} a dit : {{ .Post }} a {{ .Date }}</p></div>
+        {{ end }}
     </div>
-        <div id="Filter-Bloc">
+
+    <div id="Filter-Bloc">
+
     </div>    
-    
+
 </body>
+
+
 </html>
