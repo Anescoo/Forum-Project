@@ -20,8 +20,10 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	fmt.Print("Page d'accueil ✔️ \n")
 
 	getPostValue := req.FormValue("PostValue")
-	bdd.MakeUser("Tao", "louis.teilliais@gmail.com", "Karim69lattrik")
-	bdd.MakePoste("Tao", string(getPostValue),"test")
+	if getPostValue != "" {
+		bdd.MakePoste("Tao", string(getPostValue),"test")		
+	}
+
 	var arr [][]string
 	var posts []PostData
 	_, arr = bdd.GetAllPoste()

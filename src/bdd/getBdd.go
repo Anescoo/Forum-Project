@@ -153,12 +153,12 @@ func GetPosteByID(id int) (int, []string) {
 func GetAllPoste() (int, [][]string) {
 	_, db := OpenDataBase()
 	var resultFunc [][]string
-	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste")
+	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste ORDER BY DatePoste DESC")
 	if err != nil {
 		fmt.Println("Error GetAllPoste")
 		fmt.Println(err.Error())
 		return 500, resultFunc
-	}
+	} 
 
 	var ID int
 	var PseudoUser string
