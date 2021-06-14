@@ -24,25 +24,20 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	bdd.MakeUser("Tao", "louis.teilliais@gmail.com", "Karim69lattrik")
 	bdd.MakePoste("Tao",getPostValue,"test")
 	var arr []string
-	_, arr = bdd.GetPosteByID(2)
+	_, arr = bdd.GetPosteByID(5)
 	fmt.Println(arr)
 	
 	p := test {
 		UserName: arr[1],
 		Post: arr[2],
-		DatePoste : arr[3],
+		DatePoste : arr[5],
 	}
 
-	// NbrPosts := bdd.GetAllPoste()
-
+	fmt.Println(p.DatePoste)
 	
-
-
-	// for i := 0; i <  ; i++ {
-	// 	if getPostValue == bdd.GetPosteByID(i)[2] {
-
-	// 	}
-	// }
+	for (i := 0; i < len()); i++){
+		fmt.Println(p.Post)
+	}
 
 
 	if req.URL.Path == "/" { //verification de l'URL
