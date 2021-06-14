@@ -35,7 +35,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	fmt.Println(p.DatePoste)
 	
-	for (i := 0; i < len()); i++){
+	for i := 0; i < 10; i++{
 		fmt.Println(p.Post)
 	}
 
