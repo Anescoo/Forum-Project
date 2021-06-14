@@ -32,9 +32,7 @@ color: #010101;
 .post1 {
     background-color: white;
     border-radius: 8px;
-    /* text-align: center; */
-    /* display: flex; */
-    /* justify-content: space-between; */
+    border: black 5px;
     font-size: x-large;
     height: 100px;
     width: 50%;
