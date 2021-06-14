@@ -12,7 +12,9 @@ func main(){
 
     currentTime := time.Now()
     fmt.Println("Current Time in String: ", currentTime.String())
-    // _, db := bdd.OpenDataBase()
+    _, db := bdd.OpenDataBase()
+
+    db.Exec("SELECT * FROM Poste ORDER BY datetime(DatePoste) DESC")
 
     // db.Exec("DELETE FROM Poste WHERE ID = 23")
     // bdd.MakeUser("Tao", "louis.teilliais@gmail.com", "Karim69lattrik")
