@@ -12,11 +12,18 @@
     
     <div id="Posts">
         <form method="POST" class="form">
-            <input type="text" placeholder="Que voulez vous postez ?" name="PostValue" class="WritePost" required>
+            <input class="textarea"type="text" placeholder="Que voulez vous postez ?" name="PostValue" class="WritePost" required>
+            <input type="submit" placeholder="Oui" required>
         </form>
 
         {{ range . }}
-        <div class="post1"><p>{{ .UserName }} a dit : <br>{{ .Post }} <br> a {{ .Date }}</p></div>
+        <div class="post1">
+            {{ .UserName }} a dit :
+            <div class="contourPost">
+                {{ .Post }} <br>
+            </div> 
+            <p id="date"> à {{ .Date }}</p>
+        </div>
         {{ end }}
     </div>
 
