@@ -62,9 +62,7 @@ func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
 		key = hex.EncodeToString(keyBytes)
 		expiration := time.Now().Add(6 * time.Hour)
 		cookieForKey := http.Cookie{Name: "sessionKey", Value: key, Expires: expiration}
-		cookieForName := http.Cookie{Name: "sessionOwner", Value: getPseudo, Expires: expiration}
 		http.SetCookie(w, &cookieForKey)
-		http.SetCookie(w, &cookieForName)
 		return 0
 	}
 	return 2
