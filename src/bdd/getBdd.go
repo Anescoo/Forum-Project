@@ -17,6 +17,8 @@ func OpenDataBase() (int, *sql.DB) {
 	return 0, db //renvoie la base de donner
 }
 
+/////////////////////////////////User///////////////////////////////////////////////////////////////////////////////
+
 func MakeUser(pseudo string, email string, hash string) int {
 	_, db := OpenDataBase()                                                                //ouverture de la bdd
 	result, err := db.Prepare("INSERT INTO User (Pseudo, Email, HashMDP) VALUES(?, ?, ?)") //Preparation de la commande
@@ -98,6 +100,8 @@ func GetUserHash(username string) (int, string) {
 		return 0, HashMDP //renvoie le hash
 	}
 }
+
+////////////////////////////////////Poste///////////////////////////////////////////////////////////////////////////////////////
 
 func MakePoste(user string, contenue string, categorie string) int {
 	_, db := OpenDataBase()
@@ -206,7 +210,7 @@ func GetPosteByCategorie(categorie string) (int, [][]string) {
 func GetPosteByUser(UserPseudo string) (int, [][]string) {
 	_, db := OpenDataBase()
 	var resultFunc [][]string
-	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE PseudoUser = ?", UserPseudo)
+	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste ORDER BY DatePoste DESC WHERE PseudoUser = ?", UserPseudo)
 	if err != nil {
 		fmt.Println(err.Error())
 		return 500, resultFunc
@@ -247,6 +251,36 @@ func DeletePoste(id int) int {
 		}
 	}
 }
+
+///////////////////////Like///////////////////////////////////////////////////////////////////////
+
+func Like(idPost int, PseudoUser string) int {
+	_, db := OpenDataBase()
+	result, err := db.Prepare("INSERT INTO Like (PseudoUser, idPoste) VALUES(?,?)")
+	if err != nil {
+		fmt.Println(err.Error())
+		return 500
+	} else {
+		result.Exec(idPost, PseudoUser)
+		db.Close()
+		return 0
+	}
+}
+
+func Unlike(idPost int, PseudoUser string) int {
+	_, db := OpenDataBase()
+	result, err := db.Prepare("DELET FROM Like WHERE idPoste = ? AND PseudoUser =?")
+	if err != nil {
+		fmt.Println(err.Error())
+		return 500
+	} else {
+		result.Exec(idPost, PseudoUser)
+		db.Close()
+		return 0
+	}
+}
+
+////////////////////////Categorie//////////////////////////////////////////////////////////////////////////////
 
 func MakeCategorie(name string) int {
 	_, db := OpenDataBase()
