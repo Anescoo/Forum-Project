@@ -1,52 +1,45 @@
 package handlers
 
 import (
-    "fmt"
-    "net/http"
-    "text/template"
-    bdd "../bdd"
+	"fmt"
+	"net/http"
+	"text/template"
+	bdd "../bdd"
 )
 
-type test struct {
-    UserName string
-    Post string
-    DatePoste string
+type PostData struct {
+	UserName string
+	Post string
+	Date string
 }
 
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
-    t, _ := template.ParseFiles("./template/Accueil.html", "./template/header.html")
-    fmt.Print("Page d'accueil ✔️ \n")
+	t, _ := template.ParseFiles("./template/Accueil.html", "./template/header.html")
+	fmt.Print("Page d'accueil ✔️ \n")
 
-    getPostValue := req.FormValue("PostValue")
-    fmt.Println(getPostValue)
-    bdd.MakeUser("Tao", "louis.teilliais@gmail.com", "Karim69lattrik")
-    bdd.MakePoste("Tao",getPostValue,"test")
-    var arr []string
-    _, arr = bdd.GetPosteByID(2)    
-    p := test {
-        UserName: arr[1],
-        Post: arr[2],
-        DatePoste : arr[3],
-    }
+	getPostValue := req.FormValue("PostValue")
+	if getPostValue != "" {
+		bdd.MakePoste("Tao", string(getPostValue),"test")		
+	}
 
-    // NbrPosts := bdd.GetAllPoste()
+	var arr [][]string
+	var posts []PostData
+	_, arr = bdd.GetAllPoste()
+	for _, post := range arr {
+		p := PostData {
+			UserName: post[1],
+			Post: post[2],
+			Date: post[5],
+		}
+		posts = append(posts, p)
+	}
 
-    
-
-
-    // for i := 0; i <  ; i++ {
-    //     if getPostValue == bdd.GetPosteByID(i)[2] {
-
-    //     }
-    // }
-
-
-    if req.URL.Path == "/" { //verification de l'URL
-    } else if req.URL.Path != "/home" {
-        http.Error(w, "404 not found", http.StatusNotFound)
-        return
-    }
-    t.Execute(w, p)
+	if req.URL.Path == "/" { //verification de l'URL
+	} else if req.URL.Path != "/home" {
+		http.Error(w, "404 not found", http.StatusNotFound)
+		return
+	}
+	t.Execute(w, posts)
 }
