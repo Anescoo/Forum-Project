@@ -12,13 +12,22 @@
     
     <div id="Posts">
         <form method="POST" class="form">
-            <input class="textarea"type="text" placeholder="Que voulez vous postez ?" name="PostValue" class="WritePost" required>
+            <!-- <textarea class="textarea" type="text" placeholder="Que voulez vous postez ?" name="PostValue" class="WritePost" required></textarea> -->
+            <input class="textarea" type="text" placeholder="Que voulez vous postez ?" name="PostValue" class="WritePost" required>
             <input type="submit" placeholder="Oui" required>
         </form>
 
         {{ range . }}
         <div class="post1">
-            {{ .UserName }} a dit :
+            <div class="topPost">
+                {{ .UserName }} a dit :
+                <form method="POST">
+                    <textarea hidden name="test">{{ .ID }}</textarea>
+                    <button class="suppression">Supprimer 🗑️</button>                  
+                </form>
+
+            </div>
+
             <div class="contourPost">
                 {{ .Post }} <br>
             </div> 

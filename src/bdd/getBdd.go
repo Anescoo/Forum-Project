@@ -62,6 +62,7 @@ func GetAllUser() (int, [][]string) {
 	if err != nil {
 		fmt.Println("Error GetAllUser")
 		fmt.Println(err.Error())
+
 		return 500, resultFunc
 	}
 
@@ -84,6 +85,7 @@ func GetUserHash(username string) (int, string) {
 	result, err := db.Query("SELECT HashMDP FROM User WHERE Pseudo = ?", username) //renvoie du hash de l'utilisateur voulue
 	if err != nil {
 		fmt.Println("Error GetUserHash")
+		db.Close()
 		return 500, "error 500"
 	} else {
 
@@ -179,7 +181,7 @@ func GetAllPoste() (int, [][]string) {
 func GetPosteByCategorie(categorie string) (int, [][]string) {
 	_, db := OpenDataBase()
 	var resultFunc [][]string
-	result, err := db.Query("SELECT ID, PseudoUser, Contenue, nbLike FROM Poste WHERE Categorie = ?", categorie)
+	result, err := db.Query("SELECT ID, PseudoUser, Contenue, nbLike, DatePoste FROM Poste WHERE Categorie = ?", categorie)
 	if err != nil {
 		fmt.Println(err.Error())
 		return 500, resultFunc
@@ -189,10 +191,11 @@ func GetPosteByCategorie(categorie string) (int, [][]string) {
 		var PseudoUser string
 		var Contenue string
 		var nbLike int
+		var DatePoste string
 
 		for result.Next() {
 			result.Scan(&ID, &PseudoUser, &Contenue, &nbLike)
-			temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, strconv.Itoa(nbLike)}
+			temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, strconv.Itoa(nbLike), DatePoste}
 			resultFunc = append(resultFunc, temp)
 		}
 
@@ -204,7 +207,7 @@ func GetPosteByCategorie(categorie string) (int, [][]string) {
 func GetPosteByUser(UserPseudo string) (int, [][]string) {
 	_, db := OpenDataBase()
 	var resultFunc [][]string
-	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike FROM Poste WHERE PseudoUser = ?", UserPseudo)
+	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE PseudoUser = ?", UserPseudo)
 	if err != nil {
 		fmt.Println(err.Error())
 		return 500, resultFunc
@@ -215,10 +218,11 @@ func GetPosteByUser(UserPseudo string) (int, [][]string) {
 		var Contenue string
 		var Categorie string
 		var nbLike int
+		var DatePoste string
 
 		for result.Next() {
 			result.Scan(&ID, &PseudoUser, &Contenue, &Categorie, &nbLike)
-			temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, Categorie, strconv.Itoa(nbLike)}
+			temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, Categorie, strconv.Itoa(nbLike), DatePoste}
 			resultFunc = append(resultFunc, temp)
 		}
 

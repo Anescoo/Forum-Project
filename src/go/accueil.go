@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"text/template"
+	"strconv"
 	bdd "../bdd"
 )
 
@@ -11,6 +12,7 @@ type PostData struct {
 	UserName string
 	Post string
 	Date string
+	ID string
 }
 
 
@@ -19,6 +21,11 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	t, _ := template.ParseFiles("./template/Accueil.html", "./template/header.html")
 	fmt.Print("Page d'accueil ✔️ \n")
 
+	getPostID := req.FormValue("test")
+	IdToSuppr, err:= strconv.Atoi(getPostID)
+	if err == nil {
+		bdd.DeletePoste(IdToSuppr)
+	}
 	getPostValue := req.FormValue("PostValue")
 	if getPostValue != "" {
 		bdd.MakePoste("Tao", string(getPostValue),"test")		
@@ -29,6 +36,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	_, arr = bdd.GetAllPoste()
 	for _, post := range arr {
 		p := PostData {
+			ID: post[0],
 			UserName: post[1],
 			Post: post[2],
 			Date: post[5],

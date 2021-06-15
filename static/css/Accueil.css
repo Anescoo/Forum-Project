@@ -31,12 +31,8 @@ body {
 
 .post1 {
     background-color: white;
-<<<<<<< HEAD
-    border-radius: 8px;
-    border: black 5px;
-=======
     border-radius: 10px;
->>>>>>> 5da5c5e2fd151c2ecaaec9bf9e8bb652bb5455f1
+    color: black;
     font-size: x-large;
     width: 40%;
     display: flex;
@@ -47,19 +43,35 @@ body {
     border: 10px solid #5BC7D6;
 }
 
+.topPost {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.suppression {
+    background-color: white;
+    color: #5BC7D6;
+    border: none;
+}
+
+.suppression:hover {
+    background-color: black;
+    color: white;
+}
+
 .contourPost {
     display: flex;
-    /* justify-content: center; */
-    /* background-color: #0D748B; */
-    color: black;
-    /* border-radius: 10px; */
-    margin-left: 20%;
-    width: 60%;
+    background-color: #0D748B;
+    color: white;
+    border-radius: 10px;
+    margin-left: 10%;
+    width: 80%;
     height: auto;
-    /* border-color: black; */
-    /* border-width: 10px; */
     border-width: thick;
     border: 2px solid black;
+    margin-top: 5%;
+    /* font-family:; */
 }
 
 #date {
@@ -68,4 +80,7 @@ body {
 
 .textarea {
     margin-bottom: 50px;
+    margin-top: 10px;
+    height: auto;
+    resize: none;
 }
