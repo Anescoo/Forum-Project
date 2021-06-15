@@ -9,6 +9,7 @@ body {
 }
 
 #Post {
+
     background-color: white;
     border-radius: 10px;
     color: black;
@@ -18,11 +19,13 @@ body {
     flex-direction: column;
     justify-content: space-between;
     height: auto;
-    margin-bottom: 2%;
+    margin-bottom: 2%;  
+    /* margin-top: 2%; */
     border: 10px solid #5BC7D6;
 }
 
 #contourPost {
+    
     display: flex;
     background-color: #0D748B;
     color: white;
@@ -34,5 +37,8 @@ body {
     border: 2px solid black;
     margin-top: 5%;
     margin-bottom: 5%;
-    /* font-family:; */
+}
+
+#text {
+    margin-bottom: -2%;
 }
