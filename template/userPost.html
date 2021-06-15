@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="../static/css/userpost.css" rel="stylesheet" type="text/css">
+    <title>Merdit</title>
+</head>
+
+<body>
+    {{ template "header" }}
+    
+    <div id = "MyPosts">
+        <h1> Mes Posts</h1>
+        {{ range . }}
+        <div id="Post">
+            <p>Vous avez posté :</p> 
+            <div id = "contourPost">
+                {{ .Post }}
+            </div>
+        </div> 
+        {{ end }} 
+    </div>
+    
+</body>
+</html>

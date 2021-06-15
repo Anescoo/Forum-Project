@@ -20,6 +20,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	fmt.Print("Page d'accueil ✔️ \n")
 
 	getPostValue := req.FormValue("PostValue")
+	
 	if getPostValue != "" {
 		bdd.MakePoste("Tao", string(getPostValue),"test")		
 	}
@@ -35,7 +36,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		}
 		posts = append(posts, p)
 	}
-
+	
 	if req.URL.Path == "/" { //verification de l'URL
 	} else if req.URL.Path != "/home" {
 		http.Error(w, "404 not found", http.StatusNotFound)
