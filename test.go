@@ -1,7 +1,7 @@
 package main 
 
 import (
-    // "fmt"
+    "fmt"
     bdd "./src/bdd"
     // "database/sql"
     _ "github.com/mattn/go-sqlite3"
@@ -12,7 +12,7 @@ func main(){
     // _, db := bdd.OpenDataBase()
 
     // db.Exec("DELETE FROM Poste WHERE ID = 3")
-    // bdd.MakeUser("Tao", "louis.teilliais@gmail.com", "Karim69lattrik")
+    // bdd.MakeUser("Louis", "louis.teilliais@gmail.com", "Karim69lattrik")
 	// bdd.MakePoste("Louis", "Karim est le meilleur", "test")
 	// // fmt.Println(bdd.GetPosteByID(2)[1])
     // db.Exec("SELECT * FROM Poste ORDER BY PosteTime ASC")
@@ -26,5 +26,8 @@ func main(){
 
     // fmt.Println(bdd.GetPosteByUser("Tao"))
 
-    bdd.UpdatePoste(15, "Allez les bleus")
+    // bdd.UpdatePoste(15, "Allez les bleus")
+    bdd.Like(13, "Louis")
+    bdd.GetLikeNb(13)
+    fmt.Println(bdd.IsLike(13, "Louis"))
 }
