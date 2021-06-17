@@ -16,16 +16,17 @@ func UserPost(w http.ResponseWriter, req *http.Request){
 	
 	var arr [][]string
 	var posts []PostData
-	_, arr = bdd.GetPosteByUser("Louis")
+	_, arr = bdd.GetPosteByUser("Tao")
 	
 
 	for _, post := range arr {
 		p := PostData {
 			Post: post[2],
+			// Date: post[5],
 		}
+		// fmt.Println(p.Date)
 		posts = append(posts, p)
 	}
-	
 
 	t.Execute(w, posts)
 }

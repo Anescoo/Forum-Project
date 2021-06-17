@@ -212,7 +212,6 @@ func GetPosteByUser(UserPseudo string) (int, [][]string) {
 	_, db := OpenDataBase()
 	var resultFunc [][]string
 	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike FROM Poste WHERE PseudoUser = ?", UserPseudo)
-	// result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste ORDER BY DatePoste DESC WHERE PseudoUser = ? ", UserPseudo)
 	if err != nil {
 		fmt.Println(err.Error())
 		return 500, resultFunc

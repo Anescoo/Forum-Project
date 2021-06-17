@@ -22,7 +22,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	getPostValue := req.FormValue("PostValue")
 	
 	if getPostValue != "" {
-		bdd.MakePoste("Louis", string(getPostValue),"test")		
+		bdd.MakePoste("Tao", string(getPostValue),"test")		
 	}
 
 	var arr [][]string
