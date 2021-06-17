@@ -198,7 +198,7 @@ func GetPosteByCategorie(categorie string) (int, [][]string) {
 		var DatePoste string
 
 		for result.Next() {
-			result.Scan(&ID, &PseudoUser, &Contenue, &nbLike)
+			result.Scan(&ID, &PseudoUser, &Contenue, &nbLike, &DatePoste)
 			temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, strconv.Itoa(nbLike), DatePoste}
 			resultFunc = append(resultFunc, temp)
 		}
@@ -211,7 +211,7 @@ func GetPosteByCategorie(categorie string) (int, [][]string) {
 func GetPosteByUser(UserPseudo string) (int, [][]string) {
 	_, db := OpenDataBase()
 	var resultFunc [][]string
-	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE PseudoUser = ?", UserPseudo)
+	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE PseudoUser = ? ORDER BY DatePoste DESC", UserPseudo)
 	if err != nil {
 		fmt.Println(err.Error())
 		return 500, resultFunc
@@ -232,6 +232,20 @@ func GetPosteByUser(UserPseudo string) (int, [][]string) {
 
 		db.Close()
 		return 0, resultFunc
+	}
+}
+
+func UpdatePoste(id int, update string) int {
+	_, db := OpenDataBase()
+	result, err := db.Prepare("UPDATE Poste SET Contenue = ? WHERE ID = ?")
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500
+	} else {
+		result.Exec(update, id)
+		db.Close()
+		return 0
 	}
 }
 
@@ -262,7 +276,7 @@ func Like(idPost int, PseudoUser string) int {
 		fmt.Println(err.Error())
 		return 500
 	} else {
-		result.Exec(idPost, PseudoUser)
+		result.Exec(PseudoUser, idPost)
 		db.Close()
 		return 0
 	}
@@ -281,12 +295,47 @@ func Unlike(idPost int, PseudoUser string) int {
 	}
 }
 
+func IsLike(idPoste int, PseudoUser string) (int, bool) {
+	_, db := OpenDataBase()
+	_, err := db.Query("SELECT PseudoUser FROM Like WHERE PseudoUser = ? AND IdPoste = ?", PseudoUser, idPoste)
+	if err != nil {
+		db.Close()
+		return 500, false
+	} else {
+		db.Close()
+		return 0, true
+	}
+}
+
+func GetLikeNb(id int) int {
+	_, db := OpenDataBase()
+	result, err := db.Query("SELECT idPoste FROM Like WHERE idPoste = ?", id)
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500
+	} else {
+		var resultFunc []int
+		var idPoste int
+
+		for result.Next() {
+			result.Scan(&idPoste)
+			resultFunc = append(resultFunc, idPoste)
+		}
+
+		db.Close()
+		fmt.Println(len(resultFunc))
+		return len(resultFunc)
+	}
+}
+
 ////////////////////////Categorie//////////////////////////////////////////////////////////////////////////////
 
 func MakeCategorie(name string) int {
 	_, db := OpenDataBase()
 	result, err := db.Prepare("INSERT INTO Categorie (Name) Values(?)")
 	if err != nil {
+		db.Close()
 		return 500
 	} else {
 		result.Exec(name)
@@ -294,4 +343,75 @@ func MakeCategorie(name string) int {
 
 	db.Close()
 	return 0
+}
+
+func NbPosteByCategorie(name string) (int, int) {
+	_, db := OpenDataBase()
+	result, err := db.Query("SELECT ID FROM Poste WHERE Categorie = ?", name)
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 0, 500
+	} else {
+		var temp []int
+		var ID int
+
+		for result.Next() {
+			result.Scan(&ID)
+			temp = append(temp, ID)
+		}
+		return 0, len(temp)
+	}
+}
+
+func DeleteCategorire(name string) int {
+	_, db := OpenDataBase()
+	result, err := db.Prepare("DELETE FROM Categorie WHERE Name = ? ")
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500
+	} else {
+		result.Exec(name)
+		db.Close()
+		return 0
+	}
+}
+
+//////////////////////////////////////////Commentaire//////////////////////////////////////////////////////
+
+func MakeComment(Username string, Contenue string, IDPoste int) int {
+	_, db := OpenDataBase()
+	result, err := db.Prepare("INSERT INTO Commentaire (User, Contenue, IDPoste) VALUES(?,?,?)")
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500
+	} else {
+		result.Exec(Username, Contenue, IDPoste)
+		db.Close()
+		return 0
+	}
+}
+
+func GetCommentByPoste(idPoste int) (int, [][]string) {
+	_, db := OpenDataBase()
+	var ResultFunc [][]string
+	result, err := db.Query("SELECT User, Contenue FROM Commentaire WHERE IDPoste = ?", idPoste)
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500, ResultFunc
+	} else {
+		var User string
+		var Contenue string
+
+		for result.Next() {
+			result.Scan(&User, &Contenue)
+			temp := []string{User, Contenue}
+			ResultFunc = append(ResultFunc, temp)
+		}
+		db.Close()
+		return 0, ResultFunc
+	}
 }

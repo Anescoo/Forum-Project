@@ -31,8 +31,9 @@ body {
     flex-direction: column;
     justify-content: space-between;
     height: auto;
+    margin-top: 2%;
     margin-bottom: 5%;
-    border: 10px solid #5BC7D6;
+    border: 10px solid #5BC7D6; 
 }
 
 .topPost {
@@ -63,9 +64,12 @@ body {
     border-width: thick;
     border: 2px solid black;
     margin-top: 5%;
-    /* font-family:; */
 }
 
 #date {
+    margin-left: 50%;
+}
+
+.like {
     margin-left: 50%;
 }

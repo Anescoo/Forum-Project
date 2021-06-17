@@ -43,13 +43,15 @@ body {
     margin-bottom: -2%;
 }
 
-.suppression {
+.suppression, 
+.updatePost {
     background-color: white;
     color: #5BC7D6;
     border: none;
 }
 
-.suppression:hover {
+.suppression:hover,
+.updatePost:hover {
     background-color: black;
     color: white;
 }
@@ -58,4 +60,8 @@ body {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
+}
+
+#date {
+    margin-left: 50%;
 }
