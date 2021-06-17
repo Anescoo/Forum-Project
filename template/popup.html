@@ -1,40 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link href="../static/css/popup.css" rel="stylesheet" type="text/css">
 
-
-<head>
-        <title>Titre du document</title>
+<html>
+<title>Titre du document</title>
 </head>
 <body>
         <h2>Forme Popup</h2>
-        <p>Cliquez sur le bouton "Créer un poste" pour ouvrir la forme Popup.</p>
+        <p>Cliquez sur le bouton "Ouvrir la forme" pour ouvrir la forme Popup.</p>
         <div class="open-btn">
-                <button class="open-button" onclick="openForm()"><strong>Créer un poste</strong></button>
+                <button class="open-button" onclick="openForm()"><strong>Ouvrir la forme</strong></button>
         </div>
         <div class="login-popup">
                 <div class="form-popup" id="popupForm">
                         <form action="/action_page.php" class="form-container">
-                                <label for="publier">
-                                        <strong>Créer un post</strong>                               
+                                <h2>Créer un POST !</h2>
+                                <label for="email">
+                                     
                                 </label>
-                                <input type="text" size="10" id="publier" placeholder="Ecrivez un message..." name="messageforum" required>
-                                
-                                <label for="psw">
-                                        <button type="submit" style="width: 150px" class="btn">Publier</button>
-                                        <button type="button" style="width: 60px; position: absolute; top: 20px; left: 100px" class="btn cancel" onclick="closeForm()">❌</button>
-                                </form>
-                        </div>
-                </div> 
-                <script> function openForm() {
+                                <input type="text" id="msg" placeholder="Votre Message" name="message" required>
+                                <label for="post">                                  
+                                </label>                            
+                                <button type="submit" class="btn">Publier</button>
+                                <button type="button" class="btn cancel" onclick="closeForm()">Fermer</button>
+                        </form>
+                </div>
+        </div>
+        <script>
+                function openForm() {
                         document.getElementById("popupForm").style.display="block";
                 }
                 
                 function closeForm() {
                         document.getElementById("popupForm").style.display="none";
-                }</script>
-                
-        </body>
-        </html>
+                }
+        </script>
+</body>
+</html>
