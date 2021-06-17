@@ -8,6 +8,10 @@ import (
 	bdd "../bdd"
 )
 
+type StructOfStruct struct {
+	
+}
+
 type PostData struct {
 	UserName string
 	Post string
@@ -16,6 +20,8 @@ type PostData struct {
 	ID string
 
 }
+
+
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
