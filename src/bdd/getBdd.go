@@ -211,7 +211,7 @@ func GetPosteByCategorie(categorie string) (int, [][]string) {
 func GetPosteByUser(UserPseudo string) (int, [][]string) {
 	_, db := OpenDataBase()
 	var resultFunc [][]string
-	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE PseudoUser = ?", UserPseudo)
+	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE PseudoUser = ? ORDER BY DatePoste DESC", UserPseudo)
 	if err != nil {
 		fmt.Println(err.Error())
 		return 500, resultFunc
@@ -331,3 +331,5 @@ func MakeCategorie(name string) int {
 	db.Close()
 	return 0
 }
+
+

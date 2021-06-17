@@ -35,6 +35,23 @@ body {
     border: 10px solid #5BC7D6;
 }
 
+.topPost {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.suppression {
+    background-color: white;
+    color: #5BC7D6;
+    border: none;
+}
+
+.suppression:hover {
+    background-color: black;
+    color: white;
+}
+
 .contourPost {
     display: flex;
     background-color: #0D748B;
@@ -51,11 +68,4 @@ body {
 
 #date {
     margin-left: 50%;
-}
-
-.textarea {
-    margin-bottom: 50px;
-    margin-top: 10px;
-    height: auto;
-    resize: none;
 }

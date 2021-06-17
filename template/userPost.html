@@ -16,17 +16,25 @@
         <h1> Mes Posts</h1>
         {{ range . }}
         <div id="Post">
-            <p id = "text">Vous avez posté :</p> 
-            <!-- <form method="POST">
+            <div class="TopPost">
                 <button class="updatePost"> Modifier ✏️</button>
-            </form> -->
+                <form method="POST">
+                    <textarea hidden name="delete">{{ .ID }}</textarea>
+                    <button class="suppression">Supprimer 🗑️</button>
+                </form>  
+                <p id = "text">Vous avez posté :</p>             
+            </div>
             <div id = "contourPost">
                 {{ .Post }} 
             </div>
-            <!-- <div class="hiddenPost">
-                <input type="text">
-            </div> -->
-            {{ .Date }}
+            <div  class="updateText">
+                <form method="POST">
+                    <textarea hidden name="update">{{ .ID }}</textarea>
+                    <textarea name="sendUpdate" id="" cols="30" rows="10">{{ .Post }} </textarea>
+                    <button type="submit" name="boutonUpdate"> Envoyer</button>
+                </form>
+            </div>
+            <p id="date"> {{ .Date }}</p>
         </div> 
         {{ end }} 
     </div>

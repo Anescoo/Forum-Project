@@ -1,7 +1,7 @@
 package main 
 
 import (
-    "fmt"
+    // "fmt"
     bdd "./src/bdd"
     // "database/sql"
     _ "github.com/mattn/go-sqlite3"
@@ -24,5 +24,7 @@ func main(){
     // db, _ := sql.Open("sqlite3", "src/bdd/DataBase.db")
     // fmt.Println(db.Query("SELECT * FROM User"))
 
-    fmt.Println(bdd.GetPosteByUser("Tao"))
+    // fmt.Println(bdd.GetPosteByUser("Tao"))
+
+    bdd.UpdatePoste(15, "Allez les bleus")
 }

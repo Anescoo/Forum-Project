@@ -19,7 +19,15 @@
 
         {{ range . }}
         <div class="post1">
-            {{ .UserName }} a dit :
+            <div class="topPost">
+                {{ .UserName }} a dit :
+                <form method="POST">
+                    <textarea hidden name="test">{{ .ID }}</textarea>
+                    <button class="suppression">Supprimer 🗑️</button>                  
+                </form>
+
+            </div>
+
             <div class="contourPost">
                 {{ .Post }} <br>
             </div> 

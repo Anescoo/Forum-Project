@@ -42,3 +42,26 @@ body {
 #text {
     margin-bottom: -2%;
 }
+
+.suppression, 
+.updatePost {
+    background-color: white;
+    color: #5BC7D6;
+    border: none;
+}
+
+.suppression:hover,
+.updatePost:hover {
+    background-color: black;
+    color: white;
+}
+
+.TopPost {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+#date {
+    margin-left: 50%;
+}
