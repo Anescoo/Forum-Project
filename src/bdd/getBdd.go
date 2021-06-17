@@ -197,7 +197,7 @@ func GetPosteByCategorie(categorie string) (int, [][]string) {
 		var DatePoste string
 
 		for result.Next() {
-			result.Scan(&ID, &PseudoUser, &Contenue, &nbLike)
+			result.Scan(&ID, &PseudoUser, &Contenue, &nbLike, &DatePoste)
 			temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, strconv.Itoa(nbLike), DatePoste}
 			resultFunc = append(resultFunc, temp)
 		}
@@ -334,6 +334,7 @@ func MakeCategorie(name string) int {
 	_, db := OpenDataBase()
 	result, err := db.Prepare("INSERT INTO Categorie (Name) Values(?)")
 	if err != nil {
+		db.Close()
 		return 500
 	} else {
 		result.Exec(name)
@@ -341,4 +342,37 @@ func MakeCategorie(name string) int {
 
 	db.Close()
 	return 0
+}
+
+func NbPosteByCategorie(name string) (int, int) {
+	_, db := OpenDataBase()
+	result, err := db.Query("SELECT ID FROM Poste WHERE Categorie = ?", name)
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 0, 500
+	} else {
+		var temp []int
+		var ID int
+
+		for result.Next() {
+			result.Scan(&ID)
+			temp = append(temp, ID)
+		}
+		return 0, len(temp)
+	}
+}
+
+func DeleteCategorire(name string) int {
+	_, db := OpenDataBase()
+	result, err := db.Prepare("DELETE FROM Categorie WHERE Name = ? ")
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500
+	} else {
+		result.Exec(name)
+		db.Close()
+		return 0
+	}
 }
