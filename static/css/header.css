@@ -27,12 +27,12 @@ body {
 }
 
 .Title {
-
-font: 900;
-font-size: 100%;
-font-size: 5vmax;
-color : white;
-
+    
+    font: 900;
+    font-size: 100%;
+    font-size: 5vmax;
+    color : white;
+    
 }
 
 #Right-header {

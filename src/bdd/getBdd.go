@@ -284,7 +284,7 @@ func Like(idPost int, PseudoUser string) int {
 
 func Unlike(idPost int, PseudoUser string) int {
 	_, db := OpenDataBase()
-	result, err := db.Prepare("DELETE FROM Like WHERE idPoste = ? AND PseudoUser =?")
+	result, err := db.Prepare("DELET FROM Like WHERE idPoste = ? AND PseudoUser =?")
 	if err != nil {
 		fmt.Println(err.Error())
 		return 500
@@ -377,3 +377,4 @@ func DeleteCategorire(name string) int {
 		return 0
 	}
 }
+
