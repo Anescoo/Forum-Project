@@ -16,7 +16,7 @@ func UserPost(w http.ResponseWriter, req *http.Request){
 	
 	var arr [][]string
 	var posts []PostData
-	_, arr = bdd.GetPosteByUser("Tao")
+	_, arr = bdd.GetPosteByUser("Louis")
 	
 
 	for _, post := range arr {
