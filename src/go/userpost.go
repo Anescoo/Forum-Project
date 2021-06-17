@@ -22,9 +22,9 @@ func UserPost(w http.ResponseWriter, req *http.Request){
 	for _, post := range arr {
 		p := PostData {
 			Post: post[2],
-			// Date: post[5],
+			Date: post[5],
 		}
-		// fmt.Println(p.Date)
+		fmt.Println(p.Date)
 		posts = append(posts, p)
 	}
 

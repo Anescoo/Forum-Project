@@ -17,13 +17,16 @@
         {{ range . }}
         <div id="Post">
             <p id = "text">Vous avez posté :</p> 
-            <form method="POST">
+            <!-- <form method="POST">
                 <button class="updatePost"> Modifier ✏️</button>
-            </form>
+            </form> -->
             <div id = "contourPost">
                 {{ .Post }} 
             </div>
-            <!-- {{ .Date }} -->
+            <!-- <div class="hiddenPost">
+                <input type="text">
+            </div> -->
+            {{ .Date }}
         </div> 
         {{ end }} 
     </div>
