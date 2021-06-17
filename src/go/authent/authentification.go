@@ -11,6 +11,18 @@ import (
 	bdd "../../bdd"
 )
 
+func sessionCookie(sessionToken string, w http.ResponseWriter) {
+
+	http.SetCookie(w, &http.Cookie{
+		Name:    "session_token",
+		Value:   sessionToken,
+		Expires: time.Now().Add(4 * time.Hour)
+	})
+	//expiration := time.Now().Add(6 * time.Hour)
+	//cookieForKey := http.Cookie{Name: "sessionKey", Value: key, Expires: expiration}
+	//http.SetCookie(w, &cookieForKey)
+}
+
 func Register(username string, email string, password string) int {
 	var passwordHash string
 	_, pseudo := bdd.GetUser(username)
@@ -60,9 +72,7 @@ func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
 			return 1
 		}
 		key = hex.EncodeToString(keyBytes)
-		expiration := time.Now().Add(6 * time.Hour)
-		cookieForKey := http.Cookie{Name: "sessionKey", Value: key, Expires: expiration}
-		http.SetCookie(w, &cookieForKey)
+
 		return 0
 	}
 	return 2
