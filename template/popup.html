@@ -8,23 +8,17 @@
 <title>Titre du document</title>
 </head>
 <body>
-        <h2>Forme Popup</h2>
-        <p>Cliquez sur le bouton "Ouvrir la forme" pour ouvrir la forme Popup.</p>
+        <h2>Pop up pour créer et publier des posts.</h2>
+        
         <div class="open-btn">
-                <button class="open-button" onclick="openForm()"><strong>Ouvrir la forme</strong></button>
+                <button class="open-button" onclick="openForm()">Créer un Post !</button>
         </div>
         <div class="login-popup">
                 <div class="form-popup" id="popupForm">
-                        <form action="/action_page.php" class="form-container">
-                                <h2>Créer un POST !</h2>
-                                <label for="email">
-                                     
-                                </label>
-                                <input type="text" id="msg" placeholder="Votre Message" name="message" required>
-                                <label for="post">                                  
-                                </label>                            
-                                <button type="submit" class="btn">Publier</button>
-                                <button type="button" class="btn cancel" onclick="closeForm()">Fermer</button>
+                        <form action="/action_page.php" class="form-container">                 
+                                <input type="text" id="msg" placeholder="Votre Message" name="message" required>                       
+                                <button type="submit" class="btn">Publier</button>                                                    
+                                <button type="button" class="btn cancel" onclick="closeForm()">❌</button>
                         </form>
                 </div>
         </div>

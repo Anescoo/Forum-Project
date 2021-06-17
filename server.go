@@ -19,5 +19,6 @@ func main() {
 	http.HandleFunc("/profil", handlers.Profil)
 	http.HandleFunc("/inscription", handlers.Inscription)
 	http.HandleFunc("/pop", handlers.Pop)
+	http.HandleFunc("/parcourir", handlers.Parcrir)
 	http.ListenAndServe(":8000", nil)
 }
