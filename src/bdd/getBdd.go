@@ -211,7 +211,7 @@ func GetPosteByCategorie(categorie string) (int, [][]string) {
 func GetPosteByUser(UserPseudo string) (int, [][]string) {
 	_, db := OpenDataBase()
 	var resultFunc [][]string
-	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste ORDER BY DatePoste DESC WHERE PseudoUser = ?", UserPseudo)
+	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE PseudoUser = ? ORDER BY DatePoste DESC", UserPseudo)
 	if err != nil {
 		fmt.Println(err.Error())
 		return 500, resultFunc
@@ -225,7 +225,7 @@ func GetPosteByUser(UserPseudo string) (int, [][]string) {
 		var DatePoste string
 
 		for result.Next() {
-			result.Scan(&ID, &PseudoUser, &Contenue, &Categorie, &nbLike)
+			result.Scan(&ID, &PseudoUser, &Contenue, &Categorie, &nbLike, &DatePoste)
 			temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, Categorie, strconv.Itoa(nbLike), DatePoste}
 			resultFunc = append(resultFunc, temp)
 		}
@@ -292,6 +292,18 @@ func Unlike(idPost int, PseudoUser string) int {
 		result.Exec(idPost, PseudoUser)
 		db.Close()
 		return 0
+	}
+}
+
+func IsLike(idPoste int, PseudoUser string) (int, bool) {
+	_, db := OpenDataBase()
+	_, err := db.Query("SELECT PseudoUser FROM Like WHERE PseudoUser = ? AND IdPoste = ?", PseudoUser, idPoste)
+	if err != nil {
+		db.Close()
+		return 500, false
+	} else {
+		db.Close()
+		return 0, true
 	}
 }
 
