@@ -210,7 +210,7 @@ func GetPosteByCategorie(categorie string) (int, [][]string) {
 func GetPosteByUser(UserPseudo string) (int, [][]string) {
 	_, db := OpenDataBase()
 	var resultFunc [][]string
-	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste ORDER BY DatePoste DESC WHERE PseudoUser = ?", UserPseudo)
+	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE PseudoUser = ? ORDER BY DatePoste DESC", UserPseudo)
 	if err != nil {
 		fmt.Println(err.Error())
 		return 500, resultFunc
@@ -224,7 +224,7 @@ func GetPosteByUser(UserPseudo string) (int, [][]string) {
 		var DatePoste string
 
 		for result.Next() {
-			result.Scan(&ID, &PseudoUser, &Contenue, &Categorie, &nbLike)
+			result.Scan(&ID, &PseudoUser, &Contenue, &Categorie, &nbLike, &DatePoste)
 			temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, Categorie, strconv.Itoa(nbLike), DatePoste}
 			resultFunc = append(resultFunc, temp)
 		}
