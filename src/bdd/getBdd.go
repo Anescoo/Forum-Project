@@ -294,6 +294,18 @@ func Unlike(idPost int, PseudoUser string) int {
 	}
 }
 
+func IsLike(idPoste int, PseudoUser string) (int, bool) {
+	_, db := OpenDataBase()
+	_, err := db.Query("SELECT PseudoUser FROM Like WHERE PseudoUser = ? AND IdPoste = ?", PseudoUser, idPoste)
+	if err != nil {
+		db.Close()
+		return 500, false
+	} else {
+		db.Close()
+		return 0, true
+	}
+}
+
 func GetLikeNb(id int) int {
 	_, db := OpenDataBase()
 	result, err := db.Query("SELECT idPoste FROM Like WHERE idPoste = ?", id)
