@@ -15,7 +15,6 @@ type PostData struct {
 	ID string
 }
 
-
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	t, _ := template.ParseFiles("./template/Accueil.html", "./template/header.html")
@@ -27,8 +26,9 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		bdd.DeletePoste(IdToSuppr)
 	}
 	getPostValue := req.FormValue("PostValue")
+	
 	if getPostValue != "" {
-		bdd.MakePoste("Tao", string(getPostValue),"test")		
+		bdd.MakePoste("Louis", string(getPostValue),"test")		
 	}
 
 	var arr [][]string
@@ -43,7 +43,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		}
 		posts = append(posts, p)
 	}
-
+	
 	if req.URL.Path == "/" { //verification de l'URL
 	} else if req.URL.Path != "/home" {
 		http.Error(w, "404 not found", http.StatusNotFound)

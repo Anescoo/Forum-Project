@@ -1,11 +1,3 @@
-#entete {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-}
-
-
 #Posts {
     display: flex;
     align-items: center;
@@ -76,11 +68,4 @@ body {
 
 #date {
     margin-left: 50%;
-}
-
-.textarea {
-    margin-bottom: 50px;
-    margin-top: 10px;
-    height: auto;
-    resize: none;
 }
