@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link href="../static/css/popup.css" rel="stylesheet" type="text/css">
+
+
+<head>
+        <title>Titre du document</title>
+</head>
+<body>
+        <h2>Forme Popup</h2>
+        <p>Cliquez sur le bouton "Créer un poste" pour ouvrir la forme Popup.</p>
+        <div class="open-btn">
+                <button class="open-button" onclick="openForm()"><strong>Créer un poste</strong></button>
+        </div>
+        <div class="login-popup">
+                <div class="form-popup" id="popupForm">
+                        <form action="/action_page.php" class="form-container">
+                                <label for="publier">
+                                        <strong>Créer un post</strong>                               
+                                </label>
+                                <input type="text" size="10" id="publier" placeholder="Ecrivez un message..." name="messageforum" required>
+                                
+                                <label for="psw">
+                                        <button type="submit" style="width: 150px" class="btn">Publier</button>
+                                        <button type="button" style="width: 60px; position: absolute; top: 20px; left: 100px" class="btn cancel" onclick="closeForm()">❌</button>
+                                </form>
+                        </div>
+                </div> 
+                <script> function openForm() {
+                        document.getElementById("popupForm").style.display="block";
+                }
+                
+                function closeForm() {
+                        document.getElementById("popupForm").style.display="none";
+                }</script>
+                
+        </body>
+        </html>
