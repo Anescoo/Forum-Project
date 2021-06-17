@@ -1,52 +1,65 @@
 package handlers
 
 import (
-    "fmt"
-    "net/http"
-    "text/template"
-    bdd "../bdd"
+	"fmt"
+	"net/http"
+	"text/template"
+	"strconv"
+	bdd "../bdd"
 )
 
-type test struct {
-    UserName string
-    Post string
-    DatePoste string
-}
+type PostData struct {
+	UserName string
+	Post string
+	Date string
+	NbLike int
+	ID string
 
+}
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
-    t, _ := template.ParseFiles("./template/Accueil.html", "./template/header.html")
-    fmt.Print("Page d'accueil ✔️ \n")
+	t, _ := template.ParseFiles("./template/Accueil.html", "./template/header.html")
+	fmt.Print("Page d'accueil ✔️ \n")
 
-    getPostValue := req.FormValue("PostValue")
-    fmt.Println(getPostValue)
-    bdd.MakeUser("Tao", "louis.teilliais@gmail.com", "Karim69lattrik")
-    bdd.MakePoste("Tao",getPostValue,"test")
-    var arr []string
-    _, arr = bdd.GetPosteByID(2)    
-    p := test {
-        UserName: arr[1],
-        Post: arr[2],
-        DatePoste : arr[3],
-    }
+	getPostID := req.FormValue("delete") // récupérer id post
+	IdToSuppr, err:= strconv.Atoi(getPostID)
+	if err == nil {
+		bdd.DeletePoste(IdToSuppr) // Appliquer la fonction de getBdd.go
+	}
 
-    // NbrPosts := bdd.GetAllPoste()
+	getPostValue := req.FormValue("PostValue") // récupérer id post
+	if getPostValue != "" {
+		bdd.MakePoste("Tao", string(getPostValue),"test")	// Appliquer la fonction de getBdd.go	
+	}
 
-    
+	getIDLike := req.FormValue("like") // récupérer id post
+	IdToLike, e := strconv.Atoi(getIDLike) 
+	if e == nil{
+		bdd.Like(IdToLike, "Louis") // Appliquer la fonction de getBdd.go
+	}
+	
 
-
-    // for i := 0; i <  ; i++ {
-    //     if getPostValue == bdd.GetPosteByID(i)[2] {
-
-    //     }
-    // }
-
-
-    if req.URL.Path == "/" { //verification de l'URL
-    } else if req.URL.Path != "/home" {
-        http.Error(w, "404 not found", http.StatusNotFound)
-        return
-    }
-    t.Execute(w, p)
+	var arr [][]string
+	var posts []PostData
+	_, arr = bdd.GetAllPoste()
+	for _, post := range arr {
+		NbLike := bdd.GetLikeNb(IdToLike)
+		
+		p := PostData {
+			ID: post[0],
+			UserName: post[1],
+			Post: post[2],
+			NbLike : NbLike,
+			Date: post[5],
+		}
+		posts = append(posts, p)
+	}
+	
+	if req.URL.Path == "/" { //verification de l'URL
+	} else if req.URL.Path != "/home" {
+		http.Error(w, "404 not found", http.StatusNotFound)
+		return
+	}
+	t.Execute(w, posts)
 }

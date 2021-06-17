@@ -30,9 +30,9 @@ func main() {
 
     http.HandleFunc("/home", handlers.Accueil)
     http.HandleFunc("/connexion", handlers.Connexion)
-    http.HandleFunc("/timeline", handlers.Timeline)
     http.HandleFunc("/profil", handlers.Profil)
     http.HandleFunc("/inscription", handlers.Inscription)
+    http.HandleFunc("/userpost", handlers.UserPost)
 
     http.ListenAndServe(":8000", nil)
 }
