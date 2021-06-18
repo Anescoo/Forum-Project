@@ -16,7 +16,7 @@ func main(){
 	// bdd.MakePoste("Louis", "Karim est le meilleur", "test")
 	// // fmt.Println(bdd.GetPosteByID(2)[1])
     // db.Exec("SELECT * FROM Poste ORDER BY PosteTime ASC")
-    // fmt.Println(bdd.GetAllPoste())
+    fmt.Println(bdd.GetAllPoste())
     // fmt.Println(bdd.GetPosteByID(5))
     // _, NbrPosts := bdd.GetAllPoste()
     // fmt.Println(len(NbrPosts))
@@ -27,7 +27,7 @@ func main(){
     // fmt.Println(bdd.GetPosteByUser("Tao"))
 
     // bdd.UpdatePoste(15, "Allez les bleus")
-    bdd.Like(13, "Louis")
-    bdd.GetLikeNb(13)
-    fmt.Println(bdd.IsLike(13, "Louis"))
+    // bdd.Like(13, "Louis")
+    // bdd.GetLikeNb(13)
+    // fmt.Println(bdd.IsLike(13, "Louis"))
 }

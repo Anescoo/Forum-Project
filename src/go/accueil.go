@@ -32,19 +32,18 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	if getPostValue != "" {
 		bdd.MakePoste("Tao", string(getPostValue),"test")	// Appliquer la fonction de getBdd.go	
 	}
-
+	
 	getIDLike := req.FormValue("like") // récupérer id post
 	IdToLike, e := strconv.Atoi(getIDLike) 
 	if e == nil{
 		bdd.Like(IdToLike, "Louis") // Appliquer la fonction de getBdd.go
 	}
-	
+	NbLike := bdd.GetLikeNb(IdToLike)
 
 	var arr [][]string
 	var posts []PostData
 	_, arr = bdd.GetAllPoste()
 	for _, post := range arr {
-		NbLike := bdd.GetLikeNb(IdToLike)
 		
 		p := PostData {
 			ID: post[0],
