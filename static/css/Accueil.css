@@ -87,8 +87,25 @@ body {
     margin-left: 50%;
 }
 
-.like {
+#like form {
     display: flex;
     flex-direction: row;
-    margin-left: 50%;
+    align-items: center;
+    justify-content: space-around;
+    width: 25%;
+    margin-left: 75%;
+}
+
+#like button {
+    /* border: ; */
+    background-color: white;
+}
+
+#like button:hover {
+    background-color: black;
+}
+
+.post1 form textarea {
+    height: 0%;
+    width: 0%;
 }
