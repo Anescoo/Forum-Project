@@ -8,19 +8,17 @@ import (
 	"regexp"
 	"time"
 
+	main "../../../server.go"
 	bdd "../../bdd"
 )
 
 func sessionCookie(sessionToken string, w http.ResponseWriter) {
 
 	http.SetCookie(w, &http.Cookie{
-		Name:    "session_token",
+		Name:    "sessionToken",
 		Value:   sessionToken,
-		Expires: time.Now().Add(4 * time.Hour)
+		Expires: time.Now().Add(4 * time.Hour),
 	})
-	//expiration := time.Now().Add(6 * time.Hour)
-	//cookieForKey := http.Cookie{Name: "sessionKey", Value: key, Expires: expiration}
-	//http.SetCookie(w, &cookieForKey)
 }
 
 func Register(username string, email string, password string) int {
@@ -72,8 +70,23 @@ func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
 			return 1
 		}
 		key = hex.EncodeToString(keyBytes)
-
+		sessionCookie(key, w)
+		main.ListImport(getPseudo, key)
 		return 0
 	}
 	return 2
+}
+
+func readCookie(w http.ResponseWriter, r *http.Request) {
+	cookieContent, err := r.Cookie("sessionToken")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	sessionToken := cookieContent.Value
+	return sessionToken
 }
