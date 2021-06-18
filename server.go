@@ -21,18 +21,17 @@ func ListImport(UserConnected string, userKey string) {
 	ListeUserConnected = append(ListeUserConnected, UserConnected)
 	ListeUserKey = append(ListeUserKey, userKey)
 }
-
 func main() {
 
-	fmt.Print("Démarrage du serveur... 💬\n")
+    fmt.Print("Démarrage du serveur... 💬\n")
 
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+    http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
-	http.HandleFunc("/home", handlers.Accueil)
-	http.HandleFunc("/connexion", handlers.Connexion)
-	http.HandleFunc("/timeline", handlers.Timeline)
-	http.HandleFunc("/profil", handlers.Profil)
-	http.HandleFunc("/inscription", handlers.Inscription)
+    http.HandleFunc("/home", handlers.Accueil)
+    http.HandleFunc("/connexion", handlers.Connexion)
+    http.HandleFunc("/profil", handlers.Profil)
+    http.HandleFunc("/inscription", handlers.Inscription)
+    http.HandleFunc("/userpost", handlers.UserPost)
 
-	http.ListenAndServe(":8000", nil)
+    http.ListenAndServe(":8000", nil)
 }
