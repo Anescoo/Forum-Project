@@ -8,6 +8,10 @@ import (
 	bdd "../bdd"
 )
 
+type StructOfStruct struct {
+	
+}
+
 type PostData struct {
 	UserName string
 	Post string
@@ -16,6 +20,8 @@ type PostData struct {
 	ID string
 
 }
+
+
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
@@ -38,18 +44,18 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	if e == nil{
 		bdd.Like(IdToLike, "Louis") // Appliquer la fonction de getBdd.go
 	}
-	NbLike := bdd.GetLikeNb(IdToLike)
+	 
 
 	var arr [][]string
 	var posts []PostData
 	_, arr = bdd.GetAllPoste()
 	for _, post := range arr {
-		
+		nbLike, _ := strconv.Atoi(post[0]) 
 		p := PostData {
 			ID: post[0],
 			UserName: post[1],
 			Post: post[2],
-			NbLike : NbLike,
+			NbLike : bdd.GetLikeNb(nbLike),
 			Date: post[5],
 		}
 		posts = append(posts, p)

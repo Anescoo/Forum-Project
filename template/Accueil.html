@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="../static/css/Accueil.css" rel="stylesheet" type="text/css">
+    <script src="../static/js/accueil.js" async></script>
     <title>Projet Forum</title>
 </head>
 {{ template "header" }}
@@ -12,8 +13,11 @@
     
     <div id="Posts">
         <form method="POST" class="form">
-            <input class="textarea" type="text" placeholder="Que voulez vous postez ?" name="PostValue" class="WritePost" required>
-            <input type="submit" placeholder="Oui" required>
+            <textarea name="PostValue" class="textarea" placeholder="Que voulez vous poster ?" cols="30" rows="10"></textarea>
+            <!-- <input class="textarea" type="text" placeholder="Que voulez vous postez ?" name="PostValue" class="WritePost" required> -->
+            <input type="text" class="categorie" placeholder="Ajoutez une catégorie">
+            <input type="submit" class="boutonEnvoyer" placeholder="Oui" required>
+            
         </form>
         
         {{ range . }}
@@ -33,20 +37,19 @@
             
             <div class="like">
                 <form method="POST">
-                    <p> Like(s): {{ .NbLike }}</p>
-                    <textarea hidden name="like">{{ .ID }}</textarea>
+                    <p>{{ .NbLike }} Like(s)</p>
                     <button class="like"> ❤️</button>
+                    <textarea hidden name="like">{{ .ID }}</textarea>
+                    
                 </form> 
             </div>
         </div>
         {{ end }}
         
     </div>
-    
-    <div id="Filter-Bloc">
-        
-    </div>    
-    
+    <div id="pagination"></div>
+    <div id="Filter-Bloc"></div>    
+
 </body>
 
 

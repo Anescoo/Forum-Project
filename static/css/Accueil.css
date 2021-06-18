@@ -21,6 +21,23 @@ body {
     color: #010101;
 }
 
+.textarea {
+    height: 50px;
+    border-radius: 10px;
+    resize: none;
+}
+
+.categorie {
+    height: 50px;
+    border-radius: 10px;
+}
+
+.boutonEnvoyer {
+    height: 30px;
+    border-radius: 10px;
+}
+
+
 .post1 {
     background-color: white;
     border-radius: 10px;
@@ -71,5 +88,7 @@ body {
 }
 
 .like {
+    display: flex;
+    flex-direction: row;
     margin-left: 50%;
 }
