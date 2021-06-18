@@ -114,3 +114,9 @@ opacity: 0.8;
 .form-container .btn:hover, .open-button:hover {
         opacity: 1;
 }
+
+@media all and (max-width:480px) {
+        #btn {float: none};
+        #popup {float: none};
+        #popupform {float: none};
+}
