@@ -8,17 +8,13 @@ import (
 	bdd "../bdd"
 )
 
-type StructOfStruct struct {
-	
-}
-
 type PostData struct {
 	UserName string
 	Post string
 	Date string
 	NbLike int
 	ID string
-
+	Categorie string
 }
 
 
@@ -33,12 +29,22 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	if err == nil {
 		bdd.DeletePoste(IdToSuppr) // Appliquer la fonction de getBdd.go
 	}
-
+	
 	getPostValue := req.FormValue("PostValue") // récupérer id post
+	getCategorieValue := req.FormValue("categorie")
 	if getPostValue != "" {
-		bdd.MakePoste("Tao", string(getPostValue),"test")	// Appliquer la fonction de getBdd.go	
+		bdd.MakePoste("Tao", string(getPostValue), string(getCategorieValue))
+			// Appliquer la fonction de getBdd.go	
+	}
+	var tab []string
+	for _, cat := range tab {
+		categories := bdd.MakeCategorie(string(getCategorieValue))
+		tab = append(tab, categories)
 	}
 	
+
+
+
 	getIDLike := req.FormValue("like") // récupérer id post
 	IdToLike, e := strconv.Atoi(getIDLike) 
 	if e == nil{
@@ -55,6 +61,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 			ID: post[0],
 			UserName: post[1],
 			Post: post[2],
+			Categorie : post[3],
 			NbLike : bdd.GetLikeNb(nbLike),
 			Date: post[5],
 		}

@@ -30,5 +30,5 @@ func main(){
     // bdd.Like(13, "Louis")
     // bdd.GetLikeNb(13)
     // fmt.Println(bdd.IsLike(13, "Louis"))
-    bdd.MakeCategorie("Sport")
+    // bdd.MakeCategorie("Voiture")
 }

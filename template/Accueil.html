@@ -14,10 +14,13 @@
     <div id="Posts">
         <form method="POST" class="form">
             <textarea name="PostValue" class="textarea" placeholder="Que voulez vous poster ?" cols="30" rows="10"></textarea>
-            <!-- <input class="textarea" type="text" placeholder="Que voulez vous postez ?" name="PostValue" class="WritePost" required> -->
-            <input type="text" class="categorie" placeholder="Ajoutez une catégorie">
+            <input type="text" name="categorie" class="categorie" placeholder="Ajoutez une catégorie">
             <input type="submit" class="boutonEnvoyer" placeholder="Oui" required>
-            
+            {{ range tab}}
+            <select name="categorieSelect" id="categorieSelect">
+                <option value=""> {{ .Categorie }}</option>
+            </select>
+            {{ end }}
         </form>
         
         {{ range . }}
@@ -31,7 +34,8 @@
             </div>
             
             <div class="contourPost">
-                {{ .Post }} <br>
+                {{ .Post }} 
+                <p id = "categorie"> Votre Catégorie : {{ .Categorie }}</p>
             </div> 
             <p id="date"> à {{ .Date }}</p>
             
@@ -49,7 +53,7 @@
     </div>
     <div id="pagination"></div>
     <div id="Filter-Bloc"></div>    
-
+    
 </body>
 
 
