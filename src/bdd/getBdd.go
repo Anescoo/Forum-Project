@@ -164,7 +164,7 @@ func GetAllPoste() (int, [][]string) {
 		fmt.Println("Error GetAllPoste")
 		fmt.Println(err.Error())
 		return 500, resultFunc
-	} 
+	}
 
 	var ID int
 	var PseudoUser string
@@ -287,11 +287,58 @@ func Unlike(idPost int, PseudoUser string) int {
 	result, err := db.Prepare("DELET FROM Like WHERE idPoste = ? AND PseudoUser =?")
 	if err != nil {
 		fmt.Println(err.Error())
+		db.Close()
 		return 500
 	} else {
 		result.Exec(idPost, PseudoUser)
 		db.Close()
 		return 0
+	}
+}
+
+func GetPosteLikeByUser(UserPseuso string) (int, [][]string) {
+	_, db := OpenDataBase()
+	var ResultFunc [][]string
+	var IdLiker []int
+	temp, err := db.Query("SELECT idPoste FROM Like WHERE PseudoUser = ?", UserPseuso)
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500, ResultFunc
+	} else {
+		var IDPoste int
+
+		for temp.Next() {
+			temp.Scan(&IDPoste)
+			IdLiker = append(IdLiker, IDPoste)
+		}
+
+		db.Close()
+		for i := 0; i < len(IdLiker); i++ {
+			result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE ID = ? ", IdLiker[i])
+			if err != nil {
+				fmt.Println(err.Error())
+				db.Close()
+				return 500, ResultFunc
+			} else {
+
+				var ID int
+				var PseudoUser string
+				var Contenue string
+				var Categorie string
+				var nbLike int
+				var DatePoste string
+
+				for result.Next() {
+					result.Scan(&ID, &PseudoUser, &Contenue, &Categorie, &nbLike, &DatePoste)
+					temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, Categorie, strconv.Itoa(nbLike), DatePoste}
+					ResultFunc = append(ResultFunc, temp)
+				}
+
+				db.Close()
+				return 0, ResultFunc
+			}
+		}
 	}
 }
 
@@ -343,6 +390,27 @@ func MakeCategorie(name string) int {
 
 	db.Close()
 	return 0
+}
+
+func GetAllCategorie() (int, []string) {
+	_, db := OpenDataBase()
+	var ResultFunc []string
+	result, err := db.Query("SELECT Name FROM Categorie")
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500, ResultFunc
+	} else {
+		var NameCategorie string
+
+		for result.Next() {
+			result.Scan(&NameCategorie)
+			ResultFunc = append(ResultFunc, NameCategorie)
+		}
+
+		db.Close()
+		return 0, ResultFunc
+	}
 }
 
 func NbPosteByCategorie(name string) (int, int) {
