@@ -4,15 +4,15 @@ import (
 	"fmt"
 	"net/http"
 	"text/template"
+
 	bdd "../bdd"
 )
 
 type PostData struct {
 	UserName string
-	Post string
-	Date string
+	Post     string
+	Date     string
 }
-
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
@@ -21,17 +21,17 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	getPostValue := req.FormValue("PostValue")
 	bdd.MakeUser("Tao", "louis.teilliais@gmail.com", "Karim69lattrik")
-	bdd.MakePoste("Tao", string(getPostValue),"test")
-	
+	bdd.MakePoste("Tao", string(getPostValue), "test")
+
 	var arr [][]string
 	var posts []PostData
 	_, arr = bdd.GetAllPoste()
-	
+
 	for _, post := range arr {
-		p := PostData {
+		p := PostData{
 			UserName: post[1],
-			Post: post[2],
-			Date: post[5],
+			Post:     post[2],
+			Date:     post[5],
 		}
 		posts = append(posts, p)
 	}
