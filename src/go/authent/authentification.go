@@ -82,10 +82,10 @@ func readCookie(w http.ResponseWriter, r *http.Request) string {
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
-			return
+			return ""
 		}
 		w.WriteHeader(http.StatusBadRequest)
-		return
+		return ""
 	}
 	sessionToken := cookieContent.Value
 	return sessionToken
