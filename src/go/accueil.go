@@ -17,8 +17,6 @@ type PostData struct {
 	Categorie string
 }
 
-
-
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	t, _ := template.ParseFiles("./template/Accueil.html", "./template/header.html")
@@ -32,26 +30,19 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	
 	getPostValue := req.FormValue("PostValue") // récupérer id post
 	getCategorieValue := req.FormValue("categorie")
-	if getPostValue != "" {
-		bdd.MakePoste("Tao", string(getPostValue), string(getCategorieValue))
-			// Appliquer la fonction de getBdd.go	
-	}
-	var tab []string
-	for _, cat := range tab {
-		categories := bdd.MakeCategorie(string(getCategorieValue))
-		tab = append(tab, categories)
-	}
 	
-
-
-
+	if getPostValue != "" {
+		bdd.MakePoste("Tao", string(getPostValue), string(getCategorieValue)) // Appliquer la fonction de getBdd.go	
+	}
+	bdd.MakeCategorie(string(getCategorieValue))
+	
+	
 	getIDLike := req.FormValue("like") // récupérer id post
 	IdToLike, e := strconv.Atoi(getIDLike) 
 	if e == nil{
 		bdd.Like(IdToLike, "Louis") // Appliquer la fonction de getBdd.go
 	}
 	 
-
 	var arr [][]string
 	var posts []PostData
 	_, arr = bdd.GetAllPoste()

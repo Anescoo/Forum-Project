@@ -16,11 +16,7 @@
             <textarea name="PostValue" class="textarea" placeholder="Que voulez vous poster ?" cols="30" rows="10"></textarea>
             <input type="text" name="categorie" class="categorie" placeholder="Ajoutez une catégorie">
             <input type="submit" class="boutonEnvoyer" placeholder="Oui" required>
-            {{ range tab}}
-            <select name="categorieSelect" id="categorieSelect">
-                <option value=""> {{ .Categorie }}</option>
-            </select>
-            {{ end }}
+            <select name="selectCategorie" id=""> Categorie </select>
         </form>
         
         {{ range . }}
