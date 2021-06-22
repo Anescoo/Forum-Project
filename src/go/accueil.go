@@ -6,9 +6,10 @@ import (
 	"text/template"
 	"strconv"
 	bdd "../bdd"
+	// authent "./authent"
 )
 
-type PostData struct {
+type PostData struct { // on créer une structure avec toutes les "infos" de notre post. 
 	UserName string
 	Post string
 	Date string
@@ -47,23 +48,23 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		bdd.Like(IdToLike, "Louis") // Appliquer la fonction de getBdd.go
 	}
 	
-	var arr [][]string
-	var posts []PostData
-	_, arr = bdd.GetAllPoste()
+	var arr [][]string // on créer un tableau de tableau de string car la fonction GetAllPoste() en renvoie un 
+	var posts []PostData // on créer un tableau de notre structure PostData
+	_, arr = bdd.GetAllPoste() // on asigne a notre tableau la fonction 
 	
-	for _, post := range arr {
+	for _, post := range arr { // on parcours notre "Grand tableau"
 		nbLike, _ := strconv.Atoi(post[0])
-		p := PostData {
+		p := PostData { // on va récupérer a chaque index les données que l'on veut
 			ID: post[0],
 			UserName: post[1],
 			Post: post[2],
 			NbLike : bdd.GetLikeNb(nbLike),
 			Date: post[5],
 		}
-		posts = append(posts, p)
+		posts = append(posts, p) // on remplit notre tableau des valeurs de "p" 
 	}
 
-	sessionCookie()
+	// authent.sessionCookie()
 
 	// Gestion de l'erreur 404
 	if req.URL.Path == "/" { //verification de l'URL

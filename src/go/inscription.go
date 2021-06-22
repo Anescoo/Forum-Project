@@ -15,15 +15,15 @@ func Inscription(w http.ResponseWriter, req *http.Request) {
 
     t, _ := template.ParseFiles("./template/inscription.html", "./template/header.html")
 
-    getPseudoInscription := req.FormValue("pseudoInscription")
+    getPseudoInscription := req.FormValue("pseudoInscription") // Idem que connextion on récupère les valeurs que l'utilisateurs rentre 
     getEmailInscription := req.FormValue("emailInscription")
     getMdpInscription := req.FormValue("mdpInscription")
 
-    fmt.Println("Pseudo : ", getPseudoInscription)
+    fmt.Println("Pseudo : ", getPseudoInscription) // On les imprime dans la console 
     fmt.Println("E-mail : ", getEmailInscription)
     fmt.Println("Mot de passe : ", getMdpInscription)
 
-    err := authent.Register(getPseudoInscription, getEmailInscription, getMdpInscription)
+    err := authent.Register(getPseudoInscription, getEmailInscription, getMdpInscription) // on lui applique la fonction Register() pour vérifier la validité des valeurs rentrés. 
 
     type HTMLData struct {
         pseudoWrong string
@@ -39,7 +39,8 @@ func Inscription(w http.ResponseWriter, req *http.Request) {
         emailInvalid: "",
     }
 
-    if err != 0 {
+    // Gestion des erreurs (pas encore faite)
+    if err != 0 { 
         if err == 1 { 
             
             htmlData.pseudoWrong = "Votre pseudo est trop court"
