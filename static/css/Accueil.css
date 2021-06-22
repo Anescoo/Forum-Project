@@ -92,3 +92,11 @@ body {
     flex-direction: row;
     margin-left: 50%;
 }
+
+#categorie {
+    display: flex;
+    /* margin-left: 40%; */
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}

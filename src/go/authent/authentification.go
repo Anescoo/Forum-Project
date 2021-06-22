@@ -6,22 +6,14 @@ import (
 	"encoding/hex"
 	"net/http"
 	"regexp"
-	"time"
+	// "time"
   
 	// main "../../../server.go"
 	bdd "../../bdd"
 )
 
-func sessionCookie(sessionToken string, w http.ResponseWriter) {
-
-	http.SetCookie(w, &http.Cookie{
-		Name:    "sessionToken",
-		Value:   sessionToken,
-		Expires: time.Now().Add(4 * time.Hour),
-	})
-}
-
 func Register(username string, email string, password string) int {
+	
 	var passwordHash string
 	_, pseudo := bdd.GetUser(username)
 	verifemail, _ := regexp.Compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}")
@@ -53,6 +45,7 @@ func Register(username string, email string, password string) int {
 }
 
 func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
+	
 	err, _ := bdd.GetUser(getPseudo)
 	_, bddMdp := bdd.GetUserHash(getPseudo)
 	var key string
@@ -77,16 +70,3 @@ func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
 	return 2
 }
 
-func readCookie(w http.ResponseWriter, r *http.Request) string {
-	cookieContent, err := r.Cookie("sessionToken")
-	if err != nil {
-		if err == http.ErrNoCookie {
-			w.WriteHeader(http.StatusUnauthorized)
-			return ""
-		}
-		w.WriteHeader(http.StatusBadRequest)
-		return ""
-	}
-	sessionToken := cookieContent.Value
-	return sessionToken
-}

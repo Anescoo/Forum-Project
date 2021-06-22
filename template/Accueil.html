@@ -12,11 +12,14 @@
 <body>
     
     <div id="Posts">
+        
         <form method="POST" class="form">
             <textarea name="PostValue" class="textarea" placeholder="Que voulez vous poster ?" cols="30" rows="10"></textarea>
+            
             <input type="text" name="categorie" class="categorie" placeholder="Ajoutez une catégorie">
-            <input type="submit" class="boutonEnvoyer" placeholder="Oui" required>
-            <select name="selectCategorie" id=""> Categorie </select>
+            <input type="submit" class="boutonEnvoyer" value="Envoyer"required>
+            
+            
         </form>
         
         {{ range . }}
@@ -30,17 +33,15 @@
             </div>
             
             <div class="contourPost">
-                {{ .Post }} 
-                <p id = "categorie"> Votre Catégorie : {{ .Categorie }}</p>
+                <p>{{ .Post }} </p>
             </div> 
             <p id="date"> à {{ .Date }}</p>
-            
+            <button class="comments" onclick="window.location.href='/comments'"> 💬 </button>
             <div class="like">
                 <form method="POST">
                     <p>{{ .NbLike }} Like(s)</p>
                     <button class="like"> ❤️</button>
                     <textarea hidden name="like">{{ .ID }}</textarea>
-                    
                 </form> 
             </div>
         </div>

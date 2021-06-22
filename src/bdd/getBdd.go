@@ -314,28 +314,9 @@ func GetPosteLikeByUser(UserPseuso string) (int, [][]string) {
 		}
 
 		db.Close()
-		for i := 0; i < len(IdLiker); i++ {
-			_, db := OpenDataBase()
-			result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE ID = ? ", IdLiker[i])
-			if err != nil {
-				fmt.Println(err.Error())
-				db.Close()
-				return 500, ResultFunc
-			} else {
-
-				var ID int
-				var PseudoUser string
-				var Contenue string
-				var Categorie string
-				var nbLike int
-				var DatePoste string
-
-				for result.Next() {
-					result.Scan(&ID, &PseudoUser, &Contenue, &Categorie, &nbLike, &DatePoste)
-					temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, Categorie, strconv.Itoa(nbLike), DatePoste}
-					ResultFunc = append(ResultFunc, temp)
-				}
-			}
+		for _, i := range IdLiker {
+			_, temp := GetPosteByID(IdLiker[i])
+			ResultFunc = append(ResultFunc, temp)
 		}
 		return 0, ResultFunc
 	}
