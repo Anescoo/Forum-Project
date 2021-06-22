@@ -32,7 +32,6 @@ body {
 /* Masquez la forme Popup */
 .form-popup { 
         left: 0%;
-        /* top: 15%; */
         display: none;                                            
         z-index: 9;      
         padding: 10px 60px 30px 30px;              
@@ -72,11 +71,8 @@ body {
         background-color: #5BC7D6; 
         color: white;
         border-radius: 3%;
-        /* border: solid transparent; */
-        font-size: medium;
-        /* position: static;                  */
-        padding: 12px 20px;
-        /* cursor: pointer; */
+        font-size: medium;    
+        padding: 12px 20px;    
         height: 15%; 
         width: 25%;     
         opacity: 0.8;
@@ -94,9 +90,7 @@ body {
         top:1%;
         height: 13%;
         width: 10%;
-        border-color: transparent;
-        
-        
+        border-color: transparent;              
 } 
 
 /* Planez les effets pour les boutons */
@@ -104,37 +98,30 @@ body {
         opacity: 1;
 }
 
-/* tentative de responsive #1 */
-/* @media all and (max-width:480px) {
-        #btn {float: none};
-        #popup {float: none};
-        #popupform {float: none};
-} */
-
 .parent-div {
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
 }
 
 .parent-div input[type=file] {
-	left: 0;
-	top: 0;
-	opacity: 0;
-	position: absolute;
-	font-size: 90px;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        position: absolute;
+        font-size: 90px;
 }
 .btn-upload {
-	background-color: #fff;
-	border: 3px solid #000;
-	color: #000;
-	padding: 10px 25px;
-	border-radius: 10px;
-	font-size: 22px;
-	font-weight: bold;
-
+        background-color: #fff;
+        border: 3px solid #000;
+        color: #000;
+        padding: 10px 25px;
+        border-radius: 10px;
+        font-size: 22px;
+        font-weight: bold;
+        
 }
 
 .testDeco {
-	text-decoration: bold;
+        text-decoration: bold;
 }
