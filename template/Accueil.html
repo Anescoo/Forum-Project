@@ -36,6 +36,7 @@
             </div> 
             <div class="Bottom-Post">
                 <p id="date"> à {{ .Date }}</p>
+                <textarea hidden name="respond">{{ .ID }}</textarea>
                 <button class="CommsBtn" onclick="window.location.href='/comms'">Répondre 💬</button>
                 <div id="like">
                     <form method="POST">
