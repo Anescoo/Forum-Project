@@ -9,7 +9,29 @@
     
     {{ template "header" }}
     <body>
-        
+        <!-- <form method="POST" class="form">
+            <textarea name="PostValue" class="textarea" placeholder="Que voulez vous commenter ?" cols="30" rows="10"></textarea>
+            <input type="submit" class="boutonEnvoyer" value="Envoyer"required>
+        </form> -->
+
+        <div class="post1">
+            <div class="topPost">
+                {{ .UserName }} a dit :
+            </div>
+            <div class="contourPost">
+                <p>{{ .Post }} </p>
+            </div> 
+            <div class="Bottom-Post">
+                <p id="date"> à {{ .Date }}</p>
+                <div id="like">
+                    <form method="POST">
+                        <p>{{ .NbLike }} Like(s)</p>
+                        <button class="like"> ❤️</button>
+                        <textarea hidden name="like">{{ .ID }}</textarea>
+                    </form> 
+                </div>
+            </div>
+        </div>
     </body>
 
 </html>

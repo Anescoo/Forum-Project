@@ -127,3 +127,11 @@ body {
     color: white;
     border: none;
 }
+
+#categorie {
+    display: flex;
+    /* margin-left: 40%; */
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
