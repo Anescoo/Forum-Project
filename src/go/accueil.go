@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"net/http"
 	"text/template"
+
 	bdd "../bdd"
 )
 
 type test struct {
 	UserName string
-	Post string
+	Post     string
 }
-
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
@@ -21,26 +21,22 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	getPostValue := req.FormValue("PostValue")
 	fmt.Println(getPostValue)
 	bdd.MakeUser("Tao", "louis.teilliais@gmail.com", "Karim69lattrik")
-	bdd.MakePoste("Tao",getPostValue,"test")
+	bdd.MakePoste("Tao", getPostValue, "test")
 	var arr []string
 	_, arr = bdd.GetPosteByID(2)
-	
-	p := test {
+
+	p := test{
 		UserName: arr[1],
-		Post: arr[2],
+		Post:     arr[2],
 	}
 
 	// NbrPosts := bdd.GetAllPoste()
-
-
-
 
 	// for i := 0; i <  ; i++ {
 	// 	if getPostValue == bdd.GetPosteByID(i)[2] {
 
 	// 	}
 	// }
-
 
 	if req.URL.Path == "/" { //verification de l'URL
 	} else if req.URL.Path != "/home" {
