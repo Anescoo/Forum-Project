@@ -8,8 +8,8 @@ import (
 	bdd "../bdd"
 	// authent "./authent"
 )
-
-type PostData struct { // on créer une structure avec toutes les "infos" de notre post. 
+// Création d'une structure avec toutes les "infos" de notre post. 
+type PostData struct { 
 	UserName string
 	Post string
 	Date string
@@ -26,8 +26,9 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	t, _ := template.ParseFiles("./template/Accueil.html", "./template/header.html")
 	fmt.Print("Page d'accueil ✔️ \n")
-
-	getPostID := req.FormValue("delete") // récupérer id post
+	
+	// récupérer id post
+	getPostID := req.FormValue("delete") 
 	IdToSuppr, err:= strconv.Atoi(getPostID)
 	if err == nil {
 		bdd.DeletePoste(IdToSuppr) // Appliquer la fonction de getBdd.go
@@ -41,33 +42,35 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	if getPostValue != "" {
 		bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue)) // Appliquer la fonction de getBdd.go	
 	}
-	
-	getIDLike := req.FormValue("like") // récupérer id post
+
+	// récupérer id post
+	getIDLike := req.FormValue("like") 
 	IdToLike, e := strconv.Atoi(getIDLike) 
 	if e == nil{
 		bdd.Like(IdToLike, "Louis") // Appliquer la fonction de getBdd.go
 	}
 	
-	var arr [][]string // on créer un tableau de tableau de string car la fonction GetAllPoste() en renvoie un 
-	var posts []PostData // on créer un tableau de notre structure PostData
-	_, arr = bdd.GetAllPoste() // on asigne a notre tableau la fonction 
+	var arr [][]string 
+	var posts []PostData 
+	_, arr = bdd.GetAllPoste() 
 	
-	for _, post := range arr { // on parcours notre "Grand tableau"
+	// Parcourir et remplir notre tableau des données que l'on veut  
+	for _, post := range arr { 
 		nbLike, _ := strconv.Atoi(post[0])
-		p := PostData { // on va récupérer a chaque index les données que l'on veut
+		p := PostData { 
 			ID: post[0],
 			UserName: post[1],
 			Post: post[2],
 			NbLike : bdd.GetLikeNb(nbLike),
 			Date: post[5],
 		}
-		posts = append(posts, p) // on remplit notre tableau des valeurs de "p" 
+		posts = append(posts, p) 
 	}
 
 	// authent.sessionCookie()
 
 	// Gestion de l'erreur 404
-	if req.URL.Path == "/" { //verification de l'URL
+	if req.URL.Path == "/" { 
 	} else if req.URL.Path != "/home" {
 		http.Error(w, "404 not found", http.StatusNotFound)
 		return

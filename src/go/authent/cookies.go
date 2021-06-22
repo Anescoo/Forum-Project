@@ -16,14 +16,13 @@ func sessionCookie(sessionToken string, w http.ResponseWriter) {
 	
 	sessionToken = guuid.New().String()
 	// startSession := time.Now()
-
-	http.SetCookie(w, &http.Cookie{ // Création du cookie 
+	
+	// Création du cookie 
+	http.SetCookie(w, &http.Cookie{ 
 		Name:    "session_Token",
 		Value:   sessionToken,
-		Expires: time.Now().Add(120 * time.Second), // Temps d'expiration de la session 
+		Expires: time.Now().Add(120 * time.Second), 
 	})
-
-	// return sessionToken
 }
 
 

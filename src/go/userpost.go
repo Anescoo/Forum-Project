@@ -15,7 +15,8 @@ func UserPost(w http.ResponseWriter, req *http.Request){
 	
 	t, _ := template.ParseFiles("./template/userPost.html", "./template/header.html")
 	
-	getPostID := req.FormValue("delete") //  on gère la supression des posts 
+	// Gestion de la supression des posts 
+	getPostID := req.FormValue("delete")
 	IdToSuppr, err:= strconv.Atoi(getPostID)
 	if err == nil {
 		bdd.DeletePoste(IdToSuppr)
@@ -23,8 +24,9 @@ func UserPost(w http.ResponseWriter, req *http.Request){
 
 
 	getNewValue := req.FormValue("sendUpdate")
-	getPostIDupdate := req.FormValue("update")
-	IdtoUpdate, err:= strconv.Atoi(getPostIDupdate) //  on gère l'update des posts 
+	getPostIDupdate := req.FormValue("update") 
+	// Gestion de l'update des posts 
+	IdtoUpdate, err:= strconv.Atoi(getPostIDupdate)
 	if err == nil {
 		bdd.UpdatePoste(IdtoUpdate, getNewValue)
 	}

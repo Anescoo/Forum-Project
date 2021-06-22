@@ -14,16 +14,18 @@ func Inscription(w http.ResponseWriter, req *http.Request) {
     fmt.Print("Page d'inscription ✔️ \n")
 
     t, _ := template.ParseFiles("./template/inscription.html", "./template/header.html")
-
-    getPseudoInscription := req.FormValue("pseudoInscription") // Idem que connextion on récupère les valeurs que l'utilisateurs rentre 
+    
+    // Idem que connextion on récupère les valeurs que l'utilisateurs rentre 
+    getPseudoInscription := req.FormValue("pseudoInscription")
     getEmailInscription := req.FormValue("emailInscription")
     getMdpInscription := req.FormValue("mdpInscription")
 
-    fmt.Println("Pseudo : ", getPseudoInscription) // On les imprime dans la console 
+    fmt.Println("Pseudo : ", getPseudoInscription) 
     fmt.Println("E-mail : ", getEmailInscription)
     fmt.Println("Mot de passe : ", getMdpInscription)
 
-    err := authent.Register(getPseudoInscription, getEmailInscription, getMdpInscription) // on lui applique la fonction Register() pour vérifier la validité des valeurs rentrés. 
+    // Application de la fonction Register() pour vérifier la validité des valeurs rentrés. 
+    err := authent.Register(getPseudoInscription, getEmailInscription, getMdpInscription) 
 
     type HTMLData struct {
         pseudoWrong string

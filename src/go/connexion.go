@@ -13,12 +13,16 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 	t, _ := template.ParseFiles("./template/connexion.html", "./template/header.html")
 	fmt.Print("Page de connexion ✔️ \n")
 
-	getPseudo := req.FormValue("pseudoConnexion") // on récupère les valeurs (pseudo et mdp) que l'utilisateur rentre 
+	
+	// on récupère les valeurs (pseudo et mdp) que l'utilisateur rentre
+	getPseudo := req.FormValue("pseudoConnexion")  
 	getMdp := req.FormValue("mdpConnexion")
 
 	fmt.Println("Pseudo : ", getPseudo)
 	fmt.Println("Mot de Passe :", getMdp)
-	err := authent.Login(nil, getPseudo, getMdp) // Gestion d'erreur si l'utilisateur se trompe.
+
+	// Gestion d'erreur si l'utilisateur se trompe.
+	err := authent.Login(nil, getPseudo, getMdp) 
 	if err != 0 {
 		if err == 1 {
 			//erreur de génération de token
