@@ -45,10 +45,16 @@ body {
 
 .TopPost {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     justify-content: space-between;
 }
 
 #date {
-    margin-left: 50%;
+    margin-left: auto;
+    margin-bottom: auto;
 }
+
+.username {
+    margin-top: auto;
+}
+

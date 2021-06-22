@@ -17,7 +17,7 @@
         {{ range . }}
         <div id="Post">
             <div class="TopPost">
-                <button class="updatePost"> Modifier ✏️</button>
+                <button class="updatePost" onclick="RemoveHidden()"> Modifier ✏️</button>
                 <form method="POST">
                     <textarea hidden name="delete">{{ .ID }}</textarea>
                     <button class="suppression">Supprimer 🗑️</button>
@@ -30,13 +30,14 @@
             <div  class="updateText">
                 <form method="POST">
                     <textarea hidden name="update">{{ .ID }}</textarea>
-                    <textarea name="sendUpdate" id="" cols="30" rows="10">{{ .Post }} </textarea>
-                    <button type="submit" name="boutonUpdate"> Envoyer</button>
+                    <textarea hidden name="sendUpdate" id="modiftextarea" cols="30" rows="10">{{ .Post }} </textarea>
+                    <button type="submit" name="boutonUpdate" onclick="AddHidden()"> Envoyer</button>
                 </form>
             </div>
             <p id="date"> {{ .Date }}</p>
         </div> 
         {{ end }} 
     </div>
+    <script src="../static/js/userPost.js" defer></script>
 </body>
 </html>

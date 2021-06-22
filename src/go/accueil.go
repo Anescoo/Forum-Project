@@ -42,7 +42,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	getIDLike := req.FormValue("like") // récupérer id post
 	IdToLike, e := strconv.Atoi(getIDLike) 
 	if e == nil{
-		bdd.Like(IdToLike, "Louis") // Appliquer la fonction de getBdd.go
+		bdd.Like(IdToLike, "Tao") // Appliquer la fonction de getBdd.go
 	}
 	 
 

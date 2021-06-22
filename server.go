@@ -34,6 +34,7 @@ func main() {
     http.HandleFunc("/inscription", handlers.Inscription)
     http.HandleFunc("/userpost", handlers.UserPost)
     http.HandleFunc("/userlikes", handlers.UserLikes)
+    http.HandleFunc("/comms", handlers.Comments)
 
     http.ListenAndServe(":8000", nil)
 }

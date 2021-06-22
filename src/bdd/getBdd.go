@@ -316,7 +316,7 @@ func GetPosteLikeByUser(UserPseuso string) (int, [][]string) {
 		db.Close()
 		for i := 0; i < len(IdLiker); i++ {
 			_, db := OpenDataBase()
-			result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE ID = ? ", IdLiker[i])
+			result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE ID = ? ORDER BY DatePoste DESC ", IdLiker[i])
 			if err != nil {
 				fmt.Println(err.Error())
 				db.Close()
