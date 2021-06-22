@@ -1,4 +1,4 @@
-package authent
+package handlers
 
 
 import (
@@ -7,28 +7,22 @@ import (
 	"net/http"
 )
 
-// type Cookie struct {
-// 	Password string 
-// 	UserName string
-// }
-
-func sessionCookie(sessionToken string, w http.ResponseWriter) {
+func sessionCookie(w http.ResponseWriter, req *http.Request) {
 	
-	sessionToken = guuid.New().String()
-	// startSession := time.Now()
+	sessionToken := guuid.New().String()
 	
 	// Création du cookie 
 	http.SetCookie(w, &http.Cookie{ 
 		Name:    "session_Token",
 		Value:   sessionToken,
 		Expires: time.Now().Add(120 * time.Second), 
+		Path : "/",
 	})
 }
 
-
-func readCookie(w http.ResponseWriter, r *http.Request) string {
+func readCookie(w http.ResponseWriter, req *http.Request) string {
 	
-	cookieContent, err := r.Cookie("session_Token")
+	cookieContent, err := req.Cookie("session_Token")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
@@ -41,3 +35,13 @@ func readCookie(w http.ResponseWriter, r *http.Request) string {
 	return sessionToken
 }
 
+func VerifyCookie(w http.ResponseWriter, req *http.Request) bool {
+    
+	_, err := req.Cookie("session_Token")
+    
+	if err != nil {
+        return false
+    } else {
+        return true
+    }
+}

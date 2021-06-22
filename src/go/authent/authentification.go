@@ -48,7 +48,7 @@ func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
 	
 	err, _ := bdd.GetUser(getPseudo)
 	_, bddMdp := bdd.GetUserHash(getPseudo)
-	var key string
+	// var key string
 	loginPassHashBytes := md5.Sum([]byte(getMdp))
 	loginPassHash := hex.EncodeToString(loginPassHashBytes[:])
 	if err != 0 {
@@ -62,8 +62,8 @@ func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
 		if err != nil {
 			return 1
 		}
-		key = hex.EncodeToString(keyBytes)
-		sessionCookie(key, w)
+		// key = hex.EncodeToString(keyBytes)
+		// sessionCookie(key, w)
 		// main.ListImport(getPseudo, key)
 		return 0
 	}

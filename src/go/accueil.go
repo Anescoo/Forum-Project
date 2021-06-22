@@ -28,28 +28,50 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	fmt.Print("Page d'accueil ✔️ \n")
 	
 	// récupérer id post
+	// Delete les posts
+	
 	getPostID := req.FormValue("delete") 
 	IdToSuppr, err:= strconv.Atoi(getPostID)
 	if err == nil {
-		bdd.DeletePoste(IdToSuppr) // Appliquer la fonction de getBdd.go
+		bdd.DeletePoste(IdToSuppr) 
 	}
+	
+
 
 	// getCategorieValue := req.FormValue("categorie")
 	// bdd.MakeCategorie(string(getCategorieValue))
 	
+	
+	
 	getPostValue := req.FormValue("PostValue") 
 	getSelectValue := req.FormValue("selectCategorie")
-	if getPostValue != "" {
-		bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue)) // Appliquer la fonction de getBdd.go	
-	}
+	
+	// Gestion des cookies 
+	sessionCookie(w, req)
+	
+	// Ecrire et afficher un poste
+	if VerifyCookie(w, req) == true{
+		if getPostValue != "" {
+			bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue)) 	
+		}
+	} 
+	// else {
+	// 	http.Redirect(w, req, "/connexion", http.StatusSeeOther)
+	// }
+	
 
 	// récupérer id post
+	// Liker un post
 	getIDLike := req.FormValue("like") 
 	IdToLike, e := strconv.Atoi(getIDLike) 
 	if e == nil{
-		bdd.Like(IdToLike, "Louis") // Appliquer la fonction de getBdd.go
+		bdd.Like(IdToLike, "Louis") 
 	}
 	
+	
+
+	
+
 	var arr [][]string 
 	var posts []PostData 
 	_, arr = bdd.GetAllPoste() 
