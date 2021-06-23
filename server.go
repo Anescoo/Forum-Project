@@ -36,6 +36,8 @@ func main() {
     http.HandleFunc("/profil", handlers.Profil)
     http.HandleFunc("/inscription", handlers.Inscription)
     http.HandleFunc("/userpost", handlers.UserPost)
+    http.HandleFunc("/userlikes", handlers.UserLikes)
+    http.HandleFunc("/comms", handlers.Comments)
 
     // Choix du port que l'on sélectionne
     http.ListenAndServe(":8000", nil)

@@ -31,18 +31,20 @@
                     <button class="suppression">Supprimer 🗑️</button>                  
                 </form>
             </div>
-            
             <div class="contourPost">
                 <p>{{ .Post }} </p>
             </div> 
-            <p id="date"> à {{ .Date }}</p>
-            <button class="comments" onclick="window.location.href='/comments'"> 💬 </button>
-            <div class="like">
-                <form method="POST">
-                    <p>{{ .NbLike }} Like(s)</p>
-                    <button class="like"> ❤️</button>
-                    <textarea hidden name="like">{{ .ID }}</textarea>
-                </form> 
+            <div class="Bottom-Post">
+                <p id="date"> à {{ .Date }}</p>
+                <textarea hidden name="respond">{{ .ID }}</textarea>
+                <button class="CommsBtn" onclick="window.location.href='/comms'">Répondre 💬</button>
+                <div id="like">
+                    <form method="POST">
+                        <p>{{ .NbLike }} Like(s)</p>
+                        <button class="like"> ❤️</button>
+                        <textarea hidden name="like">{{ .ID }}</textarea>
+                    </form> 
+                </div>
             </div>
         </div>
         {{ end }}
