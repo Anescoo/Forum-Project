@@ -18,16 +18,13 @@ type PostData struct {
 	// Categorie []string
 }
 
-// type CategorieStruct struct {
-// 	Categorie []string 
-// }
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	t, _ := template.ParseFiles("./template/Accueil.html", "./template/header.html")
 	fmt.Print("Page d'accueil ✔️ \n")
 	
-	// récupérer id post
+	
 	// Delete les posts
 	
 	getPostID := req.FormValue("delete") 
@@ -41,13 +38,11 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	// getCategorieValue := req.FormValue("categorie")
 	// bdd.MakeCategorie(string(getCategorieValue))
 	
-	
-	
-	getPostValue := req.FormValue("PostValue") 
-	getSelectValue := req.FormValue("selectCategorie")
-	
 	// Gestion des cookies 
 	sessionCookie(w, req)
+
+	getPostValue := req.FormValue("PostValue") 
+	getSelectValue := req.FormValue("selectCategorie")
 	
 	// Ecrire et afficher un poste
 	if VerifyCookie(w, req) == true{
@@ -60,7 +55,6 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	// }
 	
 
-	// récupérer id post
 	// Liker un post
 	getIDLike := req.FormValue("like") 
 	IdToLike, e := strconv.Atoi(getIDLike) 
@@ -68,10 +62,6 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		bdd.Like(IdToLike, "Louis") 
 	}
 	
-	
-
-	
-
 	var arr [][]string 
 	var posts []PostData 
 	_, arr = bdd.GetAllPoste() 
@@ -88,8 +78,6 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		}
 		posts = append(posts, p) 
 	}
-
-	// authent.sessionCookie()
 
 	// Gestion de l'erreur 404
 	if req.URL.Path == "/" { 
