@@ -3,14 +3,21 @@ package handlers
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 	"text/template"
 
 	bdd "../bdd"
+	// authent "./authent"
 )
 
-type test struct {
+// Création d'une structure avec toutes les "infos" de notre post.
+type PostData struct {
 	UserName string
 	Post     string
+	Date     string
+	NbLike   int
+	ID       string
+	// Categorie []string
 }
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
@@ -18,30 +25,63 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	t, _ := template.ParseFiles("./template/Accueil.html", "./template/header.html")
 	fmt.Print("Page d'accueil ✔️ \n")
 
-	getPostValue := req.FormValue("PostValue")
-	fmt.Println(getPostValue)
-	bdd.MakeUser("Tao", "louis.teilliais@gmail.com", "Karim69lattrik")
-	bdd.MakePoste("Tao", getPostValue, "test")
-	var arr []string
-	_, arr = bdd.GetPosteByID(2)
+	// Delete les posts
 
-	p := test{
-		UserName: arr[1],
-		Post:     arr[2],
+	getPostID := req.FormValue("delete")
+	IdToSuppr, err := strconv.Atoi(getPostID)
+	if err == nil {
+		bdd.DeletePoste(IdToSuppr)
 	}
 
-	// NbrPosts := bdd.GetAllPoste()
+	// getCategorieValue := req.FormValue("categorie")
+	// bdd.MakeCategorie(string(getCategorieValue))
 
-	// for i := 0; i <  ; i++ {
-	// 	if getPostValue == bdd.GetPosteByID(i)[2] {
+	// Gestion des cookies
+	sessionCookie(w, req)
 
-	// 	}
+	getPostValue := req.FormValue("PostValue")
+	getSelectValue := req.FormValue("selectCategorie")
+
+	// Ecrire et afficher un poste
+	if VerifyCookie(w, req) == true {
+		if getPostValue != "" {
+			bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue))
+		}
+	}
+	// else {
+	// 	http.Redirect(w, req, "/connexion", http.StatusSeeOther)
 	// }
 
-	if req.URL.Path == "/" { //verification de l'URL
+	// Liker un post
+	getIDLike := req.FormValue("like")
+	IdToLike, e := strconv.Atoi(getIDLike)
+	if e == nil {
+		bdd.Like(IdToLike, "Louis")
+	}
+
+	var arr [][]string
+	var posts []PostData
+	_, arr = bdd.GetAllPoste()
+
+	// Parcourir et remplir notre tableau des données que l'on veut
+	for _, post := range arr {
+		nbLike, _ := strconv.Atoi(post[0])
+		p := PostData{
+			ID:       post[0],
+			UserName: post[1],
+			Post:     post[2],
+			NbLike:   bdd.GetLikeNb(nbLike),
+			Date:     post[5],
+		}
+		posts = append(posts, p)
+	}
+
+	// Gestion de l'erreur 404
+	if req.URL.Path == "/" {
 	} else if req.URL.Path != "/home" {
 		http.Error(w, "404 not found", http.StatusNotFound)
 		return
 	}
-	t.Execute(w, p)
+
+	t.Execute(w, posts)
 }

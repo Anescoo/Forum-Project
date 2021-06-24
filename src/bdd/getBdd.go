@@ -17,6 +17,8 @@ func OpenDataBase() (int, *sql.DB) {
 	return 0, db //renvoie la base de donner
 }
 
+/////////////////////////////////User///////////////////////////////////////////////////////////////////////////////
+
 func MakeUser(pseudo string, email string, hash string) int {
 	_, db := OpenDataBase()                                                                //ouverture de la bdd
 	result, err := db.Prepare("INSERT INTO User (Pseudo, Email, HashMDP) VALUES(?, ?, ?)") //Preparation de la commande
@@ -61,6 +63,8 @@ func GetAllUser() (int, [][]string) {
 	result, err := db.Query("SELECT Pseudo, Email FROM User")
 	if err != nil {
 		fmt.Println("Error GetAllUser")
+		fmt.Println(err.Error())
+
 		return 500, resultFunc
 	}
 
@@ -73,6 +77,7 @@ func GetAllUser() (int, [][]string) {
 		resultFunc = append(resultFunc, temp)
 	}
 
+	db.Close()
 	return 0, resultFunc
 }
 
@@ -82,6 +87,7 @@ func GetUserHash(username string) (int, string) {
 	result, err := db.Query("SELECT HashMDP FROM User WHERE Pseudo = ?", username) //renvoie du hash de l'utilisateur voulue
 	if err != nil {
 		fmt.Println("Error GetUserHash")
+		db.Close()
 		return 500, "error 500"
 	} else {
 
@@ -95,29 +101,35 @@ func GetUserHash(username string) (int, string) {
 	}
 }
 
+////////////////////////////////////Poste///////////////////////////////////////////////////////////////////////////////////////
+
 func MakePoste(user string, contenue string, categorie string) int {
 	_, db := OpenDataBase()
 	result, err := db.Prepare("INSERT INTO Poste (PseudoUser, Contenue, Categorie, nbLike) VALUES(?,?,?,?)")
 	if err != nil {
 		fmt.Println("Error MakePoste")
+		fmt.Println(err.Error())
 		return 500
 	} else {
-		fmt.Println(user, contenue, categorie)
-		result.Exec(user, contenue, categorie, 0)
-
-		fmt.Println("MakePoste done")
+		_, err := result.Exec(user, contenue, categorie, 0)
+		if err != nil {
+			fmt.Println(err.Error())
+			db.Close()
+			return 500
+		} else {
+			db.Close()
+			return 0
+		}
 	}
-
-	db.Close()
-	return 0
 }
 
 func GetPosteByID(id int) (int, []string) {
 	_, db := OpenDataBase()
 	var resultFunc []string
-	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike FROM Poste WHERE id = ?", id)
+	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE id = ?", id)
 	if err != nil {
 		fmt.Println("Error GetPosteById")
+		fmt.Println(err.Error())
 		return 500, resultFunc
 	} else {
 		fmt.Println("Starting GetPosteById")
@@ -126,16 +138,18 @@ func GetPosteByID(id int) (int, []string) {
 		var PseudoUser string
 		var Contenue string
 		var Categorie string
+		var DatePoste string
 		var nbLike int
 
 		result.Next()
-		result.Scan(&ID, &PseudoUser, &Contenue, &Categorie, &nbLike)
+		result.Scan(&ID, &PseudoUser, &Contenue, &Categorie, &nbLike, &DatePoste)
 
 		resultFunc = append(resultFunc, strconv.Itoa(ID))
 		resultFunc = append(resultFunc, PseudoUser)
 		resultFunc = append(resultFunc, Contenue)
 		resultFunc = append(resultFunc, Categorie)
 		resultFunc = append(resultFunc, strconv.Itoa(nbLike))
+		resultFunc = append(resultFunc, DatePoste)
 
 		db.Close()
 		return 0, resultFunc
@@ -145,9 +159,10 @@ func GetPosteByID(id int) (int, []string) {
 func GetAllPoste() (int, [][]string) {
 	_, db := OpenDataBase()
 	var resultFunc [][]string
-	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike FROM Poste")
+	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste ORDER BY DatePoste DESC")
 	if err != nil {
 		fmt.Println("Error GetAllPoste")
+		fmt.Println(err.Error())
 		return 500, resultFunc
 	}
 
@@ -155,21 +170,22 @@ func GetAllPoste() (int, [][]string) {
 	var PseudoUser string
 	var Contenue string
 	var Categorie string
+	var DatePoste string
 	var nbLike int
 
 	for result.Next() {
-		result.Scan(&ID, &PseudoUser, &Contenue, &Categorie, &nbLike)
-		temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, Categorie, strconv.Itoa(nbLike)}
+		result.Scan(&ID, &PseudoUser, &Contenue, &Categorie, &nbLike, &DatePoste)
+		temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, Categorie, strconv.Itoa(nbLike), DatePoste}
 		resultFunc = append(resultFunc, temp)
 	}
-
+	db.Close()
 	return 0, resultFunc
 }
 
 func GetPosteByCategorie(categorie string) (int, [][]string) {
 	_, db := OpenDataBase()
 	var resultFunc [][]string
-	result, err := db.Query("SELECT ID, PseudoUser, Contenue, nbLike FROM Poste WHERE Categorie = ?", categorie)
+	result, err := db.Query("SELECT ID, PseudoUser, Contenue, nbLike, DatePoste FROM Poste WHERE Categorie = ?", categorie)
 	if err != nil {
 		fmt.Println(err.Error())
 		return 500, resultFunc
@@ -179,10 +195,11 @@ func GetPosteByCategorie(categorie string) (int, [][]string) {
 		var PseudoUser string
 		var Contenue string
 		var nbLike int
+		var DatePoste string
 
 		for result.Next() {
-			result.Scan(&ID, &PseudoUser, &Contenue, &nbLike)
-			temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, strconv.Itoa(nbLike)}
+			result.Scan(&ID, &PseudoUser, &Contenue, &nbLike, &DatePoste)
+			temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, strconv.Itoa(nbLike), DatePoste}
 			resultFunc = append(resultFunc, temp)
 		}
 
@@ -194,7 +211,7 @@ func GetPosteByCategorie(categorie string) (int, [][]string) {
 func GetPosteByUser(UserPseudo string) (int, [][]string) {
 	_, db := OpenDataBase()
 	var resultFunc [][]string
-	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike FROM Poste WHERE PseudoUser = ?", UserPseudo)
+	result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE PseudoUser = ? ORDER BY DatePoste DESC", UserPseudo)
 	if err != nil {
 		fmt.Println(err.Error())
 		return 500, resultFunc
@@ -205,15 +222,30 @@ func GetPosteByUser(UserPseudo string) (int, [][]string) {
 		var Contenue string
 		var Categorie string
 		var nbLike int
+		var DatePoste string
 
 		for result.Next() {
-			result.Scan(&ID, &PseudoUser, &Contenue, &Categorie, &nbLike)
-			temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, Categorie, strconv.Itoa(nbLike)}
+			result.Scan(&ID, &PseudoUser, &Contenue, &Categorie, &nbLike, &DatePoste)
+			temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, Categorie, strconv.Itoa(nbLike), DatePoste}
 			resultFunc = append(resultFunc, temp)
 		}
 
 		db.Close()
 		return 0, resultFunc
+	}
+}
+
+func UpdatePoste(id int, update string) int {
+	_, db := OpenDataBase()
+	result, err := db.Prepare("UPDATE Poste SET Contenue = ? WHERE ID = ?")
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500
+	} else {
+		result.Exec(update, id)
+		db.Close()
+		return 0
 	}
 }
 
@@ -224,15 +256,132 @@ func DeletePoste(id int) int {
 		fmt.Println(err.Error())
 		return 500
 	} else {
-		result.Exec(id)
+		_, err := result.Exec(id)
+		if err != nil {
+			fmt.Println(err.Error())
+			return 500
+		} else {
+			db.Close()
+			return 0
+		}
+	}
+}
+
+///////////////////////Like///////////////////////////////////////////////////////////////////////
+
+func Like(idPost int, PseudoUser string) int {
+	_, db := OpenDataBase()
+	result, err := db.Prepare("INSERT INTO Like (PseudoUser, idPoste) VALUES(?,?)")
+	if err != nil {
+		fmt.Println(err.Error())
+		return 500
+	} else {
+		result.Exec(PseudoUser, idPost)
+		db.Close()
 		return 0
 	}
 }
+
+func Unlike(idPost int, PseudoUser string) int {
+	_, db := OpenDataBase()
+	result, err := db.Prepare("DELET FROM Like WHERE idPoste = ? AND PseudoUser =?")
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500
+	} else {
+		result.Exec(idPost, PseudoUser)
+		db.Close()
+		return 0
+	}
+}
+
+func GetPosteLikeByUser(UserPseuso string) (int, [][]string) {
+	_, db := OpenDataBase()
+	var ResultFunc [][]string
+	var IdLiker []int
+	temp, err := db.Query("SELECT idPoste FROM Like WHERE PseudoUser = ?", UserPseuso)
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500, ResultFunc
+	} else {
+		var IDPoste int
+
+		for temp.Next() {
+			temp.Scan(&IDPoste)
+			IdLiker = append(IdLiker, IDPoste)
+		}
+
+		db.Close()
+		for i := 0; i < len(IdLiker); i++ {
+			_, db := OpenDataBase()
+			result, err := db.Query("SELECT ID, PseudoUser, Contenue, Categorie, nbLike, DatePoste FROM Poste WHERE ID = ? ORDER BY DatePoste DESC ", IdLiker[i])
+			if err != nil {
+				fmt.Println(err.Error())
+				db.Close()
+				return 500, ResultFunc
+			} else {
+
+				var ID int
+				var PseudoUser string
+				var Contenue string
+				var Categorie string
+				var nbLike int
+				var DatePoste string
+
+				for result.Next() {
+					result.Scan(&ID, &PseudoUser, &Contenue, &Categorie, &nbLike, &DatePoste)
+					temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, Categorie, strconv.Itoa(nbLike), DatePoste}
+					ResultFunc = append(ResultFunc, temp)
+				}
+			}
+		}
+		return 0, ResultFunc
+	}
+}
+
+func IsLike(idPoste int, PseudoUser string) (int, bool) {
+	_, db := OpenDataBase()
+	_, err := db.Query("SELECT PseudoUser FROM Like WHERE PseudoUser = ? AND IdPoste = ?", PseudoUser, idPoste)
+	if err != nil {
+		db.Close()
+		return 500, false
+	} else {
+		db.Close()
+		return 0, true
+	}
+}
+
+func GetLikeNb(id int) int {
+	_, db := OpenDataBase()
+	result, err := db.Query("SELECT idPoste FROM Like WHERE idPoste = ?", id)
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500
+	} else {
+		var resultFunc []int
+		var idPoste int
+
+		for result.Next() {
+			result.Scan(&idPoste)
+			resultFunc = append(resultFunc, idPoste)
+		}
+
+		db.Close()
+		// fmt.Println(len(resultFunc))
+		return len(resultFunc)
+	}
+}
+
+////////////////////////Categorie//////////////////////////////////////////////////////////////////////////////
 
 func MakeCategorie(name string) int {
 	_, db := OpenDataBase()
 	result, err := db.Prepare("INSERT INTO Categorie (Name) Values(?)")
 	if err != nil {
+		db.Close()
 		return 500
 	} else {
 		result.Exec(name)
@@ -240,4 +389,96 @@ func MakeCategorie(name string) int {
 
 	db.Close()
 	return 0
+}
+
+func GetAllCategorie() (int, []string) {
+	_, db := OpenDataBase()
+	var ResultFunc []string
+	result, err := db.Query("SELECT Name FROM Categorie")
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500, ResultFunc
+	} else {
+		var NameCategorie string
+
+		for result.Next() {
+			result.Scan(&NameCategorie)
+			ResultFunc = append(ResultFunc, NameCategorie)
+		}
+
+		db.Close()
+		return 0, ResultFunc
+	}
+}
+
+func NbPosteByCategorie(name string) (int, int) {
+	_, db := OpenDataBase()
+	result, err := db.Query("SELECT ID FROM Poste WHERE Categorie = ?", name)
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 0, 500
+	} else {
+		var temp []int
+		var ID int
+
+		for result.Next() {
+			result.Scan(&ID)
+			temp = append(temp, ID)
+		}
+		return 0, len(temp)
+	}
+}
+
+func DeleteCategorire(name string) int {
+	_, db := OpenDataBase()
+	result, err := db.Prepare("DELETE FROM Categorie WHERE Name = ? ")
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500
+	} else {
+		result.Exec(name)
+		db.Close()
+		return 0
+	}
+}
+
+//////////////////////////////////////////Commentaire//////////////////////////////////////////////////////
+
+func MakeComment(Username string, Contenue string, IDPoste int) int {
+	_, db := OpenDataBase()
+	result, err := db.Prepare("INSERT INTO Commentaire (User, Contenue, IDPoste) VALUES(?,?,?)")
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500
+	} else {
+		result.Exec(Username, Contenue, IDPoste)
+		db.Close()
+		return 0
+	}
+}
+
+func GetCommentByPoste(idPoste int) (int, [][]string) {
+	_, db := OpenDataBase()
+	var ResultFunc [][]string
+	result, err := db.Query("SELECT User, Contenue FROM Commentaire WHERE IDPoste = ?", idPoste)
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500, ResultFunc
+	} else {
+		var User string
+		var Contenue string
+
+		for result.Next() {
+			result.Scan(&User, &Contenue)
+			temp := []string{User, Contenue}
+			ResultFunc = append(ResultFunc, temp)
+		}
+		db.Close()
+		return 0, ResultFunc
+	}
 }
