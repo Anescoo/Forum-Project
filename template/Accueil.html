@@ -12,10 +12,14 @@
 <body>
     
     <div id="Posts">
+        
         <form method="POST" class="form">
-            <!-- <textarea class="textarea" type="text" placeholder="Que voulez vous postez ?" name="PostValue" class="WritePost" required></textarea> -->
-            <input class="textarea" type="text" placeholder="Que voulez vous postez ?" name="PostValue" class="WritePost" required>
-            <input type="submit" placeholder="Oui" required>
+            <textarea name="PostValue" class="textarea" placeholder="Que voulez vous poster ?" cols="30" rows="10"></textarea>
+            
+            <input type="text" name="categorie" class="categorie" placeholder="Ajoutez une catégorie">
+            <input type="submit" class="boutonEnvoyer" value="Envoyer"required>
+            
+            
         </form>
         
         {{ range . }}
@@ -27,18 +31,20 @@
                     <button class="suppression">Supprimer 🗑️</button>                  
                 </form>
             </div>
-            
             <div class="contourPost">
-                {{ .Post }} <br>
+                <p>{{ .Post }} </p>
             </div> 
-            <p id="date"> à {{ .Date }}</p>
-            
-            <div class="like">
-                <form method="POST">
-                    <p> Like(s): {{ .NbLike }}</p>
-                    <textarea hidden name="like">{{ .ID }}</textarea>
-                    <button class="like"> ❤️</button>
-                </form> 
+            <div class="Bottom-Post">
+                <p id="date"> à {{ .Date }}</p>
+                <textarea hidden name="respond">{{ .ID }}</textarea>
+                <button class="CommsBtn" onclick="window.location.href='/comms'">Répondre 💬</button>
+                <div id="like">
+                    <form method="POST">
+                        <p>{{ .NbLike }} Like(s)</p>
+                        <button class="like"> ❤️</button>
+                        <textarea hidden name="like">{{ .ID }}</textarea>
+                    </form> 
+                </div>
             </div>
         </div>
         {{ end }}
@@ -46,7 +52,7 @@
     </div>
     <div id="pagination"></div>
     <div id="Filter-Bloc"></div>    
-
+    
 </body>
 
 

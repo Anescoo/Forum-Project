@@ -15,6 +15,7 @@ func UserPost(w http.ResponseWriter, req *http.Request){
 	
 	t, _ := template.ParseFiles("./template/userPost.html", "./template/header.html")
 	
+	// Gestion de la supression des posts 
 	getPostID := req.FormValue("delete")
 	IdToSuppr, err:= strconv.Atoi(getPostID)
 	if err == nil {
@@ -23,17 +24,15 @@ func UserPost(w http.ResponseWriter, req *http.Request){
 
 
 	getNewValue := req.FormValue("sendUpdate")
-	getPostIDupdate := req.FormValue("update")
+	getPostIDupdate := req.FormValue("update") 
+	// Gestion de l'update des posts 
 	IdtoUpdate, err:= strconv.Atoi(getPostIDupdate)
 	if err == nil {
 		bdd.UpdatePoste(IdtoUpdate, getNewValue)
 	}
 
 
-	// fmt.Println(getNewValue)
-	// fmt.Println(bdd.GetPosteByID(IdToSuppr))
-	// fmt.Println(bdd.UpdatePoste(IdToSuppr, getNewValue))
-
+	// même methode que dans "Accueil.go" mais pour les posts de l'utilisateurs on prend juste les valeurs dont on a besoin  
 	var arr [][]string
 	var posts []PostData
 	_, arr = bdd.GetPosteByUser("Tao")
@@ -45,7 +44,6 @@ func UserPost(w http.ResponseWriter, req *http.Request){
 			Post: post[2],
 			Date: post[5],
 		}
-		// fmt.Println(p.Date)
 		posts = append(posts, p)
 	}
 

@@ -1,7 +1,7 @@
 package main 
 
 import (
-    "fmt"
+    // "fmt"
     bdd "./src/bdd"
     // "database/sql"
     _ "github.com/mattn/go-sqlite3"
@@ -27,7 +27,14 @@ func main(){
     // fmt.Println(bdd.GetPosteByUser("Tao"))
 
     // bdd.UpdatePoste(15, "Allez les bleus")
-    bdd.Like(13, "Louis")
-    bdd.GetLikeNb(13)
-    fmt.Println(bdd.IsLike(13, "Louis"))
+    // bdd.Like(13, "Louis")
+    // bdd.GetLikeNb(13)
+    // fmt.Println(bdd.IsLike(13, "Louis"))
+    // bdd.MakeCategorie("Voiture")
+    // fmt.Println(bdd.GetPosteLikeByUser("Louis"))
+    // fmt.Println(bdd.GetAllCategorie())
+    // bdd.DeleteCategorire("")
+    // bdd.MakeComment("Louis", "Je suis un commentaire", 13)
+    // bdd.MakeUser("test", "test@gmail.com", "AZERTY")
+    bdd.MakePoste("Louis", "test", "testcategorie")
 }

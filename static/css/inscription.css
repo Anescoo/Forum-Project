@@ -45,18 +45,28 @@ body {
 
 #buttonValidation {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     height: 30%;
-}
 
+}
 
 .Identification {
     background-color: #5BC7D6; 
     color: white;
     border-radius: 45px;
     height: 55px;
-    width: 50%;
+    width: 45%;
     font-size: xx-large;
+    
+}
+
+.verifInscription {
+    background-color: #5BC7D6; 
+    color: white;
+    border-radius: 45px;
+    height: 55px;
+    width: 45%;
+    font-size: x-large;
 }
 
 .form {

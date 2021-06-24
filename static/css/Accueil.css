@@ -21,6 +21,23 @@ body {
     color: #010101;
 }
 
+.textarea {
+    height: 50px;
+    border-radius: 10px;
+    resize: none;
+}
+
+.categorie {
+    height: 50px;
+    border-radius: 10px;
+}
+
+.boutonEnvoyer {
+    height: 30px;
+    border-radius: 10px;
+}
+
+
 .post1 {
     background-color: white;
     border-radius: 10px;
@@ -66,10 +83,55 @@ body {
     margin-top: 5%;
 }
 
-#date {
-    margin-left: 50%;
+#like form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    /* width: 25%; */
+    /* margin-left: 75%; */
 }
 
-.like {
-    margin-left: 50%;
+#like button {
+    /* border: ; */
+    background-color: white;
+}
+
+#like button:hover {
+    background-color: black;
+}
+
+.post1 form textarea {
+    height: 0%;
+    width: 0%;
+}
+
+.Bottom-Post {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: auto;
+    align-items: center;
+}
+
+.CommsBtn {
+    height: 60%;
+    background-color: white;
+    color: #5BC7D6;
+    border: none;
+}
+
+.CommsBtn:hover {
+    height: 60%;
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+#categorie {
+    display: flex;
+    /* margin-left: 40%; */
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
 }
