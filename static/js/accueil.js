@@ -16,8 +16,6 @@ function ButtonNumber(param) {
     }
 }
 
-var bouton = document.getElementsByClassName("CommsBtn")
-
 // Get the popup
 var popup = document.getElementById("popupBox");
 

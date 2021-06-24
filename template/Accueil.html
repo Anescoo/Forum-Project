@@ -37,7 +37,7 @@
             <div class="Bottom-Post">
                 <p id="date"> à {{ .Date }}</p>
                 <textarea hidden name="respond">{{ .ID }}</textarea>
-                <button class="CommsBtn">Répondre 💬</button>
+                <button class="CommsBtn" id="OpenPopup">Répondre 💬</button>
                 <div id="like">
                     <form method="POST">
                         <p>{{ .NbLike }} Like(s)</p>
@@ -50,11 +50,11 @@
                 <div class="popup-content">
                     <span class="close">&times;</span>
                     <div class="Post-Content">
-                        <div id="Post">
-                            <div class="TopPost">
+                        <div class="post1">
+                            <div class="topPost">
                                 {{ .UserName }} a dit :             
                             </div>
-                            <div id = "contourPost">
+                            <div class="contourPost">
                                 {{ .Post }} 
                             </div>
                             <p id="date">{{ .Date }}</p>
