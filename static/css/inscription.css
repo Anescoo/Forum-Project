@@ -1,0 +1,77 @@
+body {
+    background-color: #0D748B;
+}
+
+#Inscription {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    width: 380px;
+    height: 400px;
+    margin-top: 6%;
+    margin-left: 35%;
+    border: 15px solid #5BC7D6;
+    border-radius: 45px;
+}
+
+#Titre {
+    display: flex;
+    justify-content: center;
+    height: 25%;
+}
+
+.Inscription {
+    font-size: 50px;
+    margin-top: 5%;
+}
+
+#Input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 70%;
+} 
+
+.Input-type {
+    width: 60%;
+    margin: auto;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    font-size: large;
+}
+
+#buttonValidation {
+    display: flex;
+    justify-content: space-between;
+    height: 30%;
+
+}
+
+.Identification {
+    background-color: #5BC7D6; 
+    color: white;
+    border-radius: 45px;
+    height: 55px;
+    width: 45%;
+    font-size: xx-large;
+    
+}
+
+.verifInscription {
+    background-color: #5BC7D6; 
+    color: white;
+    border-radius: 45px;
+    height: 55px;
+    width: 45%;
+    font-size: x-large;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+}

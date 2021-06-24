@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="../static/css/userpost.css" rel="stylesheet" type="text/css">
+    <title>Merdit</title>
+</head>
+
+<body>
+    {{ template "header" }}
+    
+    <div id = "MyPosts">
+        <h1> Mes Posts</h1>
+        {{ range . }}
+        <div id="Post">
+            <div class="TopPost">
+                <button class="updatePost" onclick="RemoveHidden()"> Modifier ✏️</button>
+                <form method="POST">
+                    <textarea hidden name="delete">{{ .ID }}</textarea>
+                    <button class="suppression">Supprimer 🗑️</button>
+                </form>  
+                <p id = "text">Vous avez posté :</p>             
+            </div>
+            <div id = "contourPost">
+                {{ .Post }} 
+            </div>
+            <div  class="updateText">
+                <form method="POST">
+                    <textarea hidden name="update">{{ .ID }}</textarea>
+                    <textarea hidden name="sendUpdate" id="modiftextarea" cols="30" rows="10">{{ .Post }} </textarea>
+                    <button type="submit" name="boutonUpdate" onclick="AddHidden()"> Envoyer</button>
+                </form>
+            </div>
+            <p id="date"> {{ .Date }}</p>
+        </div> 
+        {{ end }} 
+    </div>
+    <script src="../static/js/userPost.js" defer></script>
+</body>
+</html>
