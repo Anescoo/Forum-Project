@@ -36,3 +36,5 @@ func main() {
 	// bdd.DeleteCategorire("")
 	bdd.MakeComment("Louis", "Je suis un commentaire", 13)
 }
+
+// test git ignore
