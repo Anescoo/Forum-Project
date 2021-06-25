@@ -46,6 +46,14 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	if e == nil{
 		bdd.Like(IdToLike, "Tao") // Appliquer la fonction de getBdd.go
 	}
+
+	// Récupération de la valeur des commentaires
+	getCommentValue := req.FormValue("commentaire")
+	getCommentID := req.FormValue("IdComment")
+	StrToInt, _ := strconv.Atoi(getCommentID) 
+	if getCommentValue != "" {
+		bdd.MakeComment("Tao", getCommentValue, StrToInt)
+	}
 	
 	var arr [][]string
 	var posts []PostData
