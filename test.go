@@ -37,4 +37,4 @@ func main() {
 	bdd.MakeComment("Louis", "Je suis un commentaire", 13)
 }
 
-// test git ignore
+// test git ignore.
