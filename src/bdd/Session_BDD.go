@@ -20,6 +20,23 @@ func AddSession(PseudoUser string, UUID string) int {
 	return 0
 }
 
+func GetUserByUUID(UUID string) (int, string) {
+	_, db := OpenDataBase()
+	result, err := db.Query("SELECT PseudoUser FROM Session WHERE UUID = ?", UUID)
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500, ""
+	} else {
+		var PseudoUser string
+		result.Next()
+		result.Scan(&PseudoUser)
+		result.Close()
+		db.Close()
+		return 0, PseudoUser
+	}
+}
+
 func DeleteSession(PseudoUser string) int {
 	_, db := OpenDataBase()
 	resultFunc, err := db.Prepare("DELETE FROM Session WHERE PseudoUser = ?")
