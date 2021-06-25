@@ -8,7 +8,7 @@ import (
 
 func MakeComment(Username string, Contenue string, IDPoste int) int {
 	_, db := OpenDataBase()
-	result, err := db.Prepare("INSERT INTO Commentaire (User, Contenue, IDPoste) VALUES(?,?,?)")
+	result, err := db.Prepare("INSERT INTO Commentaire (User, Contenue, id_Poste) VALUES(?,?,?)")
 	if err != nil {
 		fmt.Println(err.Error())
 		db.Close()
@@ -23,7 +23,7 @@ func MakeComment(Username string, Contenue string, IDPoste int) int {
 func GetCommentByPoste(idPoste int) (int, [][]string) {
 	_, db := OpenDataBase()
 	var ResultFunc [][]string
-	result, err := db.Query("SELECT User, Contenue FROM Commentaire WHERE IDPoste = ?", idPoste)
+	result, err := db.Query("SELECT User, Contenue FROM Commentaire WHERE id_Poste = ?", idPoste)
 	if err != nil {
 		fmt.Println(err.Error())
 		db.Close()

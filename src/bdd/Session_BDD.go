@@ -58,6 +58,5 @@ func SessionAlreadyExiste(PseudoUser string) (int, bool) {
 				return 0, true
 			}
 		}
-
 	}
 }
