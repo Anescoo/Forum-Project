@@ -35,6 +35,7 @@ func main(){
     // fmt.Println(bdd.GetAllCategorie())
     // bdd.DeleteCategorire("")
     // bdd.MakeComment("Louis", "Je suis un commentaire", 13)
-    // bdd.MakeUser("test", "test@gmail.com", "AZERTY")
-    bdd.MakePoste("Louis", "test", "testcategorie")
+    // bdd.MakeUser("test2", "test@gmail.com", "AZERTY")
+    // bdd.MakePoste("Louis", "test", "testcategorie")
+    
 }

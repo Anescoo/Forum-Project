@@ -6,8 +6,8 @@ import (
 	"text/template"
 	"strconv"
 	bdd "../bdd"
-	// authent "./authent"
 )
+
 // Création d'une structure avec toutes les "infos" de notre post. 
 type PostData struct { 
 	UserName string
@@ -21,48 +21,37 @@ type PostData struct {
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
-	t, _ := template.ParseFiles("./template/Accueil.html", "./template/header.html")
-	fmt.Print("Page d'accueil ✔️ \n")
+	t, err := template.ParseFiles("./template/Accueil.html", "./template/header.html")
 	
-	
-	// Delete les posts
-	
-	getPostID := req.FormValue("delete") 
-	IdToSuppr, err:= strconv.Atoi(getPostID)
-	if err == nil {
-		bdd.DeletePoste(IdToSuppr) 
+	if err != nil {
+		fmt.Print(err.Error)
 	}
-	
 
+	fmt.Print("Page d'accueil ✔️ \n")
 
 	// getCategorieValue := req.FormValue("categorie")
 	// bdd.MakeCategorie(string(getCategorieValue))
 	
-	// Gestion des cookies 
-	sessionCookie(w, req)
+	// sessionCookie(w, req)
 
-	// deleteCookie(w, req)
+	VerifyUser(w, req)
 
 	getPostValue := req.FormValue("PostValue") 
 	getSelectValue := req.FormValue("selectCategorie")
+	getIDLike := req.FormValue("like") 
+	IdToLike, e := strconv.Atoi(getIDLike)
 	
 	// Vérification si l'utilisateur est connecté
-	if verifyCookie(w, req) == true{
+	if VerifyCookie(w, req) == true{
 		if getPostValue != "" {
 			bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue)) 	
+		}else if e == nil{
+			bdd.Like(IdToLike, "Louis") 
 		}
-	} 
+	}
 	// else {
 	// 	http.Redirect(w, req, "/connexion", http.StatusSeeOther)
 	// }
-	
-
-	// Liker un post
-	getIDLike := req.FormValue("like") 
-	IdToLike, e := strconv.Atoi(getIDLike) 
-	if e == nil{
-		bdd.Like(IdToLike, "Louis") 
-	}
 	
 	var arr [][]string 
 	var posts []PostData 

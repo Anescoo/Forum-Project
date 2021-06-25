@@ -13,5 +13,5 @@ func OpenDataBase() (int, *sql.DB) {
 		fmt.Println("Error database")
 		return 500, nil //renvoie du code d'erreur
 	}
-	return 0, db //renvoie la base de donner
+	return 0, db //renvoie la base de donnée
 }

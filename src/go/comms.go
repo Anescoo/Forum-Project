@@ -13,7 +13,12 @@ import (
 
 func Comments(w http.ResponseWriter, req *http.Request) {
 
-    t, _ := template.ParseFiles("./template/comms.html", "./template/header.html")
+    t, errFiles := template.ParseFiles("./template/comms.html", "./template/header.html")
+    
+    if errFiles != nil {
+		fmt.Print(errFiles.Error)
+	}
+
     fmt.Print("Page des commentaires post ✔️ \n")
     
     // var arr [][]string

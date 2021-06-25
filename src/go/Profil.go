@@ -10,7 +10,12 @@ import (
 
 func Profil(w http.ResponseWriter, req *http.Request) {
 
-	t, _ := template.ParseFiles("./template/profil.html", "./template/header.html")
+	t, err := template.ParseFiles("./template/profil.html", "./template/header.html")
+	
+	if err != nil {
+		fmt.Print(err.Error)
+	}
+
 	fmt.Print("Page du profil ✔️ \n")
 		
 	

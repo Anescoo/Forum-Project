@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func sessionCookie(w http.ResponseWriter, req *http.Request) {
+func sessionCookie(w http.ResponseWriter, req *http.Request) string {
 	
 	sessionToken := guuid.New().String()
 	
@@ -21,8 +21,9 @@ func sessionCookie(w http.ResponseWriter, req *http.Request) {
 	}
 	http.SetCookie(w, &cookie)
 
-	// return sessionToken
-	fmt.Println("Value Cookies : ", sessionToken)
+	uuidValue := cookie.Value
+	fmt.Println("Value Cookies : ", uuidValue)
+	return uuidValue
 }
 
 func readCookie(w http.ResponseWriter, req *http.Request) string {
@@ -40,7 +41,7 @@ func readCookie(w http.ResponseWriter, req *http.Request) string {
 	return sessionToken
 }
 
-func verifyCookie(w http.ResponseWriter, req *http.Request) bool {
+func VerifyCookie(w http.ResponseWriter, req *http.Request) bool {
     
 	_, err := req.Cookie("session_Token")
     
@@ -51,7 +52,6 @@ func verifyCookie(w http.ResponseWriter, req *http.Request) bool {
     }
 }
 
-
 func deleteCookie(w http.ResponseWriter, req *http.Request){
 
 	c := http.Cookie {
@@ -59,5 +59,20 @@ func deleteCookie(w http.ResponseWriter, req *http.Request){
 		MaxAge : -1,
 	}
 	http.SetCookie(w, &c)
+}
 
+// fonction de verification connexion user 
+
+func VerifyUser(w http.ResponseWriter, req *http.Request) bool {
+
+	
+	uuidValue := sessionCookie(w, req)
+
+	// if uuidValue == {
+	// 	return true
+	// }else {
+	// 	return false
+	// }
+	fmt.Println(uuidValue)
+	return true
 }

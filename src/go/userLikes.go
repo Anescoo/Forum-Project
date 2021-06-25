@@ -12,7 +12,11 @@ func UserLikes(w http.ResponseWriter, req *http.Request){
 	
 	fmt.Print("Page Mes Posts ✔️ \n")
 	
-	t, _ := template.ParseFiles("./template/userLikes.html", "./template/header.html")
+	t, err := template.ParseFiles("./template/userLikes.html", "./template/header.html")
+
+	if err != nil {
+		fmt.Print(err.Error)
+	}
 
 	var arr [][]string   // Création d'un tableau de tableau de string pour stocker tout les posts .
 	var posts []PostData  // Création d'un tableau qui prendra toutes les valeurs utiles pour un post.

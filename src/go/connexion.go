@@ -9,7 +9,12 @@ import (
 
 func Connexion(w http.ResponseWriter, req *http.Request) {
 	
-	t, _ := template.ParseFiles("./template/connexion.html", "./template/header.html")
+	t, errFiles := template.ParseFiles("./template/connexion.html", "./template/header.html")
+
+	if errFiles != nil {
+		fmt.Print(errFiles.Error)
+	}
+
 	fmt.Print("Page de connexion ✔️ \n")
 	
 	
@@ -22,9 +27,6 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 	
 	
 	err := Login(w, getPseudo, getMdp)
-	// if Login(w, getPseudo, getMdp) == 2 {
-	// 	sessionCookie(w, req)
-	// }
 
 	// Gestion d'erreurs si l'utilisateur se trompe.
 	if err != 0 {
@@ -37,13 +39,11 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 		if err == 3 {
 			//username invalide
 		}
+
+	}else {
+		sessionCookie(w, req)
+		// AJOUTER UUID A LA TABLE SESSION
 	}
-	
-	// quand l'utilisateur se connecte 
-	
-	
-	// sessionCookie(w, req)
-	
-	
+		
 	t.Execute(w, nil)
 }
