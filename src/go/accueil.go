@@ -3,48 +3,68 @@ package handlers
 import (
 	"fmt"
 	"net/http"
-	"text/template"
 	"strconv"
+	"text/template"
+
 	bdd "../bdd"
+	// authent "./authent"
 )
 
+// Création d'une structure avec toutes les "infos" de notre post.
 type PostData struct {
-	UserName string
-	Post string
-	Date string
-	NbLike int
-	ID string
+	UserName 	   string
+	Post     	   string
+	Date     	   string
+	NbLike         int
+	ID             string
+	CommentArr [][]string
 	// Categorie []string
 }
 
-// type CategorieStruct struct {
-// 	Categorie []string 
-// }
+type ComsData struct {
+	Pseudo		string
+	Com			string
+}
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
-	t, _ := template.ParseFiles("./template/Accueil.html", "./template/header.html")
+	t, _ := template.ParseFiles("./template/Accueil.html", "./template/Header.html")
 	fmt.Print("Page d'accueil ✔️ \n")
 
-	getPostID := req.FormValue("delete") // récupérer id post
-	IdToSuppr, err:= strconv.Atoi(getPostID)
+	// Delete les posts
+
+	getPostID := req.FormValue("delete")
+	IdToSuppr, err := strconv.Atoi(getPostID)
 	if err == nil {
-		bdd.DeletePoste(IdToSuppr) // Appliquer la fonction de getBdd.go
+		bdd.DeletePoste(IdToSuppr)
 	}
 
 	// getCategorieValue := req.FormValue("categorie")
 	// bdd.MakeCategorie(string(getCategorieValue))
-	
-	getPostValue := req.FormValue("PostValue") 
+
+	// Gestion des cookies
+	sessionCookie(w, req)
+
+	// deleteCookie(w, req)
+
+	getPostValue := req.FormValue("PostValue")
 	getSelectValue := req.FormValue("selectCategorie")
-	if getPostValue != "" {
-		bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue)) // Appliquer la fonction de getBdd.go	
+
+	// Vérification si l'utilisateur est connecté
+	if verifyCookie(w, req) == true {
+		if getPostValue != "" {
+			bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue))
+		}
 	}
-	
-	getIDLike := req.FormValue("like") // récupérer id post
-	IdToLike, e := strconv.Atoi(getIDLike) 
-	if e == nil{
-		bdd.Like(IdToLike, "Tao") // Appliquer la fonction de getBdd.go
+	// else {
+	// 	http.Redirect(w, req, "/connexion", http.StatusSeeOther)
+	// }
+
+	// Liker un post
+	getIDLike := req.FormValue("like")
+	IdToLike, e := strconv.Atoi(getIDLike)
+	if e == nil {
+		bdd.Like(IdToLike, "Louis")
 	}
 
 	// Récupération de la valeur des commentaires
@@ -58,23 +78,30 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	var arr [][]string
 	var posts []PostData
 	_, arr = bdd.GetAllPoste()
-	
+
+	// var commentArr [][]string
+	// _, commentArr = bdd.GetCommentByPoste(2)
+	// fmt.Println(commentArr)
+
+
+	// Parcourir et remplir notre tableau des données que l'on veut
 	for _, post := range arr {
 		nbLike, _ := strconv.Atoi(post[0])
-		p := PostData {
-			ID: post[0],
-			UserName: post[1],
-			Post: post[2],
-			NbLike : bdd.GetLikeNb(nbLike),
-			Date: post[5],
+		commentID, _ := strconv.Atoi(post[0])
+		_, coms := bdd.GetCommentByPoste(commentID)
+		p := PostData{
+			ID:       	post[0],
+			UserName: 	post[1],
+			Post:     	post[2],
+			NbLike:   	bdd.GetLikeNb(nbLike),
+			Date:     	post[5],
+			CommentArr: coms,
 		}
 		posts = append(posts, p)
 	}
 
-	// sessionCookie()
-
 	// Gestion de l'erreur 404
-	if req.URL.Path == "/" { //verification de l'URL
+	if req.URL.Path == "/" {
 	} else if req.URL.Path != "/home" {
 		http.Error(w, "404 not found", http.StatusNotFound)
 		return

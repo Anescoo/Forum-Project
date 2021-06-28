@@ -224,3 +224,37 @@ body {
 .textarea2 {
     resize: none;
 }
+
+.Comment-Content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border: 10px solid #5BC7D6;
+    border-radius: 20px;
+    margin-top: 5%;
+}
+
+.pseudo {
+    margin-right: auto;
+}
+
+.content {
+    display: flex;
+    background-color: #0D748B;
+    color: white;
+    border-radius: 10px;
+    margin-left: 10%;
+    width: 80%;
+    height: auto;
+    border-width: thick;
+    border: 2px solid black;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}

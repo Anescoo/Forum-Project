@@ -37,7 +37,7 @@
             <div class="Bottom-Post">
                 <p id="date"> à {{ .Date }}</p>
                 <textarea hidden name="respond">{{ .ID }}</textarea>
-                <button class="CommsBtn" id="OpenPopup">Répondre 💬</button>
+                <button class="CommsBtn">Répondre 💬</button>
                 <div id="like">
                     <form method="POST">
                         <p>{{ .NbLike }} Like(s)</p>
@@ -50,13 +50,11 @@
                 <div class="popup-content">
                     <div class="Post-Content">
                         <span class="close">&times;</span>
-                        <!-- <div class="WriteComment"> -->
                         <form method="POST" class="WriteComment">
                             <textarea hidden name="IdComment">{{ .ID }}</textarea>
                             <textarea placeholder="Que voulez-vous commenter ?" name="commentaire" class="textarea2" cols="100" rows="10"></textarea>
                             <input type="submit" class="boutonEnvoyer" value="Publier"required>
                         </form>
-                        <!-- </div> -->
                         <div class="Post">
                             <div class="TopPost">
                                 {{ .UserName }} a dit : 
@@ -68,7 +66,16 @@
                         </div> 
                     </div>
                     <div class="Comment-Content">
-
+                        {{ range .CommentArr }}
+                        <div class="comment">
+                            <div class="pseudo">
+                                {{ index . 0 }} a répondu : 
+                            </div>
+                            <div class="content">
+                                {{ index . 1 }}
+                            </div>
+                        </div>
+                        {{ end }}
                     </div>
                 </div>
             </div>

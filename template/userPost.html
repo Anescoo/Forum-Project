@@ -31,7 +31,7 @@
                 <form method="POST">
                     <textarea hidden name="update">{{ .ID }}</textarea>
                     <textarea hidden name="sendUpdate" id="modiftextarea" cols="30" rows="10">{{ .Post }} </textarea>
-                    <button type="submit" name="boutonUpdate" onclick="AddHidden()"> Envoyer</button>
+                    <button hidden type="submit" id="buttonUpdate" onclick="AddHidden()"> Envoyer</button>
                 </form>
             </div>
             <p id="date"> {{ .Date }}</p>

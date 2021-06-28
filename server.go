@@ -29,6 +29,8 @@ func main() {
 
     http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
+
+    // Création des pages de notre site 
     http.HandleFunc("/home", handlers.Accueil)
     http.HandleFunc("/connexion", handlers.Connexion)
     http.HandleFunc("/profil", handlers.Profil)
@@ -36,5 +38,6 @@ func main() {
     http.HandleFunc("/userpost", handlers.UserPost)
     http.HandleFunc("/userlikes", handlers.UserLikes)
 
+    // Choix du port que l'on sélectionne
     http.ListenAndServe(":8000", nil)
 }
