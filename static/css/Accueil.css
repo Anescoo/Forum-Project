@@ -22,26 +22,27 @@ body {
 }
 
 .textarea {
-    width: 60%;    
-    height: 70px;
-    margin: 10% 10% 10% 10%;
-    border: 10% solid;
-    background: #eee;
-    border-radius: 15px;
-    font-size: 10px;
-   
-     
-}
-
-/* .categorie {
     height: 50px;
     border-radius: 10px;
+    resize: none;
+    border: 30px solid #5BC7D6;
+    display: none;
+}
+
+.form-text {
+    border: 30px solid #5BC7D6;
+}
+
+.categorie {
+    height: 50px;
+    border-radius: 10px;
+    border: 10px solid #5BC7D6;
 }
 
 .boutonEnvoyer {
     height: 30px;
     border-radius: 10px;
-} */
+}
 
 
 .post1 {
@@ -70,7 +71,6 @@ body {
     color: #5BC7D6;
     border: none;
 }
-
 .suppression:hover {
     background-color: black;
     color: white;
@@ -142,3 +142,46 @@ body {
     justify-content: space-around;
 }
 
+/* The Modal (background) */
+.popup-box {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .popup-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+ .form-text  {
+    background-color: orangered;
+    width: 30%;
+    border: 10px solid #5BC7D6;
+}

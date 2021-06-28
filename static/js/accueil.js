@@ -20,10 +20,3 @@ function ChangePage(){
     
 }
 
-function openForm() {
-    document.getElementById("Posts").style.display="block";
-}
-
-function closeForm() {
-    document.getElementById("Posts").style.display="none";
-}
