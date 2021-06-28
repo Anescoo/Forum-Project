@@ -6,23 +6,48 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func Like(idPost int, PseudoUser string) int {
+func Like(idPost int, Pseudo string) int {
 	_, db := OpenDataBase()
-	result, err := db.Prepare("INSERT INTO Like (PseudoUser, idPoste) VALUES(?,?)")
+	temp, err := db.Query("SELECT PseudoUser FROM Like WHERE PseudoUser = ? AND idPoste = ?", Pseudo, idPost)
 	if err != nil {
 		fmt.Println(err.Error())
 		db.Close()
 		return 500
 	} else {
-		result.Exec(PseudoUser, idPost)
+		var PseudoUser string
+		temp.Next()
+		temp.Scan(&PseudoUser)
+		temp.Close()
 		db.Close()
-		return 0
+		if PseudoUser != Pseudo {
+			_, db := OpenDataBase()
+			temp, err := db.Prepare("INSERT INTO Like (PseudoUser, idPoste, isLike) VALUES(?,?,?)")
+			if err != nil {
+				return 500
+			} else {
+				temp.Exec(PseudoUser, idPost, true)
+				db.Close()
+				return 0
+			}
+		} else {
+			_, db := OpenDataBase()
+			result, err := db.Prepare("UPDATE Like SET isLike = true WHERE idPoste = ? AND PseudoUser =?)")
+			if err != nil {
+				fmt.Println(err.Error())
+				db.Close()
+				return 500
+			} else {
+				result.Exec(PseudoUser, idPost)
+				db.Close()
+				return 0
+			}
+		}
 	}
 }
 
-func Unlike(idPost int, PseudoUser string) int {
+func Dislike(idPost int, PseudoUser string) int {
 	_, db := OpenDataBase()
-	result, err := db.Prepare("DELET FROM Like WHERE idPoste = ? AND PseudoUser =?")
+	result, err := db.Prepare("UPDATE Like SET isLike = false WHERE idPoste = ? AND PseudoUser =?")
 	if err != nil {
 		fmt.Println(err.Error())
 		db.Close()
@@ -32,6 +57,7 @@ func Unlike(idPost int, PseudoUser string) int {
 		db.Close()
 		return 0
 	}
+
 }
 
 func GetPosteLikeByUser(UserPseuso string) (int, [][]string) {
@@ -73,11 +99,7 @@ func IsLike(idPoste int, PseudoUser string) (int, bool) {
 		result.Scan(&isLike)
 		db.Close()
 
-		if isLike == true {
-			return 0, true
-		} else {
-			return 0, false
-		}
+		return 0, isLike
 	}
 }
 
