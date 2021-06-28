@@ -47,6 +47,7 @@ func GetPosteByID(id int) (int, []string) {
 
 		result.Next()
 		result.Scan(&ID, &PseudoUser, &Contenue, &Categorie, &nbLike, &DatePoste)
+		result.Close()
 
 		resultFunc = append(resultFunc, strconv.Itoa(ID))
 		resultFunc = append(resultFunc, PseudoUser)
@@ -82,6 +83,7 @@ func GetAllPoste() (int, [][]string) {
 		temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, Categorie, strconv.Itoa(nbLike), DatePoste}
 		resultFunc = append(resultFunc, temp)
 	}
+	result.Close()
 	db.Close()
 	fmt.Println("GetAllPoste done")
 	return 0, resultFunc
@@ -107,6 +109,7 @@ func GetPosteByCategorie(categorie string) (int, [][]string) {
 			temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, strconv.Itoa(nbLike), DatePoste}
 			resultFunc = append(resultFunc, temp)
 		}
+		result.Close()
 
 		db.Close()
 		return 0, resultFunc
@@ -134,6 +137,7 @@ func GetPosteByUser(UserPseudo string) (int, [][]string) {
 			temp := []string{strconv.Itoa(ID), PseudoUser, Contenue, Categorie, strconv.Itoa(nbLike), DatePoste}
 			resultFunc = append(resultFunc, temp)
 		}
+		result.Close()
 
 		db.Close()
 		return 0, resultFunc

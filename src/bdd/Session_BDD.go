@@ -68,6 +68,7 @@ func SessionAlreadyExiste(PseudoUser string) (int, bool) {
 		} else {
 			temp.Next()
 			temp.Scan(&Pseudo)
+			temp.Close()
 			db.Close()
 			if Pseudo != PseudoUser {
 				return 0, false
