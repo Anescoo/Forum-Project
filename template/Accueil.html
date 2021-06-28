@@ -12,27 +12,29 @@
 <body>
     
     <div id="Posts">
+        <div class="open-btn" id="btn">
+            <button class="open-button" onclick="openForm()">Créer un Post ! 👆</button> 
+        </div>
         
-        <form method="POST" class="form">
-                        
-            <textarea name="PostValue" class="textarea" placeholder="Que voulez vous poster ?" cols="30" rows="10" required></textarea>
-            <input type="text" name="categorie" class="categorie" placeholder="Ajoutez une catégorie" >
+        <form method="POST" class="form"> 
+
+            <div class="form-popup" id="popupForm">
+            <!-- <div class="text"> -->
+                <textarea class="text" name="PostValue" class="textarea" placeholder=" Que voulez vous poster ?" cols="30" rows="10"></textarea>
+            <!-- </div> -->
+
+            <!-- <div class="category"> -->
+                <input type="text" name="categorie" class="categorie" placeholder=" Ajoutez une catégorie">
+            <!-- </div> -->
+
+                <button type="button" class="btn cancel" onclick="closeForm()">❌</button>  
+                <input type="submit" class="boutonEnvoyer" value="Publier"required>
             
-            <input type="submit" class="boutonEnvoyer" value="Publier"required>                                                                                        
-            <button type="button" class="btn cancel" onclick="closeForm()">❌</button>  
-            <button class="open-button" onclick="openForm()">Créer un Post !</button>    
-            <!-- <button class="btn-upload">Choisir le fichier</button> -->
-            <input type="file" name="upfile"/>
-            <script>
-                function openForm() {
-                    document.getElementById("popupForm").style.display="block";
-                }
-                
-                function closeForm() {
-                    document.getElementById("popupForm").style.display="none";
-                }
-            </script>
-            
+                <div class="parent-div">
+                    <button class="btn-upload">Choisir le fichier</button>
+                    <input type="file" name="upfile">
+                </div>
+            </div>
             
         </form>
         
@@ -40,6 +42,10 @@
         <div class="post1">
             <div class="topPost">
                 {{ .UserName }} a dit :
+                <form method="POST">
+                    <textarea hidden name="delete">{{ .ID }}</textarea>
+                    <button class="suppression">Supprimer 🗑️</button>                  
+                </form>
             </div>
             <div class="contourPost">
                 <p>{{ .Post }} </p>
@@ -52,7 +58,6 @@
                     <form method="POST">
                         <p>{{ .NbLike }} Like(s)</p>
                         <button class="like"> ❤️</button>
-                        <button class="dislike"> 👎</button>
                         <textarea hidden name="like">{{ .ID }}</textarea>
                     </form> 
                 </div>

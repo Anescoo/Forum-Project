@@ -21,27 +21,35 @@ body {
     color: #010101;
 }
 
-.textarea {
+.text {
     height: 50px;
+    width: 300px;
     border-radius: 10px;
     resize: none;
-    border: 30px solid #5BC7D6;
-    display: none;
-}
-
-.form-text {
-    border: 30px solid #5BC7D6;
+    border: 5px solid #5BC7D6;
+    top: 50px; 
 }
 
 .categorie {
     height: 50px;
     border-radius: 10px;
-    border: 10px solid #5BC7D6;
+    border: 5px solid #5BC7D6;
+    top: 15px;
 }
 
 .boutonEnvoyer {
-    height: 30px;
     border-radius: 10px;
+    background-color: #5BC7D6; 
+    color: white;
+    border-radius: 5px;
+    font-size: medium;    
+    padding: 3px 3px 3px 3px;    
+    height: 40px; 
+    width: 110px;     
+    opacity: 1;
+    position: relative;
+    /* top: 1px; */
+    left: 20px;           
 }
 
 
@@ -58,6 +66,7 @@ body {
     margin-top: 2%;
     margin-bottom: 5%;
     border: 10px solid #5BC7D6; 
+    z-index: 3;
 }
 
 .topPost {
@@ -71,6 +80,7 @@ body {
     color: #5BC7D6;
     border: none;
 }
+
 .suppression:hover {
     background-color: black;
     color: white;
@@ -154,34 +164,156 @@ body {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content/Box */
-  .popup-content {
+}
+
+/* Modal Content/Box */
+.popup-content {
     background-color: #fefefe;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
-  }
-  
-  /* The Close Button */
-  .close {
+}
+
+/* The Close Button */
+.close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-  }
-
- .form-text  {
-    background-color: orangered;
-    width: 30%;
-    border: 10px solid #5BC7D6;
 }
+
+
+/* Css pour bouton "choisir un fichier"   */
+.parent-div {
+    display: block;
+    position: relative;
+    /* overflow: hidden;  */
+}
+
+.parent-div input[type=file] {
+    opacity: 0;
+    position: absolute;
+    font-size: 90px;
+    top: -52px;
+    left: 650px;
+    height: 40px;
+    width: 180px;
+    
+}
+.btn-upload {
+    background-color: #1c87c9;
+    border-radius: 10px;
+    color: white;
+    border-radius: 5px;
+    font-size: medium;    
+    padding: 3px 3px 3px 3px;    
+    height: 40px; 
+    width: 180px;     
+    opacity: 1;
+    position: relative;
+    left: 650px;
+    top: -56px;
+    
+}
+
+.open-button:hover {
+    opacity: 1;
+    background-color: #0059ff;
+    border: 2px solid black; 
+    color: black;
+    z-index: 1;
+}
+
+.testDeco {
+    text-decoration: bold;
+}
+
+
+/* Css de la popup (masquer) */
+.form-popup {
+    top: -20px;
+    left: -50px;       
+    display: none;                                            
+    z-index: 3;      
+    padding: 50px 60px 30px 30px;              
+    background-color: #D3D3D3;
+    border: 8px solid #1c87c9;
+    margin-left: 50%;                      
+    transform: translate(-45%,5%);
+    font-size: xx-large;           
+    position: sticky;     
+    height: 100px;   
+    width: 120%;    
+    border-radius: 5px;                   
+}      
+
+.login-popup { 
+    position: relative;
+    text-align: center;
+    width: 100%;
+    border-radius: 1px;    
+}
+
+.open-button { /*bouton pour ouvrir pop up */ 
+    position: relative;
+    left: 50px;
+    top: 60px;
+    background-color: #1c87c9;
+    border-radius: 10px;
+    color: white;
+    border-radius: 5px;
+    font-size: medium;    
+    padding: 3px 3px 3px 3px;    
+    height: 40px; 
+    width: 180px;     
+    opacity: 1;
+    position: relative;
+    cursor: pointer;
+}
+
+/* .open-button:active {
+    left: 0px;
+    top: 5px;
+} */
+/* Fixez le bouton sur le côté gauche de la page */
+.open-btn {
+    display: flex;
+    justify-content: left;
+    position: relative;
+    left: -20px;
+    top: 15px;
+}
+
+/* .open-btn:active {
+    display: outside; 
+} */
+
+.form .cancel {
+    background-color: transparent;
+    bottom: 60px;
+    position: fixed;
+    right: 3px;   
+    top: 5px;
+    height: 35px;
+    width: 38px; 
+    margin: 5px 5px 5px 5px; 
+    border: 2px solid red;      
+    border-radius: 50px;     
+}   
+
+/* Placez les effets pour les boutons */
+.form .btn:hover {
+    opacity: 0.7;
+    background-color: #8B0000;
+    border: 4px solid black;
+    /* cursor: not-allowed; */
+}
+
