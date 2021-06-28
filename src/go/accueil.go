@@ -84,4 +84,10 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	}
 
 	t.Execute(w, posts)
+
 }
+
+// // Gestion de l'erreur 500
+// if http.ProtocolError != nill {
+// 	fmt.Print(err.Error)
+// }

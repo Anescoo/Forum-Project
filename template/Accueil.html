@@ -5,45 +5,72 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="../static/css/Accueil.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/popup.css" rel="stylesheet" type="text/css">
     <script src="../static/js/accueil.js" async></script>
     <title>Projet Forum</title>
 </head>
 {{ template "header" }}
 <body>
     
-    <div id="Posts">
-        
-        <form method="POST" class="form">
+    <div class="open-btn" id="btn">
+        <button class="open-button" onclick="openForm()">Créer un Post !</button> 
+    </div>  
+    
+    <form method="POST" class="form">
+        <div id="Posts" class="post">
+            
             <textarea name="PostValue" class="textarea" placeholder="Que voulez vous poster ?" cols="30" rows="10"></textarea>
+            <!-- <input type="text" id="msg" placeholder="Votre Message" name="message" style> <required>   -->
+                <!-- <input type="text" name="categorie" class="categorie" placeholder="Ajoutez une catégorie"> -->
+                <input type="text" name="categorie" class="categorie" placeholder="   Ajoutez une catégorie">
+                
+                <!-- <input type="submit" class="boutonEnvoyer" value="Envoyer"required> -->
+                <button type="submit" class="btn">Publier</button>                                                                                                 
+                <button type="button" class="btn cancel" onclick="closeForm()">❌</button> 
+                
+                <script>
+                
+                function openForm() {
+                    document.getElementById("Posts").style.display="block";
+                }
+                
+                function closeForm() {
+                    document.getElementById("Posts").style.display="none";
+                }
+                </script>
             
-            <input type="text" name="categorie" class="categorie" placeholder="Ajoutez une catégorie">
-            <input type="submit" class="boutonEnvoyer" value="Envoyer"required>
+            <!-- <div class="form-popup" id="popupForm"> -->
+                <div class="parent-div">
+                    <button class="btn-upload">Choisir le fichier</button>
+                    <input type="file" name="upfile" />
+                </div>
+                
+                
+            </form>
             
-            
-        </form>
-        
-        {{ range . }}
-        <div class="post1">
-            <div class="topPost">
-                {{ .UserName }} a dit :
-                <form method="POST">
-                    <textarea hidden name="delete">{{ .ID }}</textarea>
-                    <button class="suppression">Supprimer 🗑️</button>                  
-                </form>
-            </div>
-            <div class="contourPost">
-                <p>{{ .Post }} </p>
-            </div> 
-            <div class="Bottom-Post">
-                <p id="date"> à {{ .Date }}</p>
-                <textarea hidden name="respond">{{ .ID }}</textarea>
-                <button class="CommsBtn" onclick="window.location.href='/comms'">Répondre 💬</button>
-                <div id="like">
+            {{ range . }}
+            <div class="post1">
+                <div class="topPost">
+                    {{ .UserName }} a dit :
                     <form method="POST">
-                        <p>{{ .NbLike }} Like(s)</p>
-                        <button class="like"> ❤️</button>
-                        <textarea hidden name="like">{{ .ID }}</textarea>
-                    </form> 
+                        <textarea hidden name="delete">{{ .ID }}</textarea>
+                        <button class="suppression">Supprimer 🗑️</button>                  
+                    </form>
+                </div>
+                <div class="contourPost">
+                    <p>{{ .Post }} </p>
+                </div> 
+                <div class="Bottom-Post">
+                    <p id="date"> à {{ .Date }}</p>
+                    <textarea hidden name="respond">{{ .ID }}</textarea>
+                    <button class="CommsBtn" onclick="window.location.href='/comms'">Répondre 💬</button>
+                    <div id="like">
+                        <form method="POST">
+                            <p>{{ .NbLike }} Like(s)</p>
+                            <button class="like"> ❤️</button>
+                            <textarea hidden name="like">{{ .ID }}</textarea>
+                        </form> 
+                    </div>
                 </div>
             </div>
         </div>

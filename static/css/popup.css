@@ -19,7 +19,8 @@ body {
         border-radius: 5px;
         cursor: pointer;
         opacity: 0.8;
-        position: fixed;
+        position: relative;
+        right: 0%;
 }
 /* Positionnez la forme Popup */
 .login-popup { 
@@ -30,13 +31,13 @@ body {
 }
 
 /* Masquez la forme Popup */
-.form-popup { 
-        left: 0%;
+.post { 
+        left: 0;       
         display: none;                                            
         z-index: 9;      
-        padding: 10px 60px 30px 30px;              
+        padding: 50px 60px 30px 30px;              
         background-color: #fff;
-        border: 2px solid #5BC7D6;
+        border: 10px solid #5BC7D6;
         margin-left: 50%;                      
         transform: translate(-45%,5%);
         font-size: xx-large;           
@@ -46,43 +47,47 @@ body {
 }      
 
 /* Styles pour le conteneur de la forme */
-.form-container {
+.form {
         max-width: 800px;
         padding: 20px;
-        background-color: #fff;
+        background-color: transparent;
         width: 700px;
         border-radius: 70px;
         position: relative;
         
 }
 
-.form-container input[type=text]{
-        width: 100%;    
-        height: 120px;
+.form input[type=text]{
+        width: 60%;    
+        height: 40px;
         margin: 5% 5% 10% 5%;
         border: 10% solid;
         background: #eee;
         border-radius: 20px;
-        font-size: 20px;
+        font-size: 10px;
+        position: fixed;
+        top: 50%;
+        right: 15%;    
+        
 }
 
 /* Stylez le bouton de "publication" */
-.form-container .btn {                  
+.form .btn {                  
         background-color: #5BC7D6; 
         color: white;
         border-radius: 5px;
         font-size: medium;    
-        padding: 12px 20px;    
-        height: 15%; 
-        width: 25%;     
+        padding: 5px 5px 5px 5px;    
+        height: 13%; 
+        width: 40%;     
         opacity: 0.8;
         position: fixed;
         top: 70%;
-        right: 35%;          
+        right: 30%;          
 } 
 
 /* Stylez le bouton pour annuler */
-.form-container .cancel {
+.form .cancel {
         background-color: transparent;
         bottom: 60px;
         position: fixed;
@@ -94,7 +99,7 @@ body {
 } 
 
 /* Planez les effets pour les boutons */
-.form-container .btn:hover, .open-button:hover {
+.form .btn:hover, .open-button:hover {
         opacity: 1;
 }
 
@@ -119,7 +124,8 @@ body {
         border-radius: 5px;
         font-size: medium;
         opacity: 0.8;
-        position: relative;         
+        position: relative; 
+        top: 5%;        
         
 }
 

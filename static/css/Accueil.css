@@ -22,12 +22,18 @@ body {
 }
 
 .textarea {
-    height: 50px;
-    border-radius: 10px;
-    resize: none;
+    width: 60%;    
+    height: 70px;
+    margin: 10% 10% 10% 10%;
+    border: 10% solid;
+    background: #eee;
+    border-radius: 15px;
+    font-size: 10px;
+   
+     
 }
 
-.categorie {
+/* .categorie {
     height: 50px;
     border-radius: 10px;
 }
@@ -35,7 +41,7 @@ body {
 .boutonEnvoyer {
     height: 30px;
     border-radius: 10px;
-}
+} */
 
 
 .post1 {
@@ -135,3 +141,4 @@ body {
     align-items: center;
     justify-content: space-around;
 }
+
