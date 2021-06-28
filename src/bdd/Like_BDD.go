@@ -31,7 +31,7 @@ func Like(idPost int, Pseudo string) int {
 			}
 		} else {
 			_, db := OpenDataBase()
-			result, err := db.Prepare("UPDATE Like SET isLike = true WHERE idPoste = ? AND PseudoUser =?)")
+			result, err := db.Prepare("UPDATE Like SET isLike = true WHERE idPoste = ? AND PseudoUser =?")
 			if err != nil {
 				fmt.Println(err.Error())
 				db.Close()
@@ -64,7 +64,7 @@ func GetPosteLikeByUser(UserPseuso string) (int, [][]string) {
 	_, db := OpenDataBase()
 	var ResultFunc [][]string
 	var IdLiker []int
-	temp, err := db.Query("SELECT idPoste FROM Like WHERE PseudoUser = ?", UserPseuso)
+	temp, err := db.Query("SELECT idPoste FROM Like WHERE PseudoUser = ? AND isLike = true", UserPseuso)
 	if err != nil {
 		fmt.Println(err.Error())
 		db.Close()
@@ -105,7 +105,7 @@ func IsLike(idPoste int, PseudoUser string) (int, bool) {
 
 func GetLikeNb(id int) int {
 	_, db := OpenDataBase()
-	result, err := db.Query("SELECT idPoste FROM Like WHERE idPoste = ?", id)
+	result, err := db.Query("SELECT idPoste FROM Like WHERE idPoste = ? AND isLike = true", id)
 	if err != nil {
 		fmt.Println(err.Error())
 		db.Close()
