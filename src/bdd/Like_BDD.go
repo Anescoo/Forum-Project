@@ -120,7 +120,7 @@ func GetLikeNb(id int) int {
 		}
 
 		db.Close()
-		fmt.Println(len(resultFunc))
+		// fmt.Println(len(resultFunc))
 		return len(resultFunc)
 	}
 }
