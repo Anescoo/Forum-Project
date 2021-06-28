@@ -76,6 +76,7 @@ func GetPosteLikeByUser(UserPseuso string) (int, [][]string) {
 			temp.Scan(&IDPoste)
 			IdLiker = append(IdLiker, IDPoste)
 		}
+		temp.Close()
 
 		db.Close()
 		for _, i := range IdLiker {
@@ -97,6 +98,7 @@ func IsLike(idPoste int, PseudoUser string) (int, int) {
 
 		result.Next()
 		result.Scan(&isLike)
+		result.Close()
 		db.Close()
 
 		return 0, isLike
@@ -118,6 +120,7 @@ func GetLikeNb(id int) int {
 			result.Scan(&idPoste)
 			resultFunc = append(resultFunc, idPoste)
 		}
+		result.Close()
 
 		db.Close()
 		fmt.Println(len(resultFunc))
@@ -140,6 +143,7 @@ func GetDislikeNb(id int) int {
 			result.Scan(&idPoste)
 			resultFunc = append(resultFunc, idPoste)
 		}
+		result.Close()
 
 		db.Close()
 		fmt.Println(len(resultFunc))
