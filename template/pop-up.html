@@ -1,0 +1,25 @@
+{{ define "popup" }}
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="../static/css/popup.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>  
+        <div class="open-btn" id="btn">
+            <button class="open-button" onclick="openForm()">Créer un Post !</button> 
+        </div>    
+        <div class="form-popup" id="popupForm">
+            <div class="parent-div">
+                <button class="btn-upload">Choisir le fichier</button>
+                <input type="file" name="upfile"/>
+            </div>
+            <form action="/action_page.php" class="form-container">                 
+            <input type="text" id="msg" placeholder="Votre Message" name="message" style> <div>  
+
+            <button type="submit" class="btn">Publier</button>                                                                                                 
+            <button type="button" class="btn cancel" onclick="closeForm()">❌</button>                   
+            <script>function openForm() {document.getElementById("popupForm").style.display="block";}function closeForm() {document.getElementById("popupForm").style.display="none";}</script>
+        </div>
+    </body>
+</html>

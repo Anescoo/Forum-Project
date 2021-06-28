@@ -78,3 +78,9 @@ body {
     justify-content: space-between;
     height: 90%;
 }
+
+.conditionInscription {
+    font-size: small;
+    margin-left: 25%;
+    /* margin-top: 12%; */
+}

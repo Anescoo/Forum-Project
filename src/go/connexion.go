@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"text/template"
-	
+	"time"
+	bdd "../bdd"
 )
 
 func Connexion(w http.ResponseWriter, req *http.Request) {
@@ -16,16 +17,14 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 	}
 
 	fmt.Print("Page de connexion ✔️ \n")
-	
-	
+
 	// on récupère les valeurs (pseudo et mdp) que l'utilisateur rentre
-	getPseudo := req.FormValue("pseudoConnexion")  
+	getPseudo := req.FormValue("pseudoConnexion")
 	getMdp := req.FormValue("mdpConnexion")
-	
+
 	fmt.Println("Pseudo : ", getPseudo)
 	fmt.Println("Mot de Passe :", getMdp)
-	
-	
+
 	err := Login(w, getPseudo, getMdp)
 
 	// Gestion d'erreurs si l'utilisateur se trompe.
@@ -41,9 +40,11 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 		}
 
 	}else {
-		sessionCookie(w, req)
-		// AJOUTER UUID A LA TABLE SESSION
+		uuidValue := sessionCookie(w, req)
+		bdd.AddSession(getPseudo, uuidValue)
+		time.Sleep(2 * time.Second)
+		http.Redirect(w, req, "/home", http.StatusSeeOther)
 	}
-		
+			
 	t.Execute(w, nil)
 }

@@ -3,21 +3,21 @@ package handlers
 import (
 	"fmt"
 	"net/http"
-	"text/template"
 	"strconv"
+	"text/template"
+
 	bdd "../bdd"
 )
 
 // Création d'une structure avec toutes les "infos" de notre post. 
 type PostData struct { 
 	UserName string
-	Post string
-	Date string
-	NbLike int
-	ID string
+	Post     string
+	Date     string
+	NbLike   int
+	ID       string
 	// Categorie []string
 }
-
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
@@ -29,17 +29,11 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	fmt.Print("Page d'accueil ✔️ \n")
 
-	// getCategorieValue := req.FormValue("categorie")
-	// bdd.MakeCategorie(string(getCategorieValue))
-	
-	// sessionCookie(w, req)
-
-	VerifyUser(w, req)
-
-	getPostValue := req.FormValue("PostValue") 
+	getPostValue := req.FormValue("PostValue")
 	getSelectValue := req.FormValue("selectCategorie")
 	getIDLike := req.FormValue("like") 
 	IdToLike, e := strconv.Atoi(getIDLike)
+	getCategorieValue := req.FormValue("categorie")
 	
 	// Vérification si l'utilisateur est connecté
 	if VerifyCookie(w, req) == true{
@@ -47,6 +41,8 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 			bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue)) 	
 		}else if e == nil{
 			bdd.Like(IdToLike, "Louis") 
+		}else if getCategorieValue != ""{
+			bdd.MakeCategorie(string(getCategorieValue))
 		}
 	}
 	// else {
@@ -60,18 +56,19 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	// Parcourir et remplir notre tableau des données que l'on veut  
 	for _, post := range arr { 
 		nbLike, _ := strconv.Atoi(post[0])
-		p := PostData { 
-			ID: post[0],
+		p := PostData{
+			ID:       post[0],
 			UserName: post[1],
-			Post: post[2],
-			NbLike : bdd.GetLikeNb(nbLike),
-			Date: post[5],
+			Post:     post[2],
+			NbLike:   bdd.GetLikeNb(nbLike),
+			Date:     post[5],
+			// Categorie:post[3],
 		}
-		posts = append(posts, p) 
+		posts = append(posts, p)
 	}
 
 	// Gestion de l'erreur 404
-	if req.URL.Path == "/" { 
+	if req.URL.Path == "/" {
 	} else if req.URL.Path != "/home" {
 		http.Error(w, "404 not found", http.StatusNotFound)
 		return

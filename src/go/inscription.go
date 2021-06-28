@@ -1,17 +1,16 @@
 package handlers
 
 import (
-    
-    "fmt"
-    "net/http"
-    "text/template"
+	"fmt"
+	"net/http"
+	"text/template"
 )
 
 type HTMLData struct {
-    pseudoWrong string
-    mdpWrong string
-    mdpWeak string
-    emailInvalid string
+	pseudoWrong  string
+	mdpWrong     string
+	mdpWeak      string
+	emailInvalid string
 }
 
 func Inscription(w http.ResponseWriter, req *http.Request) {

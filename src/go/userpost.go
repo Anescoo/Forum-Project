@@ -1,16 +1,16 @@
-package handlers 
+package handlers
 
 import (
 	"fmt"
-	"text/template"
 	"net/http"
 	"strconv"
-	
+	"text/template"
+
 	bdd "../bdd"
 )
 
-func UserPost(w http.ResponseWriter, req *http.Request){
-	
+func UserPost(w http.ResponseWriter, req *http.Request) {
+
 	fmt.Print("Page TL ✔️ \n")
 	
 	t, errFiles := template.ParseFiles("./template/userPost.html", "./template/header.html")
@@ -34,7 +34,6 @@ func UserPost(w http.ResponseWriter, req *http.Request){
 		}
 	}
 	
-	
 	// même methode que dans "Accueil.go" mais pour les posts de l'utilisateurs on prend juste les valeurs dont on a besoin  
 	var arr [][]string
 	var posts []PostData
@@ -42,8 +41,8 @@ func UserPost(w http.ResponseWriter, req *http.Request){
 	
 	
 	for _, post := range arr {
-		p := PostData {
-			ID: post[0],
+		p := PostData{
+			ID:   post[0],
 			Post: post[2],
 			Date: post[5],
 		}

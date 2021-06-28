@@ -15,8 +15,8 @@
         
         <form method="POST" class="form">
             
-            <textarea name="PostValue" class="textarea" placeholder="Que voulez vous poster ?" cols="30" rows="10"></textarea>
-            <input type="text" name="categorie" class="categorie" placeholder="Ajoutez une catégorie">
+            <textarea name="PostValue" class="textarea" placeholder="Que voulez vous poster ?" cols="30" rows="10" required></textarea>
+            <input type="text" name="categorie" class="categorie" placeholder="Ajoutez une catégorie" >
             <input type="submit" class="boutonEnvoyer" value="Publier"required>
             
         </form>
@@ -32,7 +32,7 @@
             <div class="Bottom-Post">
                 <p id="date"> à {{ .Date }}</p>
                 <textarea hidden name="respond">{{ .ID }}</textarea>
-                <button class="CommsBtn" onclick="window.location.href='/comms'">Répondre 💬</button>
+                <button class="CommsBtn">Répondre 💬</button>
                 <div id="like">
                     <form method="POST">
                         <p>{{ .NbLike }} Like(s)</p>
@@ -41,13 +41,31 @@
                     </form> 
                 </div>
             </div>
+            <div class="popup-box" id="popupBox">
+                <div class="popup-content">
+                    <span class="close">&times;</span>
+                    <div class="Post-Content">
+                        <div id="Post">
+                            <div class="TopPost">
+                                {{ .UserName }} a dit :             
+                            </div>
+                            <div id = "contourPost">
+                                {{ .Post }} 
+                            </div>
+                            <p id="date">{{ .Date }}</p>
+                        </div> 
+                    </div>
+                    <div class="Comment-Content">
+
+                    </div>
+                </div>
+            </div>
         </div>
         {{ end }}
         
     </div>
     <div id="pagination"></div>
     <div id="Filter-Bloc"></div>    
-    
 </body>
 
 
