@@ -124,3 +124,25 @@ func GetLikeNb(id int) int {
 		return len(resultFunc)
 	}
 }
+
+func GetDislikeNb(id int) int {
+	_, db := OpenDataBase()
+	result, err := db.Query("SELECT idPoste FROM Like WHERE idPoste = ? AND isLike = false", id)
+	if err != nil {
+		fmt.Println(err.Error())
+		db.Close()
+		return 500
+	} else {
+		var resultFunc []int
+		var idPoste int
+
+		for result.Next() {
+			result.Scan(&idPoste)
+			resultFunc = append(resultFunc, idPoste)
+		}
+
+		db.Close()
+		fmt.Println(len(resultFunc))
+		return len(resultFunc)
+	}
+}
