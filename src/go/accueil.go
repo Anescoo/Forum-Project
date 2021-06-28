@@ -34,6 +34,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	getIDLike := req.FormValue("like") 
 	IdToLike, e := strconv.Atoi(getIDLike)
 	getCategorieValue := req.FormValue("categorie")
+
 	
 	// Vérification si l'utilisateur est connecté
 	if VerifyCookie(w, req) == true{
@@ -43,6 +44,8 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 			bdd.Like(IdToLike, "Louis") 
 		}else if getCategorieValue != ""{
 			bdd.MakeCategorie(string(getCategorieValue))
+		}else if e == nil {
+			bdd.Dislike(IdToLike, "Louis")
 		}
 	}
 	// else {
