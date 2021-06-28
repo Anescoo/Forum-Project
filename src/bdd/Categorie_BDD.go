@@ -35,6 +35,7 @@ func GetAllCategorie() (int, []string) {
 			result.Scan(&NameCategorie)
 			ResultFunc = append(ResultFunc, NameCategorie)
 		}
+		result.Close()
 
 		db.Close()
 		return 0, ResultFunc
@@ -56,6 +57,7 @@ func NbPosteByCategorie(name string) (int, int) {
 			result.Scan(&ID)
 			temp = append(temp, ID)
 		}
+		result.Close()
 		return 0, len(temp)
 	}
 }
