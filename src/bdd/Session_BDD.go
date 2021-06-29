@@ -14,9 +14,15 @@ func AddSession(PseudoUser string, UUID string) int {
 		db.Close()
 		return 500
 	} else {
-		resultFunc.Exec(PseudoUser, UUID)
+		_, err2 := resultFunc.Exec(PseudoUser, UUID)
+		if err2 != nil {
+			fmt.Println(err2.Error())
+
+		}
 	}
+	
 	db.Close()
+
 	return 0
 }
 

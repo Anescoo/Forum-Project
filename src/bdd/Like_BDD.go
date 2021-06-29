@@ -31,7 +31,9 @@ func Like(idPost int, Pseudo string) int {
 			}
 		} else {
 			_, db := OpenDataBase()
+
 			result, err := db.Prepare("UPDATE Like SET isLike = 1 WHERE idPoste = ? AND PseudoUser =?")
+
 			if err != nil {
 				fmt.Println(err.Error())
 				db.Close()
@@ -64,7 +66,9 @@ func GetPosteLikeByUser(UserPseuso string) (int, [][]string) {
 	_, db := OpenDataBase()
 	var ResultFunc [][]string
 	var IdLiker []int
+
 	temp, err := db.Query("SELECT idPoste FROM Like WHERE PseudoUser = ? AND isLike = 1", UserPseuso)
+
 	if err != nil {
 		fmt.Println(err.Error())
 		db.Close()
@@ -107,6 +111,7 @@ func IsLike(idPoste int, PseudoUser string) (int, int) {
 
 func GetLikeNb(id int) int {
 	_, db := OpenDataBase()
+
 	result, err := db.Query("SELECT idPoste FROM Like WHERE idPoste = ? AND isLike = 1", id)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -131,6 +136,7 @@ func GetLikeNb(id int) int {
 func GetDislikeNb(id int) int {
 	_, db := OpenDataBase()
 	result, err := db.Query("SELECT idPoste FROM Like WHERE idPoste = ? AND isLike = 0", id)
+
 	if err != nil {
 		fmt.Println(err.Error())
 		db.Close()
@@ -146,7 +152,7 @@ func GetDislikeNb(id int) int {
 		result.Close()
 
 		db.Close()
-		fmt.Println(len(resultFunc))
+		// fmt.Println(len(resultFunc))
 		return len(resultFunc)
 	}
 }

@@ -59,7 +59,7 @@ body {
     justify-content: space-between;
 }
 
-.suppression {
+/* .suppression {
     background-color: white;
     color: #5BC7D6;
     border: none;
@@ -68,7 +68,7 @@ body {
 .suppression:hover {
     background-color: black;
     color: white;
-}
+} */
 
 .contourPost {
     display: flex;

@@ -47,6 +47,8 @@ body {
     display: flex;
     justify-content: space-between;
     height: 30%;
+    margin-left: 5%;
+    margin-right: 5%;
 
 }
 
@@ -55,9 +57,9 @@ body {
     color: white;
     border-radius: 45px;
     height: 55px;
-    width: 45%;
+    width: 50%;
     font-size: xx-large;
-    
+    margin-right: 5%;
 }
 
 .verifInscription {
@@ -65,8 +67,9 @@ body {
     color: white;
     border-radius: 45px;
     height: 55px;
-    width: 45%;
+    width: 55%;
     font-size: x-large;
+    margin-left: 5%;
 }
 
 .form {
@@ -74,4 +77,10 @@ body {
     flex-direction: column;
     justify-content: space-between;
     height: 90%;
+}
+
+.conditionInscription {
+    font-size: small;
+    margin-left: 25%;
+    /* margin-top: 12%; */
 }
