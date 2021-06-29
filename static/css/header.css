@@ -35,6 +35,12 @@ body {
     
 }
 
+label {
+    color: white;
+    font-size: x-large;
+    margin-left: 5px;
+}
+
 #Right-header {
     display: flex;
     flex-direction: row;

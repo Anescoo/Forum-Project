@@ -14,7 +14,9 @@ func Profil(w http.ResponseWriter, req *http.Request) {
 		fmt.Print(err.Error)
 	}
 
+
 	fmt.Print("Page du profil ✔️ \n")
 
+	
 	t.Execute(w, nil)
 }
