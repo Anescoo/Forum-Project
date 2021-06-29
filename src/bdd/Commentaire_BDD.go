@@ -37,6 +37,7 @@ func GetCommentByPoste(idPoste int) (int, [][]string) {
 			temp := []string{User, Contenue}
 			ResultFunc = append(ResultFunc, temp)
 		}
+		result.Next()
 		db.Close()
 		return 0, ResultFunc
 	}
