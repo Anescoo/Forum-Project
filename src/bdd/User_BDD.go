@@ -36,8 +36,10 @@ func GetUser(username string) (int, [2]string) {
 	for result.Next() { //recuperation des info sur la bdd
 		result.Scan(&Pseudo, &Email)
 	}
+
 	
 	result.Close()
+
 	resultFunc[0] = Pseudo
 	resultFunc[1] = Email
 
@@ -64,6 +66,7 @@ func GetAllUser() (int, [][]string) {
 		temp := []string{Pseudo, Email}
 		resultFunc = append(resultFunc, temp)
 	}
+	result.Close()
 
 	db.Close()
 	return 0, resultFunc
