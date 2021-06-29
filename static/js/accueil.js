@@ -2,8 +2,11 @@ let contener = document.getElementById("pagination")
 
 let test = document.getElementsByTagName("form")
 let btnNbr = Math.ceil((test.length -1)/ 10)
+var BtnForComments = document.querySelectorAll('.CommsBtn')
+
 console.log(btnNbr)
 ButtonNumber(btnNbr)
+ComsBtn()
 
 function ButtonNumber(param) {
     contener.innerHTML = ""
@@ -16,21 +19,24 @@ function ButtonNumber(param) {
     }
 }
 
-var bouton = document.getElementsByClassName("CommsBtn")
+// for (let i = 0; i< 5; i++){
+
+// }
 
 // Get the popup
 var popup = document.getElementById("popupBox");
 
 // Get the button that opens the popup
-var btn = document.getElementById("OpenPopup");
+// var btn = document.getElementById("OpenPopup0");
 
 // Get the <span> element that closes the popup
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the popup
-btn.onclick = function() {
-  popup.style.display = "block";
-}
+// btn.onclick = function() {
+//   popup.style.display = "block";
+// }
+
 
 // When the user clicks on <span> (x), close the popup
 span.onclick = function() {
@@ -44,3 +50,14 @@ window.onclick = function(event) {
   }
 }
 
+
+function ComsBtn(){
+  for (let i = 0; i < BtnForComments.length; i++){
+    BtnForComments[i].id = "OpenPopup" + i
+    BtnForComments[i].setAttribute("onclick", "OpenPopup()")
+  }
+}
+
+function OpenPopup(){
+  popup.style.display = "block";
+}
