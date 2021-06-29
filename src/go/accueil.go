@@ -9,8 +9,8 @@ import (
 	bdd "../bdd"
 )
 
-// Création d'une structure avec toutes les "infos" de notre post. 
-type PostData struct { 
+// Création d'une structure avec toutes les "infos" de notre post.
+type PostData struct {
 	UserName string
 	Post     string
 	Date     string
@@ -20,49 +20,48 @@ type PostData struct {
 }
 
 type LoginWrapper struct {
-	IsLogged bool 
-	Data interface{} 
+	IsLogged bool
+	Data     interface{}
 }
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
-	t, err := template.ParseFiles("./template/Accueil.html", "./template/header.html")
-	
+	t, err := template.ParseFiles("./template/Accueil.html", "./template/Header.html")
+
 	if err != nil {
-		fmt.Print(err.Error)
+		fmt.Println(err.Error())
 	}
 
 	fmt.Print("Page d'accueil ✔️ \n")
 
 	getPostValue := req.FormValue("PostValue")
 	getSelectValue := req.FormValue("selectCategorie")
-	getIDLike := req.FormValue("like") 
+	getIDLike := req.FormValue("like")
 	IdToLike, e := strconv.Atoi(getIDLike)
 	getCategorieValue := req.FormValue("categorie")
 
-	
 	// Vérification si l'utilisateur est connecté
-	if VerifyCookie(req) == true{
+	if VerifyCookie(req) == true {
 		if getPostValue != "" {
-			bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue)) 	
-		}else if e == nil{
-			bdd.Like(IdToLike, "Louis") 
-		}else if getCategorieValue != ""{
+			bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue))
+		} else if e == nil {
+			bdd.Like(IdToLike, "Louis")
+		} else if getCategorieValue != "" {
 			bdd.MakeCategorie(string(getCategorieValue))
-		}else if e == nil {
+		} else if e == nil {
 			bdd.Dislike(IdToLike, "Louis")
 		}
 	}
 	// else {
 	// 	http.Redirect(w, req, "/connexion", http.StatusSeeOther)
 	// }
-	
-	var arr [][]string 
-	var posts []PostData 
-	_, arr = bdd.GetAllPoste() 
-	
-	// Parcourir et remplir notre tableau des données que l'on veut  
-	for _, post := range arr { 
+
+	var arr [][]string
+	var posts []PostData
+	_, arr = bdd.GetAllPoste()
+
+	// Parcourir et remplir notre tableau des données que l'on veut
+	for _, post := range arr {
 		nbLike, _ := strconv.Atoi(post[0])
 		p := PostData{
 			ID:       post[0],
@@ -81,9 +80,9 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, "404 not found", http.StatusNotFound)
 		return
 	}
-	pageData := LoginWrapper {
+	pageData := LoginWrapper{
 		IsLogged: VerifyCookie(req),
-		Data: posts,
+		Data:     posts,
 	}
 
 	t.Execute(w, pageData)

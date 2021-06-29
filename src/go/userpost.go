@@ -12,34 +12,33 @@ import (
 func UserPost(w http.ResponseWriter, req *http.Request) {
 
 	fmt.Print("Page TL ✔️ \n")
-	
-	t, errFiles := template.ParseFiles("./template/userPost.html", "./template/header.html")
-	
+
+	t, errFiles := template.ParseFiles("./template/userPost.html", "./template/Header.html")
+
 	if errFiles != nil {
-		fmt.Print(errFiles.Error)
+		fmt.Println(errFiles.Error())
 	}
-	
-	// Gestion de la supression des posts 
+
+	// Gestion de la supression des posts
 	getPostID := req.FormValue("delete")
-	IdToSuppr, err:= strconv.Atoi(getPostID)
+	IdToSuppr, err := strconv.Atoi(getPostID)
 	getNewValue := req.FormValue("sendUpdate")
-	getPostIDupdate := req.FormValue("update") 
-	IdtoUpdate, errUpdate:= strconv.Atoi(getPostIDupdate)
-	
-	if VerifyCookie(req){
+	getPostIDupdate := req.FormValue("update")
+	IdtoUpdate, errUpdate := strconv.Atoi(getPostIDupdate)
+
+	if VerifyCookie(req) {
 		if err == nil {
 			bdd.DeletePoste(IdToSuppr)
-		}else if errUpdate == nil {
+		} else if errUpdate == nil {
 			bdd.UpdatePoste(IdtoUpdate, getNewValue)
 		}
 	}
-	
-	// même methode que dans "Accueil.go" mais pour les posts de l'utilisateurs on prend juste les valeurs dont on a besoin  
+
+	// même methode que dans "Accueil.go" mais pour les posts de l'utilisateurs on prend juste les valeurs dont on a besoin
 	var arr [][]string
 	var posts []PostData
 	_, arr = bdd.GetPosteByUser("Tao")
-	
-	
+
 	for _, post := range arr {
 		p := PostData{
 			ID:   post[0],
@@ -48,6 +47,6 @@ func UserPost(w http.ResponseWriter, req *http.Request) {
 		}
 		posts = append(posts, p)
 	}
-	
+
 	t.Execute(w, posts)
 }

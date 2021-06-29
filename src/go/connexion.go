@@ -5,15 +5,16 @@ import (
 	"net/http"
 	"text/template"
 	"time"
+
 	bdd "../bdd"
 )
 
 func Connexion(w http.ResponseWriter, req *http.Request) {
-	
-	t, errFiles := template.ParseFiles("./template/connexion.html", "./template/header.html")
+
+	t, errFiles := template.ParseFiles("./template/connexion.html", "./template/Header.html")
 
 	if errFiles != nil {
-		fmt.Print(errFiles.Error)
+		fmt.Println(errFiles.Error())
 	}
 
 	fmt.Print("Page de connexion ✔️ \n")
@@ -39,12 +40,12 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 			//username invalide
 		}
 
-	}else {
+	} else {
 		uuidValue := sessionCookie(w, req)
 		bdd.AddSession(getPseudo, uuidValue)
 		time.Sleep(2 * time.Second)
 		http.Redirect(w, req, "/home", http.StatusSeeOther)
 	}
-			
+
 	t.Execute(w, nil)
 }
