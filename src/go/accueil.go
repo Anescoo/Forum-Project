@@ -19,6 +19,11 @@ type PostData struct {
 	// Categorie []string
 }
 
+type LoginWrapper struct {
+	IsLogged bool 
+	Data interface{} 
+}
+
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	t, err := template.ParseFiles("./template/Accueil.html", "./template/header.html")
@@ -37,7 +42,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	
 	// Vérification si l'utilisateur est connecté
-	if VerifyCookie(w, req) == true{
+	if VerifyCookie(req) == true{
 		if getPostValue != "" {
 			bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue)) 	
 		}else if e == nil{
@@ -76,6 +81,10 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, "404 not found", http.StatusNotFound)
 		return
 	}
+	pageData := LoginWrapper {
+		IsLogged: VerifyCookie(req),
+		Data: posts,
+	}
 
-	t.Execute(w, posts)
+	t.Execute(w, pageData)
 }

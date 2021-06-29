@@ -26,7 +26,7 @@ func UserPost(w http.ResponseWriter, req *http.Request) {
 	getPostIDupdate := req.FormValue("update") 
 	IdtoUpdate, errUpdate:= strconv.Atoi(getPostIDupdate)
 	
-	if VerifyCookie(w ,req) == true {
+	if VerifyCookie(req){
 		if err == nil {
 			bdd.DeletePoste(IdToSuppr)
 		}else if errUpdate == nil {

@@ -41,7 +41,7 @@ func readCookie(w http.ResponseWriter, req *http.Request) string {
 	return sessionToken
 }
 
-func VerifyCookie(w http.ResponseWriter, req *http.Request) bool {
+func VerifyCookie(req *http.Request) bool {
     
 	_, err := req.Cookie("session_Token")
     

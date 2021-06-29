@@ -8,7 +8,7 @@
     <script src="../static/js/accueil.js" async></script>
     <title>Projet Forum</title>
 </head>
-{{ template "header" }}
+{{ template "header" . }}
 <body>
     
     <div id="Posts">
@@ -21,7 +21,7 @@
             
         </form>
         
-        {{ range . }}
+        {{ range .Data }}
         <div class="post1">
             <div class="topPost">
                 {{ .UserName }} a dit :
