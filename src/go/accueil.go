@@ -53,7 +53,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	// Vérification si l'utilisateur est connecté
 	if verifyCookie(w, req) == true {
 		if getPostValue != "" {
-			bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue))
+			bdd.MakePoste("The_Real_Legend", string(getPostValue), string(getSelectValue))
 		}
 	}
 	// else {
