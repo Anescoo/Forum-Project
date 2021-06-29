@@ -56,6 +56,8 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 			bdd.MakeCategorie(string(getCategorieValue))
 		}else if e == nil {
 			bdd.Dislike(IdToLike, userValue )
+		}else {
+			fmt.Println("User is not connected")
 		}
 	}
 	// else {
