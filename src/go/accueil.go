@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 	"text/template"
+	// "time"
 
 	bdd "../bdd"
 )
@@ -54,6 +55,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		}
 	}
 	// else {
+	// 	time.Sleep(5 * time.Second)
 	// 	http.Redirect(w, req, "/connexion", http.StatusSeeOther)
 	// }
 	
@@ -74,6 +76,11 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		}
 		posts = append(posts, p)
 	}
+
+
+	uuidValue := readCookie(w, req)
+	_, userValue := bdd.GetUserByUUID(uuidValue)
+	fmt.Println(userValue)
 
 	// Gestion de l'erreur 404
 	if req.URL.Path == "/" {
