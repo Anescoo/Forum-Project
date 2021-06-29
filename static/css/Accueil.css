@@ -264,8 +264,8 @@ body {
 
 .open-button { /*bouton pour ouvrir pop up */ 
     position: relative;
-    left: 50px;
-    top: 60px;
+    left: -500px;
+    top: 10px;
     background-color: #1c87c9;
     border-radius: 10px;
     color: white;
@@ -290,8 +290,8 @@ body {
     display: flex;
     justify-content: left;
     position: relative;
-    left: -200px;
-    top: 15px;
+    left: -100px;
+    top: 150px;
 }
 
 /* .open-btn:active {
