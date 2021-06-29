@@ -39,11 +39,13 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	// Gestion des cookies
 	sessionCookie(w, req)
 
+	// deleteCookie(w, req)
+
 	getPostValue := req.FormValue("PostValue")
 	getSelectValue := req.FormValue("selectCategorie")
 
-	// Ecrire et afficher un poste
-	if VerifyCookie(w, req) == true {
+	// Vérification si l'utilisateur est connecté
+	if verifyCookie(w, req) == true {
 		if getPostValue != "" {
 			bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue))
 		}
@@ -84,10 +86,4 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	}
 
 	t.Execute(w, posts)
-
 }
-
-// // Gestion de l'erreur 500
-// if http.ProtocolError != nill {
-// 	fmt.Print(err.Error)
-// }
