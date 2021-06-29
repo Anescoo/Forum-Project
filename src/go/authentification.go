@@ -6,7 +6,7 @@ import (
 	"encoding/hex"
 	"net/http"
 	"regexp"
-	
+
 	bdd "../bdd"
 )
 
@@ -59,10 +59,6 @@ func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
 		if err != nil {
 			return 1
 		}
-<<<<<<< HEAD:src/go/authent/authentification.go
-
-=======
->>>>>>> 14fa70e34b9264b2e8c8028503e58f8f575ad285:src/go/authentification.go
 		return 0
 	}
 	return 2

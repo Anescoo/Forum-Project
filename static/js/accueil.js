@@ -16,7 +16,6 @@ function ButtonNumber(param) {
     }
 }
 
-<<<<<<< HEAD
 function ChangePage(){
     
 }
@@ -28,7 +27,6 @@ function openForm() {
 function closeForm() {
     document.getElementById("popupForm").style.display="none";
 }
-=======
 var bouton = document.getElementsByClassName("CommsBtn")
 
 // Get the popup
@@ -57,4 +55,3 @@ window.onclick = function(event) {
   }
 }
 
->>>>>>> 14fa70e34b9264b2e8c8028503e58f8f575ad285
