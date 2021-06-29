@@ -1,26 +1,21 @@
-let contener = document.getElementById("pagination")
+// let contener = document.getElementById("pagination")
 
-let test = document.getElementsByTagName("form")
-let btnNbr = Math.ceil((test.length -1)/ 10)
+// let test = document.getElementsByTagName("form")
+// let btnNbr = Math.ceil((test.length -1)/ 10)
 var BtnForComments = document.querySelectorAll('.CommsBtn')
 
-console.log(btnNbr)
-ButtonNumber(btnNbr)
+// ButtonNumber(btnNbr)
 ComsBtn()
 
-function ButtonNumber(param) {
-    contener.innerHTML = ""
-    for (let index = 1; index <= param; index++) {
-        let page = document.createElement("button")
-        page.setAttribute("onclick", "ChangePage(" + index + ")")
-        page.id = "page" + index
-        page.innerText = "Page n° " + index
-        contener.appendChild(page)
-    }
-}
-
-// for (let i = 0; i< 5; i++){
-
+// function ButtonNumber(param) {
+//     contener.innerHTML = ""
+//     for (let index = 1; index <= param; index++) {
+//         let page = document.createElement("button")
+//         page.setAttribute("onclick", "ChangePage(" + index + ")")
+//         page.id = "page" + index
+//         page.innerText = "Page n° " + index
+//         contener.appendChild(page)
+//     }
 // }
 
 // Get the popup
@@ -50,6 +45,11 @@ window.onclick = function(event) {
   }
 }
 
+window.addEventListener('keydown', (e) => {
+  if (e.key == "Escape") {
+    popup.style.display = "none";
+  }
+})
 
 function ComsBtn(){
   for (let i = 0; i < BtnForComments.length; i++){
