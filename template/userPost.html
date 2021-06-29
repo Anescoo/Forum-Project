@@ -9,12 +9,12 @@
     <title>Merdit</title>
 </head>
 
-{{ template "header"  }}
+{{ template "header" . }}
 <body>
 
     <div id = "MyPosts">
         <h1> Mes Posts</h1>
-        {{ range . }}
+        {{ range .Data }}
         <div id="Post">
             <div class="TopPost">
                 <button class="updatePost" onclick="RemoveHidden()"> Modifier ✏️</button>

@@ -10,11 +10,9 @@
 </head>
 {{ template "header" . }}
 <body>
-    
-    <div id="Posts">
-        
+
+    <div id="Posts">        
         <form method="POST" class="form">
-            
             <textarea name="PostValue" class="textarea" placeholder="Que voulez vous poster ?" cols="30" rows="10" required></textarea>
             <input type="text" name="categorie" class="categorie" placeholder="Ajoutez une catégorie" >
             <input type="submit" class="boutonEnvoyer" value="Publier"required>
@@ -44,20 +42,34 @@
             </div>
             <div class="popup-box" id="popupBox">
                 <div class="popup-content">
-                    <span class="close">&times;</span>
                     <div class="Post-Content">
-                        <div id="Post">
+                        <span class="close">&times;</span>
+                        <form method="POST" class="WriteComment">
+                            <textarea hidden name="IdComment">{{ .ID }}</textarea>
+                            <textarea placeholder="Que voulez-vous commenter ?" name="commentaire" class="textarea2" cols="100" rows="10"></textarea>
+                            <input type="submit" class="boutonEnvoyer" value="Publier"required>
+                        </form>
+                        <div class="Post">
                             <div class="TopPost">
-                                {{ .UserName }} a dit :             
+                                {{ .UserName }} a dit : 
                             </div>
-                            <div id = "contourPost">
+                            <div class="ContourPost">
                                 {{ .Post }} 
                             </div>
                             <p id="date">{{ .Date }}</p>
                         </div> 
                     </div>
                     <div class="Comment-Content">
-
+                        {{ range .CommentArr }}
+                        <div class="comment">
+                            <div class="pseudo">
+                                {{ index . 0 }} a répondu : 
+                            </div>
+                            <div class="content">
+                                {{ index . 1 }}
+                            </div>
+                        </div>
+                        {{ end }}
                     </div>
                 </div>
             </div>
