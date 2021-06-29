@@ -63,16 +63,16 @@ func deleteCookie(w http.ResponseWriter, req *http.Request){
 
 // fonction de verification connexion user 
 
-func VerifyUser(w http.ResponseWriter, req *http.Request) bool {
+// func VerifyUser(w http.ResponseWriter, req *http.Request) bool {
 
 	
-	uuidValue := sessionCookie(w, req)
+// 	uuidValue := sessionCookie(w, req)
 
-	// if uuidValue == {
-	// 	return true
-	// }else {
-	// 	return false
-	// }
-	fmt.Println(uuidValue)
-	return true
-}
+// 	// if uuidValue == {
+// 	// 	return true
+// 	// }else {
+// 	// 	return false
+// 	// }
+// 	fmt.Println(uuidValue)
+// 	return true
+// }

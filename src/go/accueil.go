@@ -21,7 +21,8 @@ type PostData struct {
 }
 
 type LoginWrapper struct {
-	IsLogged bool 
+	IsLogged bool
+	UserConnected string
 	Data interface{} 
 }
 
@@ -42,22 +43,25 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	getCategorieValue := req.FormValue("categorie")
 
 	
+	uuidValue := readCookie(w, req)
+	_, userValue := bdd.GetUserByUUID(uuidValue)
+
 	// Vérification si l'utilisateur est connecté
 	if VerifyCookie(req) == true{
 		if getPostValue != "" {
-			bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue)) 	
+			bdd.MakePoste( userValue, string(getPostValue), string(getSelectValue)) 	
 		}else if e == nil{
-			bdd.Like(IdToLike, "Louis") 
+			bdd.Like(IdToLike, userValue ) 
 		}else if getCategorieValue != ""{
 			bdd.MakeCategorie(string(getCategorieValue))
 		}else if e == nil {
-			bdd.Dislike(IdToLike, "Louis")
+			bdd.Dislike(IdToLike, userValue )
 		}
 	}
 	// else {
-	// 	time.Sleep(5 * time.Second)
-	// 	http.Redirect(w, req, "/connexion", http.StatusSeeOther)
-	// }
+	// 		time.Sleep(5 * time.Second)
+	// 		http.Redirect(w, req, "/connexion", http.StatusSeeOther)
+	// 	}
 	
 	var arr [][]string 
 	var posts []PostData 
@@ -77,19 +81,16 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		posts = append(posts, p)
 	}
 
-
-	uuidValue := readCookie(w, req)
-	_, userValue := bdd.GetUserByUUID(uuidValue)
-	fmt.Println(userValue)
-
 	// Gestion de l'erreur 404
 	if req.URL.Path == "/" {
 	} else if req.URL.Path != "/home" {
 		http.Error(w, "404 not found", http.StatusNotFound)
 		return
 	}
+
 	pageData := LoginWrapper {
 		IsLogged: VerifyCookie(req),
+		UserConnected: userValue, 
 		Data: posts,
 	}
 

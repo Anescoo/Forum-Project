@@ -10,16 +10,15 @@
 </head>
 
 <body>
-    {{ template "header" }}
+    {{ template "header" . }}
     <div id="MyAccount">
         <p class="Titre">Mon Profil</p>
         <div id="UserInfo">
             <div id="UserPhoto">
                 <img src="../static/img/basicPP.PNG" alt="PP">
                 <div id="infos">
-                    <p>Votre Pseudo :</p>
-                    <p>Votre Email : KB_92@gmail.bled</p>
-                    <p>Votre mot de passe : ********</p>
+                    <p> Votre Pseudo : {{ .UserConnected }}</p>
+                    
                 </div>
                 
             </div>
