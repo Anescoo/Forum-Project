@@ -35,8 +35,11 @@
                     <form method="POST">
                         <p>{{ .NbLike }} Like(s)</p>
                         <button class="like"> ❤️</button>
-                        <button class="dislike"> 👎</button>
                         <textarea hidden name="like">{{ .ID }}</textarea>
+                    </form> 
+                    <form method="POST">
+                        <button class="dislike"> 👎</button>
+                        <textarea hidden name="Dislike">{{ .ID }}</textarea>
                     </form> 
                 </div>
             </div>

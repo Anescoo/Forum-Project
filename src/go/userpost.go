@@ -16,21 +16,21 @@ func UserPost(w http.ResponseWriter, req *http.Request) {
 	t, errFiles := template.ParseFiles("./template/userPost.html", "./template/Header.html")
 
 	if errFiles != nil {
-		fmt.Println(errFiles.Error())
+		fmt.Print(errFiles.Error)
 	}
 
 	// Gestion de la supression des posts
 	getPostID := req.FormValue("delete")
 	IdToSuppr, err := strconv.Atoi(getPostID)
 	getNewValue := req.FormValue("sendUpdate")
-	getPostIDupdate := req.FormValue("update") 
-	IdtoUpdate, errUpdate:= strconv.Atoi(getPostIDupdate)
+	getPostIDupdate := req.FormValue("update")
+	IdtoUpdate, errUpdate := strconv.Atoi(getPostIDupdate)
 
-	// Vérification de l'user 
+	// Vérification de l'user
 	uuidValue := readCookie(w, req)
 	_, userValue := bdd.GetUserByUUID(uuidValue)
-	
-	if VerifyCookie(req){
+
+	if VerifyCookie(req) {
 		if err == nil {
 			bdd.DeletePoste(IdToSuppr)
 		} else if errUpdate == nil {

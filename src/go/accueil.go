@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 	"text/template"
+
 	// "time"
 
 	bdd "../bdd"
@@ -12,21 +13,19 @@ import (
 
 // Création d'une structure avec toutes les "infos" de notre post.
 type PostData struct {
-
-	UserName 	   string
-	Post     	   string
-	Date     	   string
-	NbLike         int
-	ID             string
+	UserName   string
+	Post       string
+	Date       string
+	NbLike     int
+	ID         string
 	CommentArr [][]string
 	// Categorie []string
 }
 
-
 type LoginWrapper struct {
-	IsLogged bool
+	IsLogged      bool
 	UserConnected string
-	Data interface{} 
+	Data          interface{}
 }
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
@@ -41,6 +40,8 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	getPostValue := req.FormValue("PostValue")
 	getSelectValue := req.FormValue("selectCategorie")
+	getCategorieValue := req.FormValue("categorie")
+
 	getIDLike := req.FormValue("like")
 	IdToLike, e := strconv.Atoi(getIDLike)
 	getCategorieValue := req.FormValue("categorie")
@@ -53,13 +54,15 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	// Vérification si l'utilisateur est connecté
 	if VerifyCookie(req) == true {
 		if getPostValue != "" {
-			bdd.MakePoste( userValue, string(getPostValue), string(getSelectValue)) 	
-		}else if e == nil{
+
+			bdd.MakePoste(userValue, string(getPostValue), string(getSelectValue))
+		} else if e == nil {
 			bdd.Like(IdToLike, userValue)
-		}else if getCategorieValue != ""{
+			fmt.Println(userValue + " a Liker")
+		} else if getCategorieValue != "" {
 			bdd.MakeCategorie(string(getCategorieValue))
-		}else if err2 == nil {
-			bdd.Dislike(IdToDislike, userValue )
+		} else if eDislike == nil {
+			bdd.Dislike(idToDislike, userValue)
 		}
 	}else {
 		fmt.Println("User is not connected")
@@ -68,7 +71,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	// Récupération de la valeur des commentaires
 	getCommentValue := req.FormValue("commentaire")
 	getCommentID := req.FormValue("IdComment")
-	StrToInt, _ := strconv.Atoi(getCommentID) 
+	StrToInt, _ := strconv.Atoi(getCommentID)
 	if getCommentValue != "" {
 		bdd.MakeComment("Tao", getCommentValue, StrToInt)
 	}
@@ -83,11 +86,11 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		commentID, _ := strconv.Atoi(post[0])
 		_, coms := bdd.GetCommentByPoste(commentID)
 		p := PostData{
-			ID:       	post[0],
-			UserName: 	post[1],
-			Post:     	post[2],
-			NbLike:   	bdd.GetLikeNb(nbLike),
-			Date:     	post[5],
+			ID:         post[0],
+			UserName:   post[1],
+			Post:       post[2],
+			NbLike:     bdd.GetLikeNb(nbLike),
+			Date:       post[5],
 			CommentArr: coms,
 		}
 		posts = append(posts, p)
