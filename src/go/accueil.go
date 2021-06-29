@@ -5,19 +5,23 @@ import (
 	"net/http"
 	"strconv"
 	"text/template"
+	// "time"
 
 	bdd "../bdd"
 )
 
 // Création d'une structure avec toutes les "infos" de notre post.
 type PostData struct {
-	UserName string
-	Post     string
-	Date     string
-	NbLike   int
-	ID       string
+
+	UserName 	   string
+	Post     	   string
+	Date     	   string
+	NbLike         int
+	ID             string
+	CommentArr [][]string
 	// Categorie []string
 }
+
 
 type LoginWrapper struct {
 	IsLogged bool
@@ -53,8 +57,19 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		}
 	}
 	// else {
+	// 	time.Sleep(5 * time.Second)
 	// 	http.Redirect(w, req, "/connexion", http.StatusSeeOther)
 	// }
+
+
+	// Récupération de la valeur des commentaires
+	getCommentValue := req.FormValue("commentaire")
+	getCommentID := req.FormValue("IdComment")
+	StrToInt, _ := strconv.Atoi(getCommentID) 
+	if getCommentValue != "" {
+		bdd.MakeComment("Tao", getCommentValue, StrToInt)
+	}
+	
 
 	var arr [][]string
 	var posts []PostData
@@ -63,16 +78,23 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	// Parcourir et remplir notre tableau des données que l'on veut
 	for _, post := range arr {
 		nbLike, _ := strconv.Atoi(post[0])
+		commentID, _ := strconv.Atoi(post[0])
+		_, coms := bdd.GetCommentByPoste(commentID)
 		p := PostData{
-			ID:       post[0],
-			UserName: post[1],
-			Post:     post[2],
-			NbLike:   bdd.GetLikeNb(nbLike),
-			Date:     post[5],
-			// Categorie:post[3],
+			ID:       	post[0],
+			UserName: 	post[1],
+			Post:     	post[2],
+			NbLike:   	bdd.GetLikeNb(nbLike),
+			Date:     	post[5],
+			CommentArr: coms,
 		}
 		posts = append(posts, p)
 	}
+
+
+	uuidValue := readCookie(w, req)
+	_, userValue := bdd.GetUserByUUID(uuidValue)
+	fmt.Println(userValue)
 
 	// Gestion de l'erreur 404
 	if req.URL.Path == "/" {
