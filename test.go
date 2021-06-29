@@ -9,7 +9,8 @@ import (
 
 func main() {
 
-	// _, db := bdd.OpenDataBase()
+	_, db := bdd.OpenDataBase()
+	db.Exec("DELETE FROM Like")
 
 	// db.Exec("DELETE FROM Poste WHERE ID = 3")
 	// bdd.MakeUser("Louis", "louis.teilliais@gmail.com", "Karim69lattrik")
@@ -34,7 +35,28 @@ func main() {
 	// fmt.Println(bdd.GetPosteLikeByUser("Louis"))
 	// fmt.Println(bdd.GetAllCategorie())
 	// bdd.DeleteCategorire("")
+	// bdd.MakeComment("Louis", "Je suis un commentaire", 13)
+	// bdd.MakeUser("test2", "test@gmail.com", "AZERTY")
+	// bdd.MakePoste("Louis", "test", "testcategorie")
+
+	bdd.DeleteSession("Louis4")
+
+	bdd.DeleteSession("Louis3")
+
+	// bdd.UpdatePoste(15, "Allez les bleus")
+	// bdd.Like(13, "Louis")
+	// bdd.GetLikeNb(13)
+	// fmt.Println(bdd.IsLike(13, "Louis"))
+	// bdd.MakeCategorie("Voiture")
+	// fmt.Println(bdd.GetPosteLikeByUser("Louis"))
+	// fmt.Println(bdd.GetAllCategorie())
+	// bdd.DeleteCategorire("")
+
 	bdd.MakeComment("Louis", "Je suis un commentaire", 13)
+
+	// bdd.MakeComment("Louis", "Je suis un commentaire", 13)
+	// bdd.MakeUser("test", "test@gmail.com", "AZERTY")
+
 }
 
 // test git ignore.

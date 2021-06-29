@@ -75,7 +75,7 @@ body {
     justify-content: space-between;
 }
 
-.suppression {
+/* .suppression {
     background-color: white;
     color: #5BC7D6;
     border: none;
@@ -84,7 +84,7 @@ body {
 .suppression:hover {
     background-color: black;
     color: white;
-}
+} */
 
 .contourPost {
     display: flex;
@@ -164,19 +164,19 @@ body {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.popup-content {
+  }
+  
+  /* Modal Content/Box */
+  .popup-content {
     background-color: #fefefe;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button */
-.close {
+  }
+  
+  /* The Close Button */
+  .close {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -319,3 +319,11 @@ body {
     /* cursor: not-allowed; */
 }
 
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }

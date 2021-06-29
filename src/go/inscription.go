@@ -17,7 +17,11 @@ func Inscription(w http.ResponseWriter, req *http.Request) {
 
 	fmt.Print("Page d'inscription ✔️ \n")
 
-	t, _ := template.ParseFiles("./template/inscription.html", "./template/header.html")
+	t, errFiles := template.ParseFiles("./template/inscription.html", "./template/header.html")
+
+	if errFiles != nil {
+		fmt.Print(errFiles.Error)
+	}
 
 	// Idem que connextion on récupère les valeurs que l'utilisateurs rentre
 	getPseudoInscription := req.FormValue("pseudoInscription")

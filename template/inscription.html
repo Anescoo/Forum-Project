@@ -17,15 +17,17 @@
         <form action="/inscription" method="POST" class="form">
             <div id="Input-container">
                 <input type="text" name="pseudoInscription" placeholder="Pseudo" class="Input-type" required>
-                    <p id ="pseudoWrong">{{ .HTMLData.pseudoWrong}}</p>
                 <input type="text" name="emailInscription" placeholder="E-mail" class="Input-type" required>
-                    <p id ="emailInvalid">{{ .HTMLData.emailInvalid}}</p>
                 <input type="password" name="mdpInscription" placeholder="Mot de passe" class="Input-type" required>
-                    <p id ="mdpWrong" >{{ .HTMLData.mdpWrong}}</p>
-                    <p id ="mdpWeak">{{ .HTMLData.mdpWeak}}</p>
+                <p class="conditionInscription"> • Minimum un caractère spécial
+                    <br> • Au moins 2 majuscule
+                    <br> • Au moins 2 minuscule 
+                    <br> • Au moins 2 chiffres
+                </p>
             </div>
             <div id="buttonValidation">
                 <button class="Identification" type="submit">S'inscrire</button>
+                <button class ="verifInscription" onclick="window.location.href='/connexion'"> Déja inscrit ? </button>
             </div>
         </form> 
     </div>
