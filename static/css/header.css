@@ -56,10 +56,19 @@ body {
 }
 
 .button1,
-.button2,
-.button3 {
+.button2 {
     height: 50%;
     width: 30%;
+    margin-top: 7%;
+    border-radius: 45px;
+    background-color: #5BC7D6;
+    color: white;
+    font-size: 1.7vmax;
+}
+
+.button3 {
+    height: 50%;
+    width: 40%;
     margin-top: 7%;
     border-radius: 45px;
     background-color: #5BC7D6;

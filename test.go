@@ -39,6 +39,9 @@ func main() {
     // bdd.MakeComment("Louis", "Je suis un commentaire", 13)
     // bdd.MakeUser("test2", "test@gmail.com", "AZERTY")
     // bdd.MakePoste("Louis", "test", "testcategorie")
+<<<<<<< HEAD
+    bdd.DeleteSession("Louis4")
+=======
     bdd.DeleteSession("Louis3")
 
 	// bdd.UpdatePoste(15, "Allez les bleus")
@@ -52,4 +55,5 @@ func main() {
 	// bdd.MakeComment("Louis", "Je suis un commentaire", 13)
 	// bdd.MakeUser("test", "test@gmail.com", "AZERTY")
 
+>>>>>>> ac95799ba23aea2636a0f13165c29411d248f472
 }
