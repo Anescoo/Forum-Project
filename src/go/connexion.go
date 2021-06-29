@@ -4,11 +4,18 @@ import (
 	"fmt"
 	"net/http"
 	"text/template"
+	"time"
+	bdd "../bdd"
 )
 
 func Connexion(w http.ResponseWriter, req *http.Request) {
+	
+	t, errFiles := template.ParseFiles("./template/connexion.html", "./template/header.html")
 
-	t, _ := template.ParseFiles("./template/connexion.html", "./template/Header.html")
+	if errFiles != nil {
+		fmt.Print(errFiles.Error)
+	}
+
 	fmt.Print("Page de connexion ✔️ \n")
 
 	// on récupère les valeurs (pseudo et mdp) que l'utilisateur rentre
@@ -19,9 +26,6 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("Mot de Passe :", getMdp)
 
 	err := Login(w, getPseudo, getMdp)
-	// if Login(w, getPseudo, getMdp) == 2 {
-	// 	sessionCookie(w, req)
-	// }
 
 	// Gestion d'erreurs si l'utilisateur se trompe.
 	if err != 0 {
@@ -34,11 +38,13 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 		if err == 3 {
 			//username invalide
 		}
+
+	}else {
+		uuidValue := sessionCookie(w, req)
+		bdd.AddSession(getPseudo, uuidValue)
+		time.Sleep(2 * time.Second)
+		http.Redirect(w, req, "/home", http.StatusSeeOther)
 	}
-
-	// quand l'utilisateur se connecte
-
-	// sessionCookie(w, req)
-
+			
 	t.Execute(w, nil)
 }

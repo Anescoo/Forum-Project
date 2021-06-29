@@ -7,7 +7,6 @@ import (
 	"text/template"
 
 	bdd "../bdd"
-	// authent "./authent"
 )
 
 // Création d'une structure avec toutes les "infos" de notre post.
@@ -21,51 +20,44 @@ type PostData struct {
 	// Categorie []string
 }
 
-type ComsData struct {
-	Pseudo		string
-	Com			string
+
+type LoginWrapper struct {
+	IsLogged bool 
+	Data interface{} 
 }
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
-	t, _ := template.ParseFiles("./template/Accueil.html", "./template/Header.html")
-	fmt.Print("Page d'accueil ✔️ \n")
-
-	// Delete les posts
-
-	getPostID := req.FormValue("delete")
-	IdToSuppr, err := strconv.Atoi(getPostID)
-	if err == nil {
-		bdd.DeletePoste(IdToSuppr)
+	t, err := template.ParseFiles("./template/Accueil.html", "./template/header.html")
+	
+	if err != nil {
+		fmt.Print(err.Error)
 	}
 
-	// getCategorieValue := req.FormValue("categorie")
-	// bdd.MakeCategorie(string(getCategorieValue))
-
-	// Gestion des cookies
-	sessionCookie(w, req)
-
-	// deleteCookie(w, req)
+	fmt.Print("Page d'accueil ✔️ \n")
 
 	getPostValue := req.FormValue("PostValue")
 	getSelectValue := req.FormValue("selectCategorie")
+	getIDLike := req.FormValue("like") 
+	IdToLike, e := strconv.Atoi(getIDLike)
+	getCategorieValue := req.FormValue("categorie")
 
+	
 	// Vérification si l'utilisateur est connecté
-	if verifyCookie(w, req) == true {
+	if VerifyCookie(req) == true{
 		if getPostValue != "" {
-			bdd.MakePoste("The_Real_Legend", string(getPostValue), string(getSelectValue))
+			bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue)) 	
+		}else if e == nil{
+			bdd.Like(IdToLike, "Louis") 
+		}else if getCategorieValue != ""{
+			bdd.MakeCategorie(string(getCategorieValue))
+		}else if e == nil {
+			bdd.Dislike(IdToLike, "Louis")
 		}
 	}
 	// else {
 	// 	http.Redirect(w, req, "/connexion", http.StatusSeeOther)
 	// }
-
-	// Liker un post
-	getIDLike := req.FormValue("like")
-	IdToLike, e := strconv.Atoi(getIDLike)
-	if e == nil {
-		bdd.Like(IdToLike, "Louis")
-	}
 
 	// Récupération de la valeur des commentaires
 	getCommentValue := req.FormValue("commentaire")
@@ -106,6 +98,10 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, "404 not found", http.StatusNotFound)
 		return
 	}
+	pageData := LoginWrapper {
+		IsLogged: VerifyCookie(req),
+		Data: posts,
+	}
 
-	t.Execute(w, posts)
+	t.Execute(w, pageData)
 }

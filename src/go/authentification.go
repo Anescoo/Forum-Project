@@ -59,7 +59,6 @@ func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
 		if err != nil {
 			return 1
 		}
-		
 		return 0
 	}
 	return 2
