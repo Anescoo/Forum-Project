@@ -25,7 +25,8 @@ type PostData struct {
 
 type LoginWrapper struct {
 	IsLogged bool
-	Data     interface{}
+	UserConnected string
+	Data interface{} 
 }
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
@@ -44,23 +45,29 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	IdToLike, e := strconv.Atoi(getIDLike)
 	getCategorieValue := req.FormValue("categorie")
 
+
+	
+	uuidValue := readCookie(w, req)
+	_, userValue := bdd.GetUserByUUID(uuidValue)
+
+
 	// Vérification si l'utilisateur est connecté
 	if VerifyCookie(req) == true {
 		if getPostValue != "" {
-			bdd.MakePoste("Tao", string(getPostValue), string(getSelectValue))
-		} else if e == nil {
-			bdd.Like(IdToLike, "Louis")
-		} else if getCategorieValue != "" {
+
+			bdd.MakePoste( userValue, string(getPostValue), string(getSelectValue)) 	
+		}else if e == nil{
+			bdd.Like(IdToLike, userValue ) 
+		}else if getCategorieValue != ""{
 			bdd.MakeCategorie(string(getCategorieValue))
-		} else if e == nil {
-			bdd.Dislike(IdToLike, "Louis")
+		}else if e == nil {
+			bdd.Dislike(IdToLike, userValue )
 		}
 	}
 	// else {
-	// 	time.Sleep(5 * time.Second)
-	// 	http.Redirect(w, req, "/connexion", http.StatusSeeOther)
-	// }
-
+	// 		time.Sleep(5 * time.Second)
+	// 		http.Redirect(w, req, "/connexion", http.StatusSeeOther)
+	// 	}
 
 	// Récupération de la valeur des commentaires
 	getCommentValue := req.FormValue("commentaire")
@@ -69,8 +76,8 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	if getCommentValue != "" {
 		bdd.MakeComment("Tao", getCommentValue, StrToInt)
 	}
-	
 
+	
 	var arr [][]string
 	var posts []PostData
 	_, arr = bdd.GetAllPoste()
@@ -91,20 +98,19 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		posts = append(posts, p)
 	}
 
-
-	uuidValue := readCookie(w, req)
-	_, userValue := bdd.GetUserByUUID(uuidValue)
-	fmt.Println(userValue)
-
 	// Gestion de l'erreur 404
 	if req.URL.Path == "/" {
 	} else if req.URL.Path != "/home" {
 		http.Error(w, "404 not found", http.StatusNotFound)
 		return
 	}
-	pageData := LoginWrapper{
+
+
+	pageData := LoginWrapper {
 		IsLogged: VerifyCookie(req),
-		Data:     posts,
+		UserConnected: userValue, 
+		Data: posts,
+
 	}
 
 	t.Execute(w, pageData)

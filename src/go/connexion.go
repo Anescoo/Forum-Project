@@ -43,7 +43,7 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 	} else {
 		uuidValue := sessionCookie(w, req)
 		bdd.AddSession(getPseudo, uuidValue)
-		time.Sleep(2 * time.Second)
+		time.Sleep(1 * time.Second)
 		http.Redirect(w, req, "/home", http.StatusSeeOther)
 	}
 
