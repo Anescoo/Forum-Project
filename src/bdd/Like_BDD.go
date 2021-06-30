@@ -25,7 +25,7 @@ func Like(idPost int, Pseudo string) int {
 			if err != nil {
 				return 500
 			} else {
-				temp.Exec(PseudoUser, idPost, 1)
+				temp.Exec(Pseudo, idPost, 1)
 				db.Close()
 				return 0
 			}
@@ -39,7 +39,7 @@ func Like(idPost int, Pseudo string) int {
 				db.Close()
 				return 500
 			} else {
-				result.Exec(PseudoUser, idPost)
+				result.Exec(Pseudo, idPost)
 				db.Close()
 				return 0
 			}
@@ -128,7 +128,7 @@ func GetLikeNb(id int) int {
 		result.Close()
 
 		db.Close()
-		fmt.Println(len(resultFunc))
+		// fmt.Println(len(resultFunc))
 		return len(resultFunc)
 	}
 }
