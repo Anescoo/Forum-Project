@@ -6,14 +6,15 @@ import (
 	"encoding/hex"
 	"net/http"
 	"regexp"
-	
+
 	bdd "../bdd"
 )
 
-func Register(username string, email string, password string) int {
-	
+func Register(username string, email string, password string, w http.ResponseWriter) int {
+
 	var passwordHash string
-	_, pseudo := bdd.GetUser(username)
+	errBdd, pseudo := bdd.GetUser(username)
+	ReturnError500(w, errBdd)
 	verifemail, _ := regexp.Compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}")
 	majLetter, _ := regexp.Compile("[A-Z]")
 	minLetter, _ := regexp.Compile("[a-z]")
@@ -38,14 +39,16 @@ func Register(username string, email string, password string) int {
 	}
 	passwordHashBytes := md5.Sum([]byte(password))
 	passwordHash = hex.EncodeToString(passwordHashBytes[:])
-	bdd.MakeUser(username, email, passwordHash)
+	errBdd = bdd.MakeUser(username, email, passwordHash)
+	ReturnError500(w, errBdd)
 	return 0
 }
 
 func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
-	
+
 	err, _ := bdd.GetUser(getPseudo)
-	_, bddMdp := bdd.GetUserHash(getPseudo)
+	errBdd, bddMdp := bdd.GetUserHash(getPseudo)
+	ReturnError500(w, errBdd)
 	loginPassHashBytes := md5.Sum([]byte(getMdp))
 	loginPassHash := hex.EncodeToString(loginPassHashBytes[:])
 	if err != 0 {
@@ -63,4 +66,3 @@ func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
 	}
 	return 2
 }
-
