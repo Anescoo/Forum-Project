@@ -21,7 +21,7 @@ Sur la page **home** on va retrouver tout les posts de tout les utilisateurs ave
 Sur la page du **profil** on va retrouver le "pseudo" de l'utilisateurs ainsi que des boutons qui sont des liens vers les pages **userPosts** et **userLikes**. 
 
 La page **UserPosts** nous sert à afficher tout les posts crées par un utilisateur avec des options pour le modifier ou encore le supprimer définitivement. 
-![](static/img/userposts.JPG)
+![](static/img/userposts.jpg)
 Idem pour la page **UserLikes** qui nous sert a afficher tout les posts liker par l'utilisateurs en question par contre il ne peut pas intéragir avec. 
 
 Nous avons aussi deux autre pages de **Connexion** et d'**Inscritpion**.
