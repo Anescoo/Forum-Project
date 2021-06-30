@@ -10,5 +10,3 @@ function RemoveHidden() {
     textArea.removeAttribute("hidden")
     button.removeAttribute("hidden")
 }
-
-console.log("test")

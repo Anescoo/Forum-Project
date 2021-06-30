@@ -4,19 +4,20 @@ import (
 	"fmt"
 	"net/http"
 	"text/template"
-
+	// "strconv"
 	bdd "../bdd"
 )
 
 func UserLikes(w http.ResponseWriter, req *http.Request) {
 
-	fmt.Print("Page Mes Posts ✔️ \n")
+	fmt.Print("Page Mes Likes ✔️ \n")
 
 	t, err := template.ParseFiles("./template/userLikes.html", "./template/Header.html")
 
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+
 
 
 	var errBdd int
@@ -32,7 +33,7 @@ func UserLikes(w http.ResponseWriter, req *http.Request) {
 	ReturnError500(w, errBdd)
 
 
-	// Boucle po_r récupérer les valeurs de chaque post et les envoyer dans le tableau posts.
+	// Boucle pour récupérer les valeurs de chaque post et les envoyer dans le tableau posts.
 	for _, post := range arr {
 		p := PostData{
 			ID:       post[0],
@@ -43,5 +44,11 @@ func UserLikes(w http.ResponseWriter, req *http.Request) {
 		posts = append(posts, p)
 	}
 
-	t.Execute(w, posts)
+	pageData := LoginWrapper {
+		IsLogged: VerifyCookie(req),
+		UserConnected: userValue, 
+		Data: posts,
+	}
+
+	t.Execute(w, pageData)
 }

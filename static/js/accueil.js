@@ -19,7 +19,9 @@ function openForm() {
     btn.style.display="none"
 }
 
+
 function closeForm() {
     document.getElementById("popupForm").style.display="none";
     btn.style.display="flex"
+
 }

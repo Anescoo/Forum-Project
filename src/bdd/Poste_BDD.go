@@ -36,7 +36,7 @@ func GetPosteByID(id int) (int, []string) {
 		fmt.Println(err.Error())
 		return 500, resultFunc
 	} else {
-		fmt.Println("Starting GetPosteById")
+		
 
 		var ID int
 		var PseudoUser string

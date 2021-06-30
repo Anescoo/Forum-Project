@@ -67,7 +67,7 @@ func GetPosteLikeByUser(UserPseuso string) (int, [][]string) {
 	var ResultFunc [][]string
 	var IdLiker []int
 
-	temp, err := db.Query("SELECT idPoste FROM Like WHERE PseudoUser = ? AND isLike = 1", UserPseuso)
+	temp, err := db.Query("SELECT idPoste FROM Like WHERE PseudoUser = ? AND isLike = 1 ", UserPseuso)
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -86,7 +86,7 @@ func GetPosteLikeByUser(UserPseuso string) (int, [][]string) {
 		db.Close()
 		for _, i := range IdLiker {
 			_, temp := GetPosteByID(i)
-			fmt.Println(temp)
+
 			ResultFunc = append(ResultFunc, temp)
 		}
 		return 0, ResultFunc

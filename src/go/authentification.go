@@ -10,7 +10,9 @@ import (
 	bdd "../bdd"
 )
 
+
 func Register(username string, email string, password string, w http.ResponseWriter) int {
+
 
 	var passwordHash string
 	errBdd, pseudo := bdd.GetUser(username)

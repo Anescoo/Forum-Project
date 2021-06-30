@@ -19,7 +19,7 @@ type PostData struct {
 	NbLike     int
 	ID         string
 	CommentArr [][]string
-	// Categorie []string
+	Categorie string
 }
 
 type LoginWrapper struct {
@@ -41,9 +41,9 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	fmt.Print("Page d'accueil ✔️ \n")
 
 	getPostValue := req.FormValue("PostValue")
+	
 	getSelectValue := req.FormValue("selectCategorie")
-	getCategorieValue := req.FormValue("categorie")
-
+	
 	getIDLike := req.FormValue("like")
 	IdToLike, e := strconv.Atoi(getIDLike)
 
@@ -58,7 +58,6 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	// Vérification si l'utilisateur est connecté
 	if VerifyCookie(req) == true {
 		if getPostValue != "" {
-
 			errBdd = bdd.MakePoste(userValue, string(getPostValue), string(getSelectValue))
 			ReturnError500(w, errBdd)
 		} else if e == nil {
@@ -68,14 +67,13 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		} else if getCategorieValue != "" {
 			errBdd = bdd.MakeCategorie(string(getCategorieValue))
 			ReturnError500(w, errBdd)
+
 		} else if eDislike == nil {
 			bdd.Dislike(idToDislike, userValue)
 		}
+	}else {
+		fmt.Println("User is not connected")
 	}
-	// else {
-	// 		time.Sleep(5 * time.Second)
-	// 		http.Redirect(w, req, "/connexion", http.StatusSeeOther)
-	// 	}
 
 	IdPostToComment := req.FormValue("ForId")
 	fmt.Println(IdPostToComment)
@@ -114,6 +112,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 			NbLike:   	bdd.GetLikeNb(PostIdInt),
 			Date:     	post[5],
 			CommentArr: coms,
+			Categorie: post[3],
 		}
 		posts = append(posts, p)
 	}
@@ -125,10 +124,11 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	pageData := LoginWrapper{
-		IsLogged:      VerifyCookie(req),
-		UserConnected: userValue,
-		Data:          posts,
+	pageData := LoginWrapper {
+		IsLogged: VerifyCookie(req),
+		UserConnected: userValue, 
+		Data: posts,
+
 	}
 
 	t.Execute(w, pageData)

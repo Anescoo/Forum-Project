@@ -21,6 +21,8 @@ body {
     height: 25%;
 }
 
+
+
 .connexion {
     font-size: 50px;
     margin-top: 5%;
@@ -65,4 +67,9 @@ body {
     justify-content: space-between;
     margin-top: 5%;
     height: 50%;
+}
+
+.HTMLError {
+    font-size: medium;
+    margin-left: 25%;
 }

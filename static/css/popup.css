@@ -1,0 +1,134 @@
+    * {
+        box-sizing: border-box;
+}
+body {
+        font-family: Roboto, Helvetica, sans-serif;
+}
+/* Fixez le bouton sur le côté gauche de la page */
+.open-btn {
+        display: flex;
+        justify-content: left;
+        position: fixed;
+}
+/* Stylez et fixez le bouton sur la page */
+.open-button { /*bouton pour ouvrir pop up */
+        background-color: #1c87c9;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        opacity: 0.8;
+        position: relative;
+        right: 0%;
+}
+/* Positionnez la forme Popup */
+.login-popup { 
+        position: fixed;
+        text-align: center;
+        width: 100%;
+        border-radius: 1px;
+}
+
+/* Masquez la forme Popup */
+.post { 
+        left: 0;       
+        display: none;                                            
+        z-index: 9;      
+        padding: 50px 60px 30px 30px;              
+        background-color: #fff;
+        border: 10px solid #5BC7D6;
+        margin-left: 50%;                      
+        transform: translate(-45%,5%);
+        font-size: xx-large;           
+        position: fixed;     
+        height: 50%;       
+        border-radius: 20px;                   
+}      
+
+/* Styles pour le conteneur de la forme */
+.form {
+        max-width: 800px;
+        padding: 20px;
+        background-color: transparent;
+        width: 700px;
+        border-radius: 70px;
+        position: relative;
+        
+}
+
+.form input[type=text]{
+        width: 60%;    
+        height: 40px;
+        margin: 5% 5% 10% 5%;
+        border: 10% solid;
+        background: #eee;
+        border-radius: 20px;
+        font-size: 10px;
+        position: fixed;
+        top: 50%;
+        right: 15%;    
+        
+}
+
+/* Stylez le bouton de "publication" */
+.form .btn {                  
+        background-color: #5BC7D6; 
+        color: white;
+        border-radius: 5px;
+        font-size: medium;    
+        padding: 5px 5px 5px 5px;    
+        height: 13%; 
+        width: 40%;     
+        opacity: 0.8;
+        position: fixed;
+        top: 70%;
+        right: 30%;          
+} 
+
+/* Stylez le bouton pour annuler */
+.form .cancel {
+        background-color: transparent;
+        bottom: 60px;
+        position: fixed;
+        left: 92%;   
+        top:1%;
+        height: 13%;
+        width: 10%;
+        border-color: transparent;              
+} 
+
+/* Planez les effets pour les boutons */
+.form .btn:hover, .open-button:hover {
+        opacity: 1;
+}
+
+.parent-div {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+}
+
+.parent-div input[type=file] {
+        left: 0;
+        top: 0;
+        opacity: 0;
+        position: absolute;
+        font-size: 90px;
+}
+.btn-upload {
+        background-color: #1c87c9;
+        border: 0px solid #000;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 5px;
+        font-size: medium;
+        opacity: 0.8;
+        position: relative; 
+        top: 5%;        
+        
+}
+
+.testDeco {
+        text-decoration: bold;
+}

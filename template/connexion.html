@@ -14,18 +14,28 @@
         <div id="Titre">
             <p class="connexion">Connexion</p>
         </div>
+        
         <form action="/connexion" method="POST" class="form">
             
             <div id="Input-container">
+                
                 <input type="text" name="pseudoConnexion" placeholder="Pseudo" class="Input-type" required>
+                {{ if eq .NbErr 3}}
+                    <div class="HTMLError"> {{ .MessageError }} </div>
+                {{ end}}                  
                 <input type="password" name="mdpConnexion" placeholder="Mot de passe" class="Input-type" required>
+                {{ if eq .NbErr 2}}
+                    <div class="HTMLError"> {{ .MessageError }} </div>
+                {{ end}}   
+                {{ if eq .NbErr 1}}
+                    <div class="HTMLError"> {{ .MessageError }} </div>
+                {{ end}} 
             </div>
             <div id="buttonValidation">
                 <button class="Identification" type="submit">S'identifier</button>
             </div>
-            
+          
         </form>
-        
     </div>
 </body>
 </html>

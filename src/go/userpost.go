@@ -46,6 +46,7 @@ func UserPost(w http.ResponseWriter, req *http.Request) {
 	// même methode que dans "Accueil.go" mais pour les posts de l'utilisateurs on prend juste les valeurs dont on a besoin
 	var arr [][]string
 	var posts []PostData
+
 	errBdd, arr = bdd.GetPosteByUser(userValue)
 	ReturnError500(w, errBdd)
 
@@ -54,9 +55,16 @@ func UserPost(w http.ResponseWriter, req *http.Request) {
 			ID:   post[0],
 			Post: post[2],
 			Date: post[5],
+			Categorie: post[3],
 		}
 		posts = append(posts, p)
 	}
 
-	t.Execute(w, posts)
+	pageData := LoginWrapper {
+		IsLogged: VerifyCookie(req),
+		UserConnected: userValue, 
+		Data: posts,
+	}
+
+	t.Execute(w, pageData)
 }
