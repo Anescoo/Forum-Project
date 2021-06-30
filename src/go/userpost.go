@@ -16,8 +16,10 @@ func UserPost(w http.ResponseWriter, req *http.Request) {
 	t, errFiles := template.ParseFiles("./template/userPost.html", "./template/Header.html")
 
 	if errFiles != nil {
-		fmt.Print(errFiles.Error)
+		fmt.Print(errFiles.Error())
 	}
+
+	var errBdd int
 
 	// Gestion de la supression des posts
 	getPostID := req.FormValue("delete")
@@ -28,20 +30,24 @@ func UserPost(w http.ResponseWriter, req *http.Request) {
 
 	// Vérification de l'user
 	uuidValue := readCookie(w, req)
-	_, userValue := bdd.GetUserByUUID(uuidValue)
+	errBdd, userValue := bdd.GetUserByUUID(uuidValue)
+	ReturnError500(w, errBdd)
 
 	if VerifyCookie(req) {
 		if err == nil {
-			bdd.DeletePoste(IdToSuppr)
+			errBdd = bdd.DeletePoste(IdToSuppr)
+			ReturnError500(w, errBdd)
 		} else if errUpdate == nil {
-			bdd.UpdatePoste(IdtoUpdate, getNewValue)
+			errBdd = bdd.UpdatePoste(IdtoUpdate, getNewValue)
+			ReturnError500(w, errBdd)
 		}
 	}
 
 	// même methode que dans "Accueil.go" mais pour les posts de l'utilisateurs on prend juste les valeurs dont on a besoin
 	var arr [][]string
 	var posts []PostData
-	_, arr = bdd.GetPosteByUser(userValue)
+	errBdd, arr = bdd.GetPosteByUser(userValue)
+	ReturnError500(w, errBdd)
 
 	for _, post := range arr {
 		p := PostData{

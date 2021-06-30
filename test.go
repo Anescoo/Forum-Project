@@ -2,15 +2,14 @@ package main
 
 import (
 	// "fmt"
+	"fmt"
+
 	bdd "./src/bdd"
 	// "database/sql"
 	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-
-	_, db := bdd.OpenDataBase()
-	db.Exec("DELETE FROM Like")
 
 	// db.Exec("DELETE FROM Poste WHERE ID = 3")
 	// bdd.MakeUser("Louis", "louis.teilliais@gmail.com", "Karim69lattrik")
@@ -38,4 +37,5 @@ func main() {
 	// bdd.MakeComment("Louis", "Je suis un commentaire", 13)
 	// bdd.MakeUser("test2", "test@gmail.com", "AZERTY")
 	// bdd.MakePoste("Louis", "test", "testcategorie")
+	fmt.Println(bdd.GetPosteLikeByUser("Arata34"))
 }
