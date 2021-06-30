@@ -260,3 +260,8 @@ body {
     width: 95%;
     margin-left: 2%;
 }
+
+.categories {
+    margin-left: auto;
+    margin-top: auto;
+}

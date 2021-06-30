@@ -22,6 +22,6 @@ func main() {
 	http.HandleFunc("/userlikes", handlers.UserLikes)
 	http.HandleFunc("/deconnexion", handlers.Deconnexion)
 
-	// Choix du port que l'on sélectionne
+	// Choix du port de notre serveur
 	http.ListenAndServe(":8000", nil)
 }

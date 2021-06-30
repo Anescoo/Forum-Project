@@ -6,10 +6,10 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 60%;
-    margin-left: 20%;
-    height: 80%;
+    width: auto;
+    height: auto;
     margin-top: 5%;
+
 }
 
 .Titre {
@@ -32,8 +32,15 @@ body {
 }
 
 #UserPhoto img {
-    height: 20%;
-    width: 20%;
+    height: 10%;
+    width: 10%;
+    margin-top: 2%;
+}
+
+.pseudoUser {
+    font-size: xx-large;
+    color: white;
+    margin-bottom: 10%;
 }
 
 .BtnToLike,
@@ -45,10 +52,13 @@ body {
     background-color: #5BC7D6;
     color: white;
     font-size: 1.7vmax;
-    
 }
-
+#infos {
+    margin-top: 4%;
+}
 #BtnToPostsLikes {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    margin-top: 5%;
+    
 }
