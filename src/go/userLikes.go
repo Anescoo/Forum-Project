@@ -24,9 +24,9 @@ func UserLikes(w http.ResponseWriter, req *http.Request) {
 
 	var arr [][]string                     // Création d'un tableau de tableau de string pour stocker tout les posts .
 	var posts []PostData                   // Création d'un tableau qui prendra toutes les valeurs utiles pour un post.
-	_, arr = bdd.GetPosteLikeByUser("Louis") // On va push dans arr tout les posts qui ont été liké par l'utilisateur.
+	_, arr = bdd.GetPosteLikeByUser(userValue) // On va push dans arr tout les posts qui ont été liké par l'utilisateur.
 
-	// Boucle po_r récupérer les valeurs de chaque post et les envoyer dans le tableau posts.
+	// Boucle pour récupérer les valeurs de chaque post et les envoyer dans le tableau posts.
 	for _, post := range arr {
 		p := PostData{
 			ID:       post[0],

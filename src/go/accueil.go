@@ -44,12 +44,13 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	getIDLike := req.FormValue("like")
 	IdToLike, e := strconv.Atoi(getIDLike)
-	getCategorieValue := req.FormValue("categorie")
-	IdToDislike, err2 := strconv.Atoi(getIDLike)
 
-	// Récupération User	
+	getDislike := req.FormValue("Dislike")
+	idToDislike, eDislike := strconv.Atoi(getDislike)
+
 	uuidValue := readCookie(w, req)
-	_, userValue := bdd.GetUserByUUID(uuidValue)
+	var userValue string
+	_, userValue = bdd.GetUserByUUID(uuidValue)
 
 	// Vérification si l'utilisateur est connecté
 	if VerifyCookie(req) == true {
@@ -58,7 +59,6 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 			bdd.MakePoste(userValue, string(getPostValue), string(getSelectValue))
 		} else if e == nil {
 			bdd.Like(IdToLike, userValue)
-			fmt.Println(userValue + " a Liker")
 		} else if getCategorieValue != "" {
 			bdd.MakeCategorie(string(getCategorieValue))
 		} else if eDislike == nil {
