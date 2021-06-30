@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="../static/css/profil.css" rel="stylesheet" type="text/css">
+    <title>Merdit</title>
+</head>
+
+<body>
+    {{ template "header" . }}
+    <div id="MyAccount">
+        <p class="Titre">Mon Profil</p>
+        <div id="UserInfo">
+            <div id="UserPhoto">
+               <img src="../static/img/basicPP.PNG" alt="PP"> 
+               <div id="infos">
+                    <p class="pseudoUser">  Votre Pseudo : {{ .UserConnected }} </p>
+                </div>
+            </div>
+            <div id ="BtnToPostsLikes">
+                <div id="MyPosts">
+                    <button class="BtnToPosts" onclick="window.location.href='/userpost'"> Mes Posts</button>
+                </div>
+                <div id="MyLikes">
+                    <button class="BtnToLike" onclick="window.location.href='/userlikes'">Mes Likes</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

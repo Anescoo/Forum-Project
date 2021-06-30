@@ -1,0 +1,348 @@
+#Posts {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+body {
+    background-color: #0D748B;
+}
+
+.textarea {
+    height: 50px;
+    border-radius: 10px;
+    resize: none;
+}
+
+.categorie {
+    height: 50px;
+    border: 5px solid #5BC7D6;
+    border-radius: 10px;
+}
+
+.boutonEnvoyer {
+    height: 20%;
+    width: 30%;
+    background-color: #5BC7D6;
+    border-radius: 10px;
+    color: white;
+    margin-top: 15%;
+}
+
+#boutonEnvoyer {
+    height: 45%;
+    width: 15%;
+    background-color: #5BC7D6;
+    border-radius: 10px;
+    color: white;
+}
+
+.post1 {
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+    font-size: x-large;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
+    margin-top: 2%;
+    border: 10px solid #5BC7D6; 
+}
+
+.topPost {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.contourPost {
+    display: flex;
+    background-color: #0D748B;
+    color: white;
+    border-radius: 10px;
+    margin-left: 10%;
+    width: 80%;
+    height: auto;
+    border-width: thick;
+    border: 2px solid black;
+    margin-top: 5%;
+}
+
+#like {
+    display: flex;
+    flex-direction: row;
+}
+
+#like form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    /* width: 25%; */
+    /* margin-left: 75%; */
+}
+
+#like button {
+    /* border: ; */
+    background-color: white;
+}
+
+#like button:hover {
+    background-color: black;
+}
+
+.Bottom-Post {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: auto;
+    align-items: center;
+}
+
+.CommsBtn {
+    height: 60%;
+    background-color: white;
+    color: #5BC7D6;
+    border: none;
+}
+
+.CommsBtn:hover {
+    height: 60%;
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+/* The Modal (background) */
+.popup-box {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.popup-content {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 10px solid #5BC7D6; 
+    border-radius: 45px;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.Post-Content {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.Post {
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border: 10px solid #5BC7D6;
+}
+
+.TopPost {
+    margin-right: auto;
+}
+
+.ContourPost {
+    display: flex;
+    background-color: #0D748B;
+    color: white;
+    border-radius: 10px;
+    margin-left: 10%;
+    width: 80%;
+    height: auto;
+    border-width: thick;
+    border: 2px solid black;
+    margin-top: 5%;
+}
+
+.WriteComment {
+    display: flex;
+    flex-direction: row;
+    margin-right: auto;
+    width: 40%;
+    justify-content: center;
+}
+
+.textarea2 {
+    resize: none;
+}
+
+.Comment-Content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border: 10px solid #5BC7D6;
+    border-radius: 20px;
+    margin-top: 5%;
+}
+
+.pseudo {
+    margin-right: auto;
+}
+
+.content {
+    display: flex;
+    background-color: #0D748B;
+    color: white;
+    border-radius: 10px;
+    margin-left: 10%;
+    width: 80%;
+    height: auto;
+    border-width: thick;
+    border: 2px solid black;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+/* Css pour bouton "choisir un fichier"   */
+.parent-div {
+    display: block;
+    position: relative;
+    /* overflow: hidden;  */
+}
+
+.parent-div input[type=file] {
+    opacity: 0;
+    position: absolute;
+    font-size: 90px;
+    top: -52px;
+    left: 650px;
+    height: 40px;
+    width: 180px;
+    
+}
+
+.btn-upload {
+    background-color: #1c87c9;
+    border-radius: 10px;
+    color: white;
+    border-radius: 5px;
+    font-size: medium;    
+    padding: 3px 3px 3px 3px;    
+    height: 40px; 
+    width: 180px;     
+    opacity: 1;
+    position: relative;
+    left: 570px;
+    top: -56px;
+    
+}
+
+.open-button:hover {
+    opacity: 1;
+    background-color: #0059ff;
+    border: 2px solid black; 
+    color: black;
+    z-index: 1;
+}
+
+/* Css de la popup (masquer) */
+.form-popup {
+    top: -20px;
+    left: -50px;       
+    display: none;                                            
+    z-index: 3;      
+    padding: 50px 60px 30px 30px;              
+    background-color: #D3D3D3;
+    border: 8px solid #1c87c9;
+    margin-left: 50%;                      
+    transform: translate(-45%,5%);
+    font-size: xx-large;           
+    position: sticky;     
+    height: 100px;   
+    width: 120%;    
+    border-radius: 5px;                   
+}      
+
+.open-button { /*bouton pour ouvrir pop up */ 
+    background-color: #1c87c9;
+    border-radius: 10px;
+    color: white;
+    border-radius: 5px;
+    font-size: medium;    
+    padding: 3px 3px 3px 3px;    
+    height: 40px; 
+    width: 180px;     
+    cursor: pointer;
+}
+
+.open-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.form .cancel {
+    background-color: transparent;
+    bottom: 60px;
+    position: fixed;
+    right: 3px;   
+    top: 5px;
+    height: 35px;
+    width: 38px; 
+    margin: 5px 5px 5px 5px; 
+    border: 2px solid red;      
+    border-radius: 50px;     
+} 
+
+/* Placez les effets pour les boutons */
+.form .btn:hover {
+    opacity: 0.7;
+    background-color: #8B0000;
+    border: 4px solid black;
+    /* cursor: not-allowed; */
+}
+
+.text {
+    resize: none;
+    border: 5px solid #5BC7D6;
+    border-radius: 10px;
+}
+
+.categories {
+    margin-left: auto;
+    margin-top: auto;
+}
+
+#selectCategorie {
+    height: 30%;
+    border-radius: 10%;
+}

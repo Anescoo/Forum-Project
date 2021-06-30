@@ -1,0 +1,64 @@
+body {
+    background-color: #0D748B;
+}
+
+#MyAccount {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: auto;
+    height: auto;
+    margin-top: 5%;
+
+}
+
+.Titre {
+    margin: auto;
+    font: 700;
+    font-size: 7vh;
+    color : white;
+}
+
+#UserInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   
+}
+
+#UserPhoto {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#UserPhoto img {
+    height: 10%;
+    width: 10%;
+    margin-top: 2%;
+}
+
+.pseudoUser {
+    font-size: xx-large;
+    color: white;
+    margin-bottom: 10%;
+}
+
+.BtnToLike,
+.BtnToPosts {
+    height: auto;
+    width: auto;
+    margin-top: 7%;
+    border-radius: 45px;
+    background-color: #5BC7D6;
+    color: white;
+    font-size: 1.7vmax;
+}
+#infos {
+    margin-top: 4%;
+}
+#BtnToPostsLikes {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    
+}

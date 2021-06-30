@@ -1,0 +1,37 @@
+{{define "header"}}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="../static/css/header.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="Contener">
+        <div id="left-header">
+            <a href="/home"><img src="../static/img/1 logov.png" alt="Le logo" class="logo"></a>
+        </div>
+        
+        <div id="Title">    
+            <p class="Title">Projet Forum</p>
+        </div>
+        
+        <div id="Right-header">
+            
+            {{ if .IsLogged }} 
+            <button class="button3"  onclick="window.location.href='/deconnexion'"> Déconnexion</button>
+            <div id="UserInfos">
+                <a href="/profil"><img src="../static/img/basicPP.PNG" alt="PP user" class="PP"></a>
+                <label> {{ .UserConnected }} </label>
+            </div>
+            {{ else }}
+            <button class="button1" onclick="window.location.href='/inscription'">Inscription</button>
+            <button class="button2" onclick="window.location.href='/connexion'">Connexion</button>
+            {{ end }}
+            
+            
+        </div>
+    </div>
+</div>
+</body>
+
+{{end}}
