@@ -6,11 +6,9 @@ import (
 	"text/template"
 )
 
-type HTMLData struct {
-	pseudoWrong  string
-	mdpWrong     string
-	mdpWeak      string
-	emailInvalid string
+type ErrorData struct {
+	Message string
+	NbErr int
 }
 
 func Inscription(w http.ResponseWriter, req *http.Request) {
@@ -35,31 +33,25 @@ func Inscription(w http.ResponseWriter, req *http.Request) {
 	// Application de la fonction Register() pour vérifier la validité des valeurs rentrés.
 	err := Register(getPseudoInscription, getEmailInscription, getMdpInscription)
 
-	ErrorHtml := HTMLData{
-		pseudoWrong:  "",
-		mdpWrong:     "",
-		mdpWeak:      "",
-		emailInvalid: "",
+	HTMLError := ErrorData{
+		Message: "",
+		NbErr: err,
 	}
 
 	// Gestion des erreurs (pas encore faite)
 	if err != 0 {
 		if err == 1 {
-			ErrorHtml.pseudoWrong = "Votre pseudo est trop court"
-			fmt.Println("Votre pseudo est trop court")
-
+			HTMLError.Message = "Votre pseudo est trop court"
 		} else if err == 2 {
-			ErrorHtml.mdpWrong = "Votre mot de passe est trop court"
-			fmt.Println("Votre mot de passe est trop court")
-			
+			HTMLError.Message = "Votre mot de passe est trop court"
+
 		} else if err == 3 {
-			ErrorHtml.mdpWeak = "Votre mot de passe est trop faible"
-			fmt.Println("Votre mot de passe est trop faible")
+			HTMLError.Message = "Votre mot de passe est trop faible"
 
 		} else if err == 4 {
-			ErrorHtml.emailInvalid = "Adresse mail invalide"
-			fmt.Println("Adresse mail invalide")
+			HTMLError.Message = "Adresse mail invalide"
 		}
+		fmt.Println(HTMLError.Message)
 	}
-	t.Execute(w, ErrorHtml)
+	t.Execute(w, HTMLError)
 }

@@ -14,18 +14,22 @@
         <div id="Titre">
             <p class="connexion">Connexion</p>
         </div>
-
         
         <form action="/connexion" method="POST" class="form">
-            {{ template "pop" }}
+            
             <div id="Input-container">
                 
                 <input type="text" name="pseudoConnexion" placeholder="Pseudo" class="Input-type" required>
-                <p> {{ .UserNameError }} </p>                  
+                {{ if eq .NbErr 3}}
+                    <div class="HTMLError"> {{ .MessageError }} </div>
+                {{ end}}                  
                 <input type="password" name="mdpConnexion" placeholder="Mot de passe" class="Input-type" required>
-                {{  .PasswordError }}    
-                <!-- <p hidden>Mot de passe invalide</p> -->
-                {{ .TokenError }}
+                {{ if eq .NbErr 2}}
+                    <div class="HTMLError"> {{ .MessageError }} </div>
+                {{ end}}   
+                {{ if eq .NbErr 1}}
+                    <div class="HTMLError"> {{ .MessageError }} </div>
+                {{ end}} 
             </div>
             <div id="buttonValidation">
                 <button class="Identification" type="submit">S'identifier</button>

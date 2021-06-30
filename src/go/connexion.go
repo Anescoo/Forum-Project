@@ -10,9 +10,8 @@ import (
 )
 
 type DataError struct {
-	PasswordError string
-	TokenError string 
-	UserNameError string
+	MessageError string
+	NbErr int
 }
 
 
@@ -36,21 +35,18 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 	err := Login(w, getPseudo, getMdp)
 
 	DataHTML := DataError {
-		TokenError: "",
-		PasswordError: "",
-		UserNameError: "",
+		MessageError: "",
+		NbErr: err,
 	}
+
 	// Gestion d'erreurs si l'utilisateur se trompe.
 	if err != 0 {
 		if err == 1 {
-			// DataHTML.TokenError = "Une erreur s'est produite, veuillez réessayer"
-			// fmt.Println("Une erreur s'est produite")
+			DataHTML.MessageError = "Une erreur s'est produite, veuillez réessayer"
 		}else if err == 2 {
-			// DataHTML.PasswordError = "Mot de passe incorrect"
-			// fmt.Println("Mot de passe incorect")
+			DataHTML.MessageError = "Mot de passe incorrect"
 		}else if err == 3 {
-			// DataHTML.UserNameError = "Pseudo invalide"
-			// fmt.Println("Pseudo invalide")
+			DataHTML.MessageError = "Pseudo invalide"
 		}
 	} else {
 		uuidValue := sessionCookie(w, req)

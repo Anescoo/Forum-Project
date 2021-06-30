@@ -26,7 +26,7 @@ func main() {
 	// fmt.Println(db.Query("SELECT * FROM User"))
 
 	// fmt.Println(bdd.GetPosteByUser("Tao"))
-
+	// bdd.MakeCategorie("voiture")
 }
 
 

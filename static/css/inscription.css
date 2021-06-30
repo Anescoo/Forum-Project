@@ -84,3 +84,8 @@ body {
     margin-left: 25%;
     /* margin-top: 12%; */
 }
+
+.ErrorHtml {
+    font-size: medium;
+    margin-left: 25%;
+}

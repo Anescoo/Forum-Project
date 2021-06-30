@@ -19,7 +19,7 @@ type PostData struct {
 	NbLike     int
 	ID         string
 	CommentArr [][]string
-	// Categorie []string
+	Categorie string
 }
 
 type LoginWrapper struct {
@@ -39,9 +39,9 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	fmt.Print("Page d'accueil ✔️ \n")
 
 	getPostValue := req.FormValue("PostValue")
+	
 	getSelectValue := req.FormValue("selectCategorie")
-	getCategorieValue := req.FormValue("categorie")
-
+	
 	getIDLike := req.FormValue("like")
 	IdToLike, e := strconv.Atoi(getIDLike)
 
@@ -55,12 +55,11 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	// Vérification si l'utilisateur est connecté
 	if VerifyCookie(req) == true {
 		if getPostValue != "" {
-
 			bdd.MakePoste(userValue, string(getPostValue), string(getSelectValue))
 		} else if e == nil {
 			bdd.Like(IdToLike, userValue)
-		} else if getCategorieValue != "" {
-			bdd.MakeCategorie(string(getCategorieValue))
+		} else if getSelectValue != "" {
+			bdd.MakeCategorie(string(getSelectValue))
 		} else if eDislike == nil {
 			bdd.Dislike(idToDislike, userValue)
 		}
@@ -92,6 +91,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 			NbLike:     bdd.GetLikeNb(nbLike),
 			Date:       post[5],
 			CommentArr: coms,
+			Categorie: post[3],
 		}
 		posts = append(posts, p)
 	}
