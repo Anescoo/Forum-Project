@@ -1,12 +1,12 @@
 package handlers
 
 import (
-	"fmt"
-	"net/http"
-	"strconv"
-	"text/template"
+    "fmt"
+    "net/http"
+    "strconv"
+    "text/template"
 
-	bdd "../bdd"
+    bdd "../bdd"
 )
 
 func UserPost(w http.ResponseWriter, req *http.Request) {

@@ -18,6 +18,7 @@ func UserLikes(w http.ResponseWriter, req *http.Request) {
 		fmt.Println(err.Error())
 	}
 
+
 	var errBdd int
 
 	uuidValue := readCookie(w, req)
@@ -29,6 +30,7 @@ func UserLikes(w http.ResponseWriter, req *http.Request) {
 	var posts []PostData                            // Création d'un tableau qui prendra toutes les valeurs utiles pour un post.
 	errBdd, arr = bdd.GetPosteLikeByUser(userValue) // On va push dans arr tout les posts qui ont été liké par l'utilisateur.
 	ReturnError500(w, errBdd)
+
 
 	// Boucle po_r récupérer les valeurs de chaque post et les envoyer dans le tableau posts.
 	for _, post := range arr {
