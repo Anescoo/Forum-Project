@@ -7,19 +7,6 @@
 body {
     background-color: #0D748B;
 }
-.Titre {
-    position: absolute;
-    width: 389px;
-    height: 71px;
-    left: 280px;
-    top: 7px;
-    font-family: Rock Salt;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 40px;
-    line-height: 95px;
-    color: #010101;
-}
 
 .textarea {
     height: 50px;
@@ -58,17 +45,6 @@ body {
     justify-content: space-between;
 }
 
-/* .suppression {
-    background-color: white;
-    color: #5BC7D6;
-    border: none;
-}
-
-.suppression:hover {
-    background-color: black;
-    color: white;
-} */
-
 .contourPost {
     display: flex;
     background-color: #0D748B;
@@ -80,6 +56,11 @@ body {
     border-width: thick;
     border: 2px solid black;
     margin-top: 5%;
+}
+
+#like {
+    display: flex;
+    flex-direction: row;
 }
 
 #like form {
@@ -120,14 +101,6 @@ body {
     background-color: black;
     color: white;
     border: none;
-}
-
-#categorie {
-    display: flex;
-    /* margin-left: 40%; */
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
 }
 
 /* The Modal (background) */
@@ -202,15 +175,6 @@ body {
     margin-top: 5%;
 }
 
-.Commentaire {
-    width: 60%;
-}
-
-.CommentValue {
-    height: 50%;
-    width: 50%;
-}
-
 .WriteComment {
     display: flex;
     flex-direction: row;
@@ -255,9 +219,4 @@ body {
     border: 2px solid black;
     margin-top: 5%;
     margin-bottom: 5%;
-}
-
-.Comment-Zone {
-    width: 95%;
-    margin-left: 2%;
 }

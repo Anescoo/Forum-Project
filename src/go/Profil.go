@@ -8,10 +8,10 @@ import (
 
 func Profil(w http.ResponseWriter, req *http.Request) {
 
-	t, err := template.ParseFiles("./template/profil.html", "./template/header.html")
-	
+	t, err := template.ParseFiles("./template/profil.html", "./template/Header.html")
+
 	if err != nil {
-		fmt.Print(err.Error)
+		fmt.Println(err.Error())
 	}
 
 

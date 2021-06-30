@@ -11,11 +11,11 @@ import (
 func UserLikes(w http.ResponseWriter, req *http.Request) {
 
 	fmt.Print("Page Mes Posts ✔️ \n")
-	
-	t, err := template.ParseFiles("./template/userLikes.html", "./template/header.html")
+
+	t, err := template.ParseFiles("./template/userLikes.html", "./template/Header.html")
 
 	if err != nil {
-		fmt.Print(err.Error)
+		fmt.Println(err.Error())
 	}
 
 	var arr [][]string                     // Création d'un tableau de tableau de string pour stocker tout les posts .

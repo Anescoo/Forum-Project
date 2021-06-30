@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 	"text/template"
+
 	// "time"
 
 	bdd "../bdd"
@@ -12,58 +13,63 @@ import (
 
 // Création d'une structure avec toutes les "infos" de notre post.
 type PostData struct {
-	UserName 	   string
-	Post     	   string
-	Date     	   string
-	NbLike         int
-	ID             string
+	UserName   string
+	Post       string
+	Date       string
+	NbLike     int
+	ID         string
 	CommentArr [][]string
 	// Categorie []string
 }
 
-
 type LoginWrapper struct {
-	IsLogged bool
+	IsLogged      bool
 	UserConnected string
-	Data interface{} 
+	Data          interface{}
 }
 
 func Accueil(w http.ResponseWriter, req *http.Request) {
 
-	t, err := template.ParseFiles("./template/Accueil.html", "./template/header.html")
-	
+	t, err := template.ParseFiles("./template/Accueil.html", "./template/Header.html")
+
 	if err != nil {
-		fmt.Print(err.Error)
+		fmt.Println(err.Error())
 	}
 
 	fmt.Print("Page d'accueil ✔️ \n")
 
 	getPostValue := req.FormValue("PostValue")
 	getSelectValue := req.FormValue("selectCategorie")
-	getIDLike := req.FormValue("like") 
-	IdToLike, e := strconv.Atoi(getIDLike)
 	getCategorieValue := req.FormValue("categorie")
 
-	
+	getIDLike := req.FormValue("like")
+	IdToLike, e := strconv.Atoi(getIDLike)
+
+	getDislike := req.FormValue("Dislike")
+	idToDislike, eDislike := strconv.Atoi(getDislike)
+
 	uuidValue := readCookie(w, req)
-	_, userValue := bdd.GetUserByUUID(uuidValue)
+	var userValue string
+	_, userValue = bdd.GetUserByUUID(uuidValue)
 
 	// Vérification si l'utilisateur est connecté
-	if VerifyCookie(req) == true{
+	if VerifyCookie(req) == true {
 		if getPostValue != "" {
-			bdd.MakePoste( userValue, string(getPostValue), string(getSelectValue)) 	
-		}else if e == nil{
-			bdd.Like(IdToLike, userValue ) 
-		}else if getCategorieValue != ""{
+
+			bdd.MakePoste(userValue, string(getPostValue), string(getSelectValue))
+		} else if e == nil {
+			bdd.Like(IdToLike, userValue)
+			fmt.Println(userValue + " a Liker")
+		} else if getCategorieValue != "" {
 			bdd.MakeCategorie(string(getCategorieValue))
-		}else if e == nil {
-			bdd.Dislike(IdToLike, userValue )
+		} else if eDislike == nil {
+			bdd.Dislike(idToDislike, userValue)
 		}
 	}
 	// else {
-	// 	time.Sleep(5 * time.Second)
-	// 	http.Redirect(w, req, "/connexion", http.StatusSeeOther)
-	// }
+	// 		time.Sleep(5 * time.Second)
+	// 		http.Redirect(w, req, "/connexion", http.StatusSeeOther)
+	// 	}
 
 	IdPostToComment := req.FormValue("ForId")
 	fmt.Println(IdPostToComment)
@@ -71,20 +77,15 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	// Récupération de la valeur des commentaires
 	getCommentValue := req.FormValue("commentaire")
 	getCommentID := req.FormValue("IdComment")
-	StrToInt, _ := strconv.Atoi(getCommentID) 
+	StrToInt, _ := strconv.Atoi(getCommentID)
 	if getCommentValue != "" {
 		fmt.Println(StrToInt)
 		bdd.MakeComment(userValue, getCommentValue, StrToInt)
 	}
-	
+
 	var arr [][]string
 	var posts []PostData
 	_, arr = bdd.GetAllPoste()
-
-	// var commentArr [][]string
-	// _, commentArr = bdd.GetCommentByPoste(2)
-	// fmt.Println(commentArr)
-
 
 	// Parcourir et remplir notre tableau des données que l'on veut
 	for _, post := range arr {
@@ -108,10 +109,10 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	pageData := LoginWrapper {
-		IsLogged: VerifyCookie(req),
-		UserConnected: userValue, 
-		Data: posts,
+	pageData := LoginWrapper{
+		IsLogged:      VerifyCookie(req),
+		UserConnected: userValue,
+		Data:          posts,
 	}
 
 	t.Execute(w, pageData)

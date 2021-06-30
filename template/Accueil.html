@@ -37,26 +37,14 @@
                     <form method="POST">
                         <p>{{ .NbLike }} Like(s)</p>
                         <button class="like"> ❤️</button>
-                        <button class="dislike"> 👎</button>
                         <textarea hidden name="like">{{ .ID }}</textarea>
+                    </form> 
+                    <form method="POST">
+                        <button class="dislike"> 👎</button>
+                        <textarea hidden name="Dislike">{{ .ID }}</textarea>
                     </form> 
                 </div>
             </div>
-            <!-- <div id="Commentaires">
-                <input type="text" placeholder="Commentez le post ... " class="Comment-Zone">
-                <div class="Comment-Content">
-                    {{ range .CommentArr }}
-                    <div class="comment">
-                        <div class="pseudo">
-                            {{ index . 0 }} a répondu : 
-                        </div>
-                        <div class="content">
-                            {{ index . 1 }}
-                        </div>
-                    </div>
-                    {{ end }}
-                </div>
-            </div> -->
             <div class="popup-box" id="popupBox-{{ .ID }}" hidden>
                 <div class="popup-content">
                     <div class="Post-Content">
