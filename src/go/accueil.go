@@ -65,12 +65,16 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	// 	http.Redirect(w, req, "/connexion", http.StatusSeeOther)
 	// }
 
+	IdPostToComment := req.FormValue("ForId")
+	fmt.Println(IdPostToComment)
+
 	// Récupération de la valeur des commentaires
 	getCommentValue := req.FormValue("commentaire")
 	getCommentID := req.FormValue("IdComment")
 	StrToInt, _ := strconv.Atoi(getCommentID) 
 	if getCommentValue != "" {
-		bdd.MakeComment("Tao", getCommentValue, StrToInt)
+		fmt.Println(StrToInt)
+		bdd.MakeComment(userValue, getCommentValue, StrToInt)
 	}
 	
 	var arr [][]string
@@ -84,14 +88,13 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	// Parcourir et remplir notre tableau des données que l'on veut
 	for _, post := range arr {
-		nbLike, _ := strconv.Atoi(post[0])
-		commentID, _ := strconv.Atoi(post[0])
-		_, coms := bdd.GetCommentByPoste(commentID)
+		PostIdInt, _ := strconv.Atoi(post[0])
+		_, coms := bdd.GetCommentByPoste(PostIdInt)
 		p := PostData{
 			ID:       	post[0],
 			UserName: 	post[1],
 			Post:     	post[2],
-			NbLike:   	bdd.GetLikeNb(nbLike),
+			NbLike:   	bdd.GetLikeNb(PostIdInt),
 			Date:     	post[5],
 			CommentArr: coms,
 		}
