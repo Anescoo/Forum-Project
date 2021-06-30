@@ -31,13 +31,13 @@ Nous avons aussi deux autre pages de **Connexion** et d'**Inscritpion**.
 
 Nous avons organisé notre code de façon a mettre tout les fichiers de mêmes langages dans les mêmes dossier :
 
-    Un dossier **template** où nous avons tous nos fichier HTML, entre autres **Accueil.html**, **connexion.html**, **inscription.html**,**profil.html**, etc.. Dans ce dossier, nous avons aussi notre fichier header.html qui se trouve sur toutes nos pages.
+- Un dossier **template** où nous avons tous nos fichier HTML, entre autres **Accueil.html**, **connexion.html**, **inscription.html**,**profil.html**, etc.. Dans ce dossier, nous avons aussi notre fichier header.html qui se trouve sur toutes nos pages.
 
-    Un dossier **static** où se trouve plusieurs dossiers css, images et scripts. Le fichier css contient tous nos fichiers pour le style des pages, ex : **Accueil.css**, **profil.css**, **connexion.css**, etc.... Le dossier images, comme son nom l'indique contient juste l'image que l'on a besoin. Le dossier scripts contient lui les fichier JS que l'on utilise pour nos pages : **accueil.js**, **Header.js**, **userPosts.js**.
+- Un dossier **static** où se trouve plusieurs dossiers css, images et scripts. Le fichier css contient tous nos fichiers pour le style des pages, ex : **Accueil.css**, **profil.css**, **connexion.css**, etc.... Le dossier images, comme son nom l'indique contient juste l'image que l'on a besoin. Le dossier scripts contient lui les fichier JS que l'on utilise pour nos pages : **accueil.js**, **Header.js**, **userPosts.js**.
 
-    Un dossier **src**, qui lui contient les fichiers qui vont nous permettre de gérer les fonctionnalités de nos différentes pages, en GO : **connexion.go**, **cookies.go**, **Profil.go**, etc... 
+- Un dossier **src**, qui lui contient les fichiers qui vont nous permettre de gérer les fonctionnalités de nos différentes pages, en GO : **connexion.go**, **cookies.go**, **Profil.go**, etc... 
 
-    Pour finir, un dossier **bdd** qui va contenir la base de données, ainsi que tout les fichier dont on a besoin pour l'utiliser :**getBDD.go**, **Poste_BDD.go**, **Session_BDD.go**, etc ...
+- Pour finir, un dossier **bdd** qui va contenir la base de données, ainsi que tout les fichier dont on a besoin pour l'utiliser : **getBDD.go**, **Poste_BDD.go**, **Session_BDD.go**, etc ...
 
 
 Nous avons aussi a la racine notre serveur en GO qui nous permet de lancer notre site, il se nomme server.go
