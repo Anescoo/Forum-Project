@@ -9,6 +9,12 @@ import (
 	bdd "../bdd"
 )
 
+type DataError struct {
+	PasswordError string
+	TokenError    string
+	UserNameError string
+}
+
 func Connexion(w http.ResponseWriter, req *http.Request) {
 
 	t, errFiles := template.ParseFiles("./template/connexion.html", "./template/Header.html")
@@ -28,18 +34,23 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 
 	err := Login(w, getPseudo, getMdp)
 
+	DataHTML := DataError{
+		TokenError:    "",
+		PasswordError: "",
+		UserNameError: "",
+	}
 	// Gestion d'erreurs si l'utilisateur se trompe.
 	if err != 0 {
 		if err == 1 {
-			//erreur de génération de token
+			// DataHTML.TokenError = "Une erreur s'est produite, veuillez réessayer"
+			// fmt.Println("Une erreur s'est produite")
+		} else if err == 2 {
+			// DataHTML.PasswordError = "Mot de passe incorrect"
+			// fmt.Println("Mot de passe incorect")
+		} else if err == 3 {
+			// DataHTML.UserNameError = "Pseudo invalide"
+			// fmt.Println("Pseudo invalide")
 		}
-		if err == 2 {
-			//mdp incorect
-		}
-		if err == 3 {
-			//username invalide
-		}
-
 	} else {
 		uuidValue := sessionCookie(w, req)
 		bdd.AddSession(getPseudo, uuidValue)
@@ -47,5 +58,5 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 		http.Redirect(w, req, "/home", http.StatusSeeOther)
 	}
 
-	t.Execute(w, nil)
+	t.Execute(w, DataHTML)
 }

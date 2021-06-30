@@ -279,13 +279,6 @@ body {
     cursor: pointer;
 }
 
-/* #btn:active {
-    left: -500px;
-    top: 20px;
-    position: relative;
-    z-index: 3;
-}  */
-/* Fixez le bouton sur le côté gauche de la page */
 .open-btn {
     display: flex;
     justify-content: left;
@@ -293,10 +286,6 @@ body {
     left: -100px;
     top: 150px;
 }
-
-/* .open-btn:active {
-    display: outside; 
-} */
 
 .form .cancel {
     background-color: transparent;

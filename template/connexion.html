@@ -1,3 +1,4 @@
+  
 <!DOCTYPE html>
 
 <html lang="en">
@@ -19,8 +20,13 @@
         <form action="/connexion" method="POST" class="form">
             {{ template "pop" }}
             <div id="Input-container">
+                
                 <input type="text" name="pseudoConnexion" placeholder="Pseudo" class="Input-type" required>
+                <p> {{ .UserNameError }} </p>                  
                 <input type="password" name="mdpConnexion" placeholder="Mot de passe" class="Input-type" required>
+                {{  .PasswordError }}    
+                <!-- <p hidden>Mot de passe invalide</p> -->
+                {{ .TokenError }}
             </div>
             <div id="buttonValidation">
                 <button class="Identification" type="submit">S'identifier</button>
