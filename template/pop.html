@@ -1,0 +1,34 @@
+{{ define "pop" }}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="../static/css/Accueil.css" rel="stylesheet" type="text/css">
+    <script src="../static/js/accueil.js" async></script>
+</head>
+<body>
+    
+    <div id="Posts">
+        <div class="open-btn" id="btn">
+            <button class="open-button" onclick="openForm()">Créer un Post ! 👆</button> 
+        </div>
+        
+        <form method="POST" class="form"> 
+
+            <div class="form-popup" id="popupForm">
+                <textarea class="text" name="PostValue" class="textarea" placeholder=" Que voulez vous poster ?" cols="30" rows="10"></textarea>
+                <input type="text" name="categorie" class="categorie" placeholder=" Ajoutez une catégorie">
+            
+
+                <button type="button" class="btn cancel" onclick="closeForm()">❌</button>  
+                <input type="submit" class="boutonEnvoyer" value="Publier"required>
+            
+                <div class="parent-div">
+                    <button class="btn-upload">Choisir le fichier</button>
+                    <input type="file" name="upfile">
+                </div>
+            </div>
+            
+        </form>   
+</body>
+</html>
+{{ end }}

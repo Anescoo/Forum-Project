@@ -10,12 +10,31 @@
 </head>
 {{ template "header" . }}
 <body>
+    
+    <div id="Posts">
+        <div class="open-btn" id="btn">
+            <button class="open-button" onclick="openForm()">Créer un Post ! 👆</button> 
+        </div>
+        
+        <form method="POST" class="form"> 
 
-    <div id="Posts">        
-        <form method="POST" class="form">
-            <textarea name="PostValue" class="textarea" placeholder="Que voulez vous poster ?" cols="30" rows="10" required></textarea>
-            <input type="text" name="categorie" class="categorie" placeholder="Ajoutez une catégorie" >
-            <input type="submit" class="boutonEnvoyer" value="Publier"required>
+            <div class="form-popup" id="popupForm">
+            <!-- <div class="text"> -->
+                <textarea class="text" name="PostValue" class="textarea" placeholder=" Que voulez vous poster ?" cols="30" rows="10"></textarea>
+            <!-- </div> -->
+
+            <!-- <div class="category"> -->
+                <input type="text" name="categorie" class="categorie" placeholder=" Ajoutez une catégorie">
+            <!-- </div> -->
+
+                <button type="button" class="btn cancel" onclick="closeForm()">❌</button>  
+                <input type="submit" class="boutonEnvoyer" value="Publier"required>
+            
+                <div class="parent-div">
+                    <button class="btn-upload">Choisir le fichier</button>
+                    <input type="file" name="upfile">
+                </div>
+            </div>
             
         </form>
         
@@ -83,6 +102,4 @@
     <div id="pagination"></div>
     <div id="Filter-Bloc"></div>    
 </body>
-
-
 </html>

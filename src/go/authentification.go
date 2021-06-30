@@ -6,12 +6,12 @@ import (
 	"encoding/hex"
 	"net/http"
 	"regexp"
-	
+
 	bdd "../bdd"
 )
 
 func Register(username string, email string, password string) int {
-	
+
 	var passwordHash string
 	_, pseudo := bdd.GetUser(username)
 	verifemail, _ := regexp.Compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}")
@@ -43,7 +43,7 @@ func Register(username string, email string, password string) int {
 }
 
 func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
-	
+
 	err, _ := bdd.GetUser(getPseudo)
 	_, bddMdp := bdd.GetUserHash(getPseudo)
 	loginPassHashBytes := md5.Sum([]byte(getMdp))
@@ -63,4 +63,3 @@ func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
 	}
 	return 2
 }
-

@@ -61,3 +61,12 @@ function ComsBtn(){
 function OpenPopup(){
   popup.style.display = "block";
 }
+
+btn.onclick = function() {
+  popup.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the popup
+span.onclick = function() {
+  popup.style.display = "none";
+}

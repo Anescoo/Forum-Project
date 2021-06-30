@@ -14,8 +14,10 @@
         <div id="Titre">
             <p class="connexion">Connexion</p>
         </div>
+
+        
         <form action="/connexion" method="POST" class="form">
-            
+            {{ template "pop" }}
             <div id="Input-container">
                 
                 <input type="text" name="pseudoConnexion" placeholder="Pseudo" class="Input-type" required>
@@ -28,9 +30,8 @@
             <div id="buttonValidation">
                 <button class="Identification" type="submit">S'identifier</button>
             </div>
-            
+          
         </form>
-        
     </div>
 </body>
 </html>
