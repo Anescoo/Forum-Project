@@ -27,25 +27,6 @@ func main() {
 
 	// fmt.Println(bdd.GetPosteByUser("Tao"))
 
-<<<<<<< HEAD
-	// bdd.UpdatePoste(15, "Allez les bleus")
-	// bdd.Like(13, "Louis")
-	// bdd.GetLikeNb(13)
-	// fmt.Println(bdd.IsLike(13, "Louis"))
-	// bdd.MakeCategorie("Voiture")
-	// fmt.Println(bdd.GetPosteLikeByUser("Louis"))
-	// fmt.Println(bdd.GetAllCategorie())
-	// bdd.DeleteCategorire("")
-	// bdd.MakeComment("Louis", "Je suis un commentaire", 13)
-	// bdd.MakeUser("test2", "test@gmail.com", "AZERTY")
-	// bdd.MakePoste("Louis", "test", "testcategorie")
-
-	bdd.DeleteSession("Louis4")
-
-	bdd.DeleteSession("Louis3")
-
-=======
->>>>>>> 63aae898ca59ba9aacbbec6a9eb12a6d85e967be
 	// bdd.UpdatePoste(15, "Allez les bleus")
 	// bdd.Like(13, "Louis")
 	// bdd.GetLikeNb(13)
@@ -58,13 +39,8 @@ func main() {
 	bdd.MakeComment("Louis", "Je suis un commentaire", 13)
 
 	// bdd.MakeComment("Louis", "Je suis un commentaire", 13)
-<<<<<<< HEAD
-	// bdd.MakeUser("test", "test@gmail.com", "AZERTY")
-
-=======
 	// bdd.MakeUser("test2", "test@gmail.com", "AZERTY")
 	// bdd.MakePoste("Louis", "test", "testcategorie")
->>>>>>> 63aae898ca59ba9aacbbec6a9eb12a6d85e967be
 }
 
 // test git ignore.
