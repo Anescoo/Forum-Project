@@ -62,24 +62,20 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	// Vérification si l'utilisateur est connecté
 	if VerifyCookie(req) == true {
 		if getPostValue != "" {
-			errBdd = bdd.MakePoste(userValue, string(getPostValue), string(getCategorieValue))
+			errBdd = bdd.MakePoste(userValue, string(getPostValue), string(getSelectValue))
 			if ReturnError500(w, errBdd) {
 				return
 			}
-
 		} else if e == nil {
 			errBdd = bdd.Like(IdToLike, userValue)
 			if ReturnError500(w, errBdd) {
 				return
 			}
-			fmt.Println(userValue + " a Liker")
-		} else if getCategorieValue != "" {
-			errBdd = bdd.MakeCategorie(string(getCategorieValue))
-
+		} else if getSelectValue != "" {
+			errBdd = bdd.MakeCategorie(string(getSelectValue))
 			if ReturnError500(w, errBdd) {
 				return
 			}
-
 		} else if eDislike == nil {
 			bdd.Dislike(idToDislike, userValue)
 		}
@@ -114,9 +110,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	for _, post := range arr {
 
 		PostIdInt, _ := strconv.Atoi(post[0])
-		_, coms := bdd.GetCommentByPoste(PostIdInt)
-
-		errBdd, coms := bdd.GetCommentByPoste(commentID)
+		errBdd, coms := bdd.GetCommentByPoste(PostIdInt)
 
 		if ReturnError500(w, errBdd) {
 			return

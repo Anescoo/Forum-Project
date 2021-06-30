@@ -262,7 +262,7 @@ body {
     width: 180px;     
     opacity: 1;
     position: relative;
-    left: 650px;
+    left: 570px;
     top: -56px;
     
 }
@@ -335,4 +335,14 @@ body {
     resize: none;
     border: 5px solid #5BC7D6;
     border-radius: 10px;
+}
+
+.categories {
+    margin-left: auto;
+    margin-top: auto;
+}
+
+#selectCategorie {
+    height: 30%;
+    border-radius: 10%;
 }
