@@ -36,6 +36,8 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		fmt.Println(err.Error())
 	}
 
+	var errBdd int
+
 	fmt.Print("Page d'accueil ✔️ \n")
 
 	getPostValue := req.FormValue("PostValue")
@@ -50,18 +52,22 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	uuidValue := readCookie(w, req)
 	var userValue string
-	_, userValue = bdd.GetUserByUUID(uuidValue)
+	errBdd, userValue = bdd.GetUserByUUID(uuidValue)
+	ReturnError500(w, errBdd)
 
 	// Vérification si l'utilisateur est connecté
 	if VerifyCookie(req) == true {
 		if getPostValue != "" {
 
-			bdd.MakePoste(userValue, string(getPostValue), string(getSelectValue))
+			errBdd = bdd.MakePoste(userValue, string(getPostValue), string(getSelectValue))
+			ReturnError500(w, errBdd)
 		} else if e == nil {
-			bdd.Like(IdToLike, userValue)
+			errBdd = bdd.Like(IdToLike, userValue)
+			ReturnError500(w, errBdd)
 			fmt.Println(userValue + " a Liker")
 		} else if getCategorieValue != "" {
-			bdd.MakeCategorie(string(getCategorieValue))
+			errBdd = bdd.MakeCategorie(string(getCategorieValue))
+			ReturnError500(w, errBdd)
 		} else if eDislike == nil {
 			bdd.Dislike(idToDislike, userValue)
 		}
@@ -76,18 +82,21 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	getCommentID := req.FormValue("IdComment")
 	StrToInt, _ := strconv.Atoi(getCommentID)
 	if getCommentValue != "" {
-		bdd.MakeComment("Tao", getCommentValue, StrToInt)
+		errBdd = bdd.MakeComment("Tao", getCommentValue, StrToInt)
+		ReturnError500(w, errBdd)
 	}
 
 	var arr [][]string
 	var posts []PostData
-	_, arr = bdd.GetAllPoste()
+	errBdd, arr = bdd.GetAllPoste()
+	ReturnError500(w, errBdd)
 
 	// Parcourir et remplir notre tableau des données que l'on veut
 	for _, post := range arr {
 		nbLike, _ := strconv.Atoi(post[0])
 		commentID, _ := strconv.Atoi(post[0])
-		_, coms := bdd.GetCommentByPoste(commentID)
+		errBdd, coms := bdd.GetCommentByPoste(commentID)
+		ReturnError500(w, errBdd)
 		p := PostData{
 			ID:         post[0],
 			UserName:   post[1],
@@ -113,4 +122,13 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	}
 
 	t.Execute(w, pageData)
+}
+
+func ReturnError500(w http.ResponseWriter, errBdd int) {
+	if errBdd != 0 {
+		http.Error(w, "500 Internal server error", http.StatusInternalServerError)
+		return
+	} else {
+		return
+	}
 }

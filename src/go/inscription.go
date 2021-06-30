@@ -33,7 +33,7 @@ func Inscription(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("Mot de passe : ", getMdpInscription)
 
 	// Application de la fonction Register() pour vérifier la validité des valeurs rentrés.
-	err := Register(getPseudoInscription, getEmailInscription, getMdpInscription)
+	err := Register(getPseudoInscription, getEmailInscription, getMdpInscription, w)
 
 	htmlData := HTMLData{
 		pseudoWrong:  "",
