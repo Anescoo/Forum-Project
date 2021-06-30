@@ -2,9 +2,8 @@ package main
 
 import (
 	// "fmt"
-	"fmt"
-
 	bdd "./src/bdd"
+
 	// "database/sql"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -37,5 +36,5 @@ func main() {
 	// bdd.MakeComment("Louis", "Je suis un commentaire", 13)
 	// bdd.MakeUser("test2", "test@gmail.com", "AZERTY")
 	// bdd.MakePoste("Louis", "test", "testcategorie")
-	fmt.Println(bdd.GetPosteLikeByUser("Arata34"))
+	bdd.MakePoste("Arata34", "Teste Categorie 2", "Sport")
 }

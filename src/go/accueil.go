@@ -41,7 +41,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	fmt.Print("Page d'accueil ✔️ \n")
 
 	getPostValue := req.FormValue("PostValue")
-	getSelectValue := req.FormValue("selectCategorie")
+	// getSelectValue := req.FormValue("selectCategorie")
 	getCategorieValue := req.FormValue("categorie")
 
 	getIDLike := req.FormValue("like")
@@ -61,7 +61,7 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	if VerifyCookie(req) == true {
 		if getPostValue != "" {
 
-			errBdd = bdd.MakePoste(userValue, string(getPostValue), string(getSelectValue))
+			errBdd = bdd.MakePoste(userValue, string(getPostValue), string(getCategorieValue))
 			if ReturnError500(w, errBdd) {
 				return
 			}
