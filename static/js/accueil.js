@@ -9,6 +9,7 @@ function TogglePopup(id) {
     const popup = document.getElementById(id)
     popup.toggleAttribute("hidden")
     document.getElementById("popupForm").style.display="none";
+    btn.style.display="flex"
 }
 
 
