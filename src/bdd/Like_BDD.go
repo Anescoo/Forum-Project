@@ -81,10 +81,12 @@ func GetPosteLikeByUser(UserPseuso string) (int, [][]string) {
 			IdLiker = append(IdLiker, IDPoste)
 		}
 		temp.Close()
+		fmt.Println(IdLiker)
 
 		db.Close()
 		for _, i := range IdLiker {
 			_, temp := GetPosteByID(i)
+
 			ResultFunc = append(ResultFunc, temp)
 		}
 		return 0, ResultFunc

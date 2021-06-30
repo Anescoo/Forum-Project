@@ -23,6 +23,8 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 		fmt.Println(errFiles.Error())
 	}
 
+	var errBdd int
+
 	fmt.Print("Page de connexion ✔️ \n")
 
 	// on récupère les valeurs (pseudo et mdp) que l'utilisateur rentre
@@ -50,7 +52,8 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 		}
 	} else {
 		uuidValue := sessionCookie(w, req)
-		bdd.AddSession(getPseudo, uuidValue)
+		errBdd = bdd.AddSession(getPseudo, uuidValue)
+		ReturnError500(w, errBdd)
 		time.Sleep(1 * time.Second)
 		http.Redirect(w, req, "/home", http.StatusSeeOther)
 	}
