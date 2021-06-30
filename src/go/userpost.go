@@ -49,6 +49,7 @@ func UserPost(w http.ResponseWriter, req *http.Request) {
 			ID:   post[0],
 			Post: post[2],
 			Date: post[5],
+			Categorie: post[3],
 		}
 		posts = append(posts, p)
 	}

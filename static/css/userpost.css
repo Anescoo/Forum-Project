@@ -65,3 +65,8 @@ body {
 #date {
     margin-left: 50%;
 }
+
+.categories {
+    margin-left: auto;
+    margin-top: auto;
+}
