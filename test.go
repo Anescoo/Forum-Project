@@ -25,6 +25,7 @@ func main() {
 
 	// fmt.Println(bdd.GetPosteByUser("Tao"))
 
+
 	// bdd.UpdatePoste(15, "Allez les bleus")
 	// bdd.Like(13, "Louis")
 	// bdd.GetLikeNb(13)
@@ -36,5 +37,9 @@ func main() {
 	// bdd.MakeComment("Louis", "Je suis un commentaire", 13)
 	// bdd.MakeUser("test2", "test@gmail.com", "AZERTY")
 	// bdd.MakePoste("Louis", "test", "testcategorie")
+
 	bdd.MakePoste("Arata34", "Teste Categorie 2", "Sport")
+
 }
+
+

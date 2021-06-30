@@ -13,14 +13,42 @@
     
     <div id="Posts">
         
-        <form method="POST" class="form">
+        <!-- <form method="POST" class="form">
             
             <textarea name="PostValue" class="textarea" placeholder="Que voulez vous poster ?" cols="30" rows="10" required></textarea>
-            <input type="text" name="categorie" class="categorie" placeholder="Ajoutez une catégorie" >
+            <select name="selectCategorie" id="selectCategorie">
+                <option value=""> CATEGORIES</option>
+                <option value="Sport"> Sport</option>
+                <option value="Cinema"> Cinema</option>
+                <option value="Politique"> Politique</option>
+                <option value="Voiture"> Voiture</option>
+                <option value="Loisir"> Loisir</option>
+                <option value="Actu"> Actu</option>
+                <option value="Musique"> Musique</option>
+            </select>
             <input type="submit" class="boutonEnvoyer" value="Publier"required>
             
-        </form>
-        
+        </form> -->
+        <div id="WritePost">
+            <div class="open-btn" id="btn">
+                <button class="open-button" onclick="openForm()">Créer un Post ! 👆</button> 
+            </div>
+            <form method="POST" class="form"> 
+                <div class="form-popup" id="popupForm">
+                    <textarea class="text" name="PostValue" class="textarea" placeholder=" Que voulez vous poster ?" cols="40" rows="4"></textarea>
+                    <input type="text" name="categorie" class="categorie" placeholder=" Ajoutez une catégorie">
+                    <button type="button" class="cancel" onclick="closeForm()">❌</button>  
+                    <input type="submit" id="boutonEnvoyer" value="Publier"required>          
+                    <div class="parent-div">
+                        <button class="btn-upload">Choisir le fichier</button>
+                        <input type="file" name="upfile">
+                    </div>
+                </div>
+            </form>  
+        </div>
+
+
+
         {{ range .Data }}
         <div class="post1">
             <div class="topPost">
@@ -28,29 +56,27 @@
             </div>
             <div class="contourPost">
                 <p>{{ .Post }} </p>
+                <div class="categories"> {{ .Categorie}} </div>
             </div> 
             <div class="Bottom-Post">
                 <p id="date"> à {{ .Date }}</p>
                 <textarea hidden name="respond">{{ .ID }}</textarea>
-                <button class="CommsBtn">Répondre 💬</button>
+                <button class="CommsBtn" name="ForId" onclick="TogglePopup('popupBox-{{ .ID }}')">Répondre 💬</button>
                 <div id="like">
                     <form method="POST">
                         <p>{{ .NbLike }} Like(s)</p>
                         <button class="like"> ❤️</button>
-                        <textarea hidden name="like">{{ .ID }}</textarea>
-                    </form> 
-                    <form method="POST">
                         <button class="dislike"> 👎</button>
-                        <textarea hidden name="Dislike">{{ .ID }}</textarea>
+                        <textarea hidden name="like">{{ .ID }}</textarea>
                     </form> 
                 </div>
             </div>
-            <div class="popup-box" id="popupBox">
+            <div class="popup-box" id="popupBox-{{ .ID }}" hidden>
                 <div class="popup-content">
                     <div class="Post-Content">
-                        <span class="close">&times;</span>
+                        <span class="close" onclick="TogglePopup('popupBox-{{ .ID }}')">&times;</span>
                         <form method="POST" class="WriteComment">
-                            <textarea hidden name="IdComment">{{ .ID }}</textarea>
+                            <input hidden name="IdComment" value="{{ .ID }}">
                             <textarea placeholder="Que voulez-vous commenter ?" name="commentaire" class="textarea2" cols="100" rows="10"></textarea>
                             <input type="submit" class="boutonEnvoyer" value="Publier"required>
                         </form>

@@ -1,12 +1,12 @@
 package handlers
 
 import (
-	"fmt"
-	"net/http"
-	"strconv"
-	"text/template"
+    "fmt"
+    "net/http"
+    "strconv"
+    "text/template"
 
-	bdd "../bdd"
+    bdd "../bdd"
 )
 
 func UserPost(w http.ResponseWriter, req *http.Request) {
@@ -52,6 +52,7 @@ func UserPost(w http.ResponseWriter, req *http.Request) {
 	// même methode que dans "Accueil.go" mais pour les posts de l'utilisateurs on prend juste les valeurs dont on a besoin
 	var arr [][]string
 	var posts []PostData
+
 	errBdd, arr = bdd.GetPosteByUser(userValue)
 	if ReturnError500(w, errBdd) {
 		return
@@ -62,9 +63,16 @@ func UserPost(w http.ResponseWriter, req *http.Request) {
 			ID:   post[0],
 			Post: post[2],
 			Date: post[5],
+			Categorie: post[3],
 		}
 		posts = append(posts, p)
 	}
 
-	t.Execute(w, posts)
+	pageData := LoginWrapper {
+		IsLogged: VerifyCookie(req),
+		UserConnected: userValue, 
+		Data: posts,
+	}
+
+	t.Execute(w, pageData)
 }

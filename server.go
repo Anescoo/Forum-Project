@@ -9,20 +9,19 @@ import (
 
 func main() {
 
-    fmt.Print("Démarrage du serveur... 💬\n")
+	fmt.Print("Démarrage du serveur... 💬\n")
 
-    http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
+	// Création des actions de notre site
+	http.HandleFunc("/home", handlers.Accueil)
+	http.HandleFunc("/connexion", handlers.Connexion)
+	http.HandleFunc("/profil", handlers.Profil)
+	http.HandleFunc("/inscription", handlers.Inscription)
+	http.HandleFunc("/userpost", handlers.UserPost)
+	http.HandleFunc("/userlikes", handlers.UserLikes)
+	http.HandleFunc("/deconnexion", handlers.Deconnexion)
 
-    // Création des actions de notre site 
-    http.HandleFunc("/home", handlers.Accueil)
-    http.HandleFunc("/connexion", handlers.Connexion)
-    http.HandleFunc("/profil", handlers.Profil)
-    http.HandleFunc("/inscription", handlers.Inscription)
-    http.HandleFunc("/userpost", handlers.UserPost)
-    http.HandleFunc("/userlikes", handlers.UserLikes)
-    http.HandleFunc("/deconnexion", handlers.Deconnexion)
-
-    // Choix du port que l'on sélectionne
-    http.ListenAndServe(":8000", nil)
+	// Choix du port de notre serveur
+	http.ListenAndServe(":8000", nil)
 }

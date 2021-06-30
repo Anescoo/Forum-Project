@@ -9,17 +9,29 @@
 </head>
 
 <body>
-    {{ template "header" . }}
+    {{ template "header"  }}
     <div id="Inscription">
         <div id="Titre">
             <p class="Inscription">Inscription</p>
         </div>
         <form action="/inscription" method="POST" class="form">
             <div id="Input-container">
+
                 <input type="text" name="pseudoInscription" placeholder="Pseudo" class="Input-type" required>
-                <input type="text" name="emailInscription" placeholder="E-mail" class="Input-type" required>
+                {{ if eq .NbErr 1}}
+                <div class="ErrorHtml"> {{ .Message }}</div>
+                {{ end}}
+                <input type="email" name="emailInscription" placeholder="E-mail" class="Input-type" required>
+                {{ if eq .NbErr 4}}
+                <div class="ErrorHtml"> {{ .Message }}</div>
+                {{ end}}
                 <input type="password" name="mdpInscription" placeholder="Mot de passe" class="Input-type" required>
-                <p class="conditionInscription"> • Minimum un caractère spécial
+                {{ if or (eq .NbErr 2) ( eq .NbErr 3)}}
+                <div class="ErrorHtml"> {{ .Message }}</div>
+                {{ end}}
+                
+                <p class="conditionInscription"> 
+                    • Minimum un caractère spécial
                     <br> • Au moins 2 majuscule
                     <br> • Au moins 2 minuscule 
                     <br> • Au moins 2 chiffres

@@ -10,11 +10,11 @@
 </head>
 
 <body>
-    {{ template "header"}}
+    {{ template "header" . }}
     
     <div id = "MyLikes">
         <h1> Mes Likes</h1>
-        {{ range . }}
+        {{ range .Data }}
         <div id="Post">
             <div class="TopPost">
                 <p id = "text">Vous avez liké :</p>             

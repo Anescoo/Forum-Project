@@ -19,7 +19,7 @@ type PostData struct {
 	NbLike     int
 	ID         string
 	CommentArr [][]string
-	// Categorie []string
+	Categorie string
 }
 
 type LoginWrapper struct {
@@ -41,8 +41,10 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	fmt.Print("Page d'accueil ✔️ \n")
 
 	getPostValue := req.FormValue("PostValue")
-	// getSelectValue := req.FormValue("selectCategorie")
-	getCategorieValue := req.FormValue("categorie")
+
+	
+	getSelectValue := req.FormValue("selectCategorie")
+	
 
 	getIDLike := req.FormValue("like")
 	IdToLike, e := strconv.Atoi(getIDLike)
@@ -60,11 +62,11 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	// Vérification si l'utilisateur est connecté
 	if VerifyCookie(req) == true {
 		if getPostValue != "" {
-
 			errBdd = bdd.MakePoste(userValue, string(getPostValue), string(getCategorieValue))
 			if ReturnError500(w, errBdd) {
 				return
 			}
+
 		} else if e == nil {
 			errBdd = bdd.Like(IdToLike, userValue)
 			if ReturnError500(w, errBdd) {
@@ -73,27 +75,32 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 			fmt.Println(userValue + " a Liker")
 		} else if getCategorieValue != "" {
 			errBdd = bdd.MakeCategorie(string(getCategorieValue))
+
 			if ReturnError500(w, errBdd) {
 				return
 			}
+
 		} else if eDislike == nil {
 			bdd.Dislike(idToDislike, userValue)
 		}
+	}else {
+		fmt.Println("User is not connected")
 	}
-	// else {
-	// 		time.Sleep(5 * time.Second)
-	// 		http.Redirect(w, req, "/connexion", http.StatusSeeOther)
-	// 	}
+
+	IdPostToComment := req.FormValue("ForId")
+	fmt.Println(IdPostToComment)
 
 	// Récupération de la valeur des commentaires
 	getCommentValue := req.FormValue("commentaire")
 	getCommentID := req.FormValue("IdComment")
 	StrToInt, _ := strconv.Atoi(getCommentID)
 	if getCommentValue != "" {
-		errBdd = bdd.MakeComment("Tao", getCommentValue, StrToInt)
+
+		errBdd = bdd.MakeComment(userValue, getCommentValue, StrToInt)
 		if ReturnError500(w, errBdd) {
 			return
 		}
+
 	}
 
 	var arr [][]string
@@ -105,19 +112,24 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 
 	// Parcourir et remplir notre tableau des données que l'on veut
 	for _, post := range arr {
-		nbLike, _ := strconv.Atoi(post[0])
-		commentID, _ := strconv.Atoi(post[0])
+
+		PostIdInt, _ := strconv.Atoi(post[0])
+		_, coms := bdd.GetCommentByPoste(PostIdInt)
+
 		errBdd, coms := bdd.GetCommentByPoste(commentID)
+
 		if ReturnError500(w, errBdd) {
 			return
 		}
+
 		p := PostData{
-			ID:         post[0],
-			UserName:   post[1],
-			Post:       post[2],
-			NbLike:     bdd.GetLikeNb(nbLike),
-			Date:       post[5],
+			ID:       	post[0],
+			UserName: 	post[1],
+			Post:     	post[2],
+			NbLike:   	bdd.GetLikeNb(PostIdInt),
+			Date:     	post[5],
 			CommentArr: coms,
+			Categorie: post[3],
 		}
 		posts = append(posts, p)
 	}
@@ -129,10 +141,11 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	pageData := LoginWrapper{
-		IsLogged:      VerifyCookie(req),
-		UserConnected: userValue,
-		Data:          posts,
+	pageData := LoginWrapper {
+		IsLogged: VerifyCookie(req),
+		UserConnected: userValue, 
+		Data: posts,
+
 	}
 
 	t.Execute(w, pageData)
