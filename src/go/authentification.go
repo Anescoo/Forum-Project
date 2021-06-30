@@ -16,7 +16,9 @@ func Register(username string, email string, password string, w http.ResponseWri
 
 	var passwordHash string
 	errBdd, pseudo := bdd.GetUser(username)
-	ReturnError500(w, errBdd)
+	if ReturnError500(w, errBdd) {
+		return 500
+	}
 	verifemail, _ := regexp.Compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}")
 	majLetter, _ := regexp.Compile("[A-Z]")
 	minLetter, _ := regexp.Compile("[a-z]")
@@ -42,7 +44,9 @@ func Register(username string, email string, password string, w http.ResponseWri
 	passwordHashBytes := md5.Sum([]byte(password))
 	passwordHash = hex.EncodeToString(passwordHashBytes[:])
 	errBdd = bdd.MakeUser(username, email, passwordHash)
-	ReturnError500(w, errBdd)
+	if ReturnError500(w, errBdd) {
+		return 500
+	}
 	return 0
 }
 
@@ -50,7 +54,9 @@ func Login(w http.ResponseWriter, getPseudo string, getMdp string) int {
 
 	err, _ := bdd.GetUser(getPseudo)
 	errBdd, bddMdp := bdd.GetUserHash(getPseudo)
-	ReturnError500(w, errBdd)
+	if ReturnError500(w, errBdd) {
+		return 500
+	}
 	loginPassHashBytes := md5.Sum([]byte(getMdp))
 	loginPassHash := hex.EncodeToString(loginPassHashBytes[:])
 	if err != 0 {

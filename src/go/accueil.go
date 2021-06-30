@@ -41,9 +41,11 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	fmt.Print("Page d'accueil ✔️ \n")
 
 	getPostValue := req.FormValue("PostValue")
+
 	
 	getSelectValue := req.FormValue("selectCategorie")
 	
+
 	getIDLike := req.FormValue("like")
 	IdToLike, e := strconv.Atoi(getIDLike)
 
@@ -53,20 +55,30 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	uuidValue := readCookie(w, req)
 	var userValue string
 	errBdd, userValue = bdd.GetUserByUUID(uuidValue)
-	ReturnError500(w, errBdd)
+	if ReturnError500(w, errBdd) {
+		return
+	}
 
 	// Vérification si l'utilisateur est connecté
 	if VerifyCookie(req) == true {
 		if getPostValue != "" {
-			errBdd = bdd.MakePoste(userValue, string(getPostValue), string(getSelectValue))
-			ReturnError500(w, errBdd)
+			errBdd = bdd.MakePoste(userValue, string(getPostValue), string(getCategorieValue))
+			if ReturnError500(w, errBdd) {
+				return
+			}
+
 		} else if e == nil {
 			errBdd = bdd.Like(IdToLike, userValue)
-			ReturnError500(w, errBdd)
+			if ReturnError500(w, errBdd) {
+				return
+			}
 			fmt.Println(userValue + " a Liker")
 		} else if getCategorieValue != "" {
 			errBdd = bdd.MakeCategorie(string(getCategorieValue))
-			ReturnError500(w, errBdd)
+
+			if ReturnError500(w, errBdd) {
+				return
+			}
 
 		} else if eDislike == nil {
 			bdd.Dislike(idToDislike, userValue)
@@ -84,17 +96,19 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	StrToInt, _ := strconv.Atoi(getCommentID)
 	if getCommentValue != "" {
 
-		fmt.Println(StrToInt)
-		bdd.MakeComment(userValue, getCommentValue, StrToInt)
-
-		ReturnError500(w, errBdd)
+		errBdd = bdd.MakeComment(userValue, getCommentValue, StrToInt)
+		if ReturnError500(w, errBdd) {
+			return
+		}
 
 	}
 
 	var arr [][]string
 	var posts []PostData
 	errBdd, arr = bdd.GetAllPoste()
-	ReturnError500(w, errBdd)
+	if ReturnError500(w, errBdd) {
+		return
+	}
 
 	// Parcourir et remplir notre tableau des données que l'on veut
 	for _, post := range arr {
@@ -103,7 +117,10 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 		_, coms := bdd.GetCommentByPoste(PostIdInt)
 
 		errBdd, coms := bdd.GetCommentByPoste(commentID)
-		ReturnError500(w, errBdd)
+
+		if ReturnError500(w, errBdd) {
+			return
+		}
 
 		p := PostData{
 			ID:       	post[0],
@@ -134,11 +151,11 @@ func Accueil(w http.ResponseWriter, req *http.Request) {
 	t.Execute(w, pageData)
 }
 
-func ReturnError500(w http.ResponseWriter, errBdd int) {
+func ReturnError500(w http.ResponseWriter, errBdd int) bool {
 	if errBdd != 0 {
 		http.Error(w, "500 Internal server error", http.StatusInternalServerError)
-		return
+		return true
 	} else {
-		return
+		return false
 	}
 }

@@ -31,15 +31,21 @@ func UserPost(w http.ResponseWriter, req *http.Request) {
 	// Vérification de l'user
 	uuidValue := readCookie(w, req)
 	errBdd, userValue := bdd.GetUserByUUID(uuidValue)
-	ReturnError500(w, errBdd)
+	if ReturnError500(w, errBdd) {
+		return
+	}
 
 	if VerifyCookie(req) {
 		if err == nil {
 			errBdd = bdd.DeletePoste(IdToSuppr)
-			ReturnError500(w, errBdd)
+			if ReturnError500(w, errBdd) {
+				return
+			}
 		} else if errUpdate == nil {
 			errBdd = bdd.UpdatePoste(IdtoUpdate, getNewValue)
-			ReturnError500(w, errBdd)
+			if ReturnError500(w, errBdd) {
+				return
+			}
 		}
 	}
 
@@ -48,7 +54,9 @@ func UserPost(w http.ResponseWriter, req *http.Request) {
 	var posts []PostData
 
 	errBdd, arr = bdd.GetPosteByUser(userValue)
-	ReturnError500(w, errBdd)
+	if ReturnError500(w, errBdd) {
+		return
+	}
 
 	for _, post := range arr {
 		p := PostData{

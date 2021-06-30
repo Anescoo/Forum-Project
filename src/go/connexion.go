@@ -53,7 +53,9 @@ func Connexion(w http.ResponseWriter, req *http.Request) {
 	} else {
 		uuidValue := sessionCookie(w, req)
 		errBdd = bdd.AddSession(getPseudo, uuidValue)
-		ReturnError500(w, errBdd)
+		if ReturnError500(w, errBdd) {
+			return
+		}
 		time.Sleep(1 * time.Second)
 		http.Redirect(w, req, "/home", http.StatusSeeOther)
 	}
