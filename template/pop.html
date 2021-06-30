@@ -1,4 +1,4 @@
-{{define "pop"}}
+{{ define "pop" }}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,13 +15,9 @@
         <form method="POST" class="form"> 
 
             <div class="form-popup" id="popupForm">
-            <!-- <div class="text"> -->
                 <textarea class="text" name="PostValue" class="textarea" placeholder=" Que voulez vous poster ?" cols="30" rows="10"></textarea>
-            <!-- </div> -->
-
-            <!-- <div class="category"> -->
                 <input type="text" name="categorie" class="categorie" placeholder=" Ajoutez une catégorie">
-            <!-- </div> -->
+            
 
                 <button type="button" class="btn cancel" onclick="closeForm()">❌</button>  
                 <input type="submit" class="boutonEnvoyer" value="Publier"required>
