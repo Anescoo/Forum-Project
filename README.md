@@ -57,5 +57,4 @@ Nous avons aussi a la racine notre serveur en GO qui nous permet de lancer notre
 
 [Miro](https://miro.com/welcomeonboard/etZgF6OuEeGWBk7fbvOViFWdDMl9rTU5tBCBydfEG19BL5MpuDGSctqfzjiOF0Mz)
 
-
-![image](static/img/1618562406336.jpg)
+[Documentation](https://docs.google.com/document/d/18iLWEdNrKuij4L-j_bLBICJS9fo8Jg1Q8BcIHB42WVg/edit?usp=sharing)
